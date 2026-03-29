@@ -1,1259 +1,321 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asaf Peled — Product Leader & People Builder</title>
-  <meta name="description" content="Product operations leader, strategic advisor, and youth life skills coach. 12+ years in global fintech. Helping people move from confusion to capability." />
-  <meta property="og:title" content="Asaf Peled — Product Leader & People Builder" />
-  <meta property="og:description" content="12+ years in global fintech. Youth life skills coach. Turning complexity into clarity." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..500&display=swap" rel="stylesheet">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cream: #FAF7F2;
-      --warm-white: #FFFDF9;
-      --ink: #1C1A17;
-      --ink-soft: #4A4540;
-      --ink-faint: #8C8680;
-      --gold: #C9955C;
-      --gold-light: #E8C49A;
-      --gold-pale: #F5E8D8;
-      --gold-deep: #A67840;
-      --sage: #6B9678;
-      --sage-light: #D4E8DC;
-      --sage-deep: #4A7558;
-      --border: rgba(28, 26, 23, 0.09);
-      --shadow-sm: 0 2px 12px rgba(28, 26, 23, 0.06);
-      --shadow-md: 0 4px 28px rgba(28, 26, 23, 0.09);
-      --shadow-gold: 0 8px 32px rgba(201, 149, 92, 0.22);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background-color: var(--cream);
-      color: var(--ink);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── GRAIN OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.45;
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--cream); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 99px; }
-
-    /* ─────────────────────────────── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      padding: 1.25rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(250, 247, 242, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      transition: box-shadow 0.4s ease, padding 0.4s ease;
-    }
-
-    nav.scrolled {
-      box-shadow: 0 2px 32px rgba(28, 26, 23, 0.07);
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      color: var(--ink);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-logo:hover { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      text-decoration: none;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0;
-      width: 0; height: 1px;
-      background: var(--gold);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.2rem;
-      background: var(--ink);
-      color: var(--cream) !important;
-      border-radius: 2px;
-      font-size: 0.73rem !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.25s ease, transform 0.2s ease !important;
-    }
-    .nav-cta::after { display: none !important; }
-    .nav-cta:hover {
-      background: var(--gold) !important;
-      color: var(--warm-white) !important;
-      transform: translateY(-1px);
-    }
-
-    /* ─────────────────────────────── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 8rem 4rem 5rem;
-      gap: 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Warm ambient glow */
-    .hero::before {
-      content: '';
-      position: absolute;
-      right: -5%;
-      top: 5%;
-      width: 55%;
-      height: 90%;
-      background: radial-gradient(ellipse at 60% 40%, var(--gold-pale) 0%, rgba(245,232,216,0.3) 45%, transparent 70%);
-      pointer-events: none;
-    }
-
-    /* Subtle horizontal rule decoration */
-    .hero::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-      opacity: 0.4;
-    }
-
-    .hero-text { position: relative; z-index: 2; }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.75rem;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 2.5rem;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
-
-    .hero-eyebrow-sep {
-      opacity: 0.5;
-      font-size: 0.55rem;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5.5vw, 5.2rem);
-      font-weight: 300;
-      line-height: 1.07;
-      letter-spacing: -0.015em;
-      color: var(--ink);
-      margin-bottom: 1.75rem;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: var(--ink-soft);
-      max-width: 44ch;
-      line-height: 1.8;
-      margin-bottom: 2.75rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 0.85rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.9rem;
-      border-radius: 2px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--ink);
-      color: var(--cream);
-      border: 1px solid var(--ink);
-    }
-
-    .btn-primary:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid rgba(28,26,23,0.18);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-2px);
-    }
-
-    /* ── HERO STAT CARDS ── */
-    .hero-visual {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .stat-card {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.4rem 1.6rem;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateX(-5px);
-      box-shadow: var(--shadow-gold);
-      border-color: rgba(201,149,92,0.25);
-    }
-
-    .stat-card:nth-child(2) { margin-left: 2.5rem; }
-    .stat-card:nth-child(3) { margin-left: 1rem; }
-
-    .stat-icon {
-      width: 2.8rem;
-      height: 2.8rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .icon-gold { background: var(--gold-pale); }
-    .icon-sage { background: var(--sage-light); }
-    .icon-ink  { background: rgba(28,26,23,0.05); }
-
-    .stat-label {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 0.2rem;
-    }
-
-    .stat-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-
-    /* ─────────────────────────────── SHARED SECTION ── */
-    section { padding: 6.5rem 4rem; }
-
-    .section-label {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-      font-weight: 300;
-      line-height: 1.12;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-    }
-
-    h2 em { font-style: italic; color: var(--gold); }
-
-    .section-intro {
-      font-size: 1rem;
-      color: var(--ink-soft);
-      max-width: 58ch;
-      line-height: 1.85;
-    }
-
-    /* ─────────────────────────────── ABOUT ── */
-    .about {
-      background: var(--warm-white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.65fr;
-      gap: 6rem;
-      align-items: start;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .about-sticky {
-      position: sticky;
-      top: 6.5rem;
-    }
-
-    .ornament {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      color: var(--gold-light);
-      letter-spacing: 0.6em;
-      margin-top: 2rem;
-      display: block;
-      opacity: 0.6;
-    }
-
-    .about-body p {
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      line-height: 1.9;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-body p:last-of-type { margin-bottom: 0; }
-
-    .about-body strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    /* Values grid */
-    .values-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
-      margin-top: 2.5rem;
-    }
-
-    .value-chip {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      padding: 0.8rem 1rem;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      font-size: 0.82rem;
-      color: var(--ink-soft);
-      line-height: 1.5;
-      transition: border-color 0.25s, background 0.25s;
-    }
-
-    .value-chip:hover {
-      border-color: var(--gold-light);
-      background: var(--gold-pale);
-    }
-
-    .value-chip-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-      margin-top: 0.42rem;
-    }
-
-    /* ─────────────────────────────── CAPABILITIES ── */
-    .capabilities-section {
-      background: var(--cream);
-      padding: 6.5rem 4rem;
-    }
-
-    .capabilities-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .cap-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3.5rem;
-      gap: 2rem;
-    }
-
-    .cap-header-left { flex: 1; }
-
-    .cap-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .cap-card {
-      background: var(--cream);
-      padding: 2.25rem 2rem;
-      transition: background 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Bottom accent line */
-    .cap-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s ease;
-    }
-
-    .cap-card:hover { background: var(--warm-white); }
-    .cap-card:hover::after { transform: scaleX(1); }
-
-    /* Sage variant for youth cards */
-    .cap-card.sage-card::after {
-      background: linear-gradient(90deg, var(--sage), var(--sage-light));
-    }
-
-    .cap-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: rgba(201,149,92,0.2);
-      line-height: 1;
-      margin-bottom: 1.1rem;
-      transition: color 0.3s;
-    }
-
-    .cap-card:hover .cap-number { color: rgba(201,149,92,0.4); }
-    .cap-card.sage-card .cap-number { color: rgba(107,150,120,0.2); }
-    .cap-card.sage-card:hover .cap-number { color: rgba(107,150,120,0.4); }
-
-    .cap-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.75rem;
-      line-height: 1.3;
-    }
-
-    .cap-desc {
-      font-size: 0.875rem;
-      color: var(--ink-soft);
-      line-height: 1.8;
-    }
-
-    .cap-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 1.4rem;
-    }
-
-    .tag {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.22rem 0.65rem;
-      border-radius: 2px;
-      background: var(--gold-pale);
-      color: var(--gold-deep);
-      border: 1px solid rgba(201,149,92,0.18);
-    }
-
-    .tag-sage {
-      background: var(--sage-light);
-      color: var(--sage-deep);
-      border-color: rgba(107,150,120,0.2);
-    }
-
-    /* ─────────────────────────────── DIVIDER ── */
-    .divider-ornament {
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--warm-white);
-    }
-
-    .divider-ornament-inner {
-      display: inline-flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--ink-faint);
-      letter-spacing: 0.08em;
-    }
-
-    .divider-ornament-inner::before,
-    .divider-ornament-inner::after {
-      content: '';
-      display: block;
-      width: 4rem;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-light));
-    }
-
-    .divider-ornament-inner::after {
-      background: linear-gradient(90deg, var(--gold-light), transparent);
-    }
-
-    /* ─────────────────────────────── WORK WITH ME ── */
-    .work {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 6.5rem 4rem;
-    }
-
-    .work .section-label { color: var(--gold-light); }
-    .work .section-label::before { background: var(--gold-light); }
-    .work h2 { color: var(--warm-white); }
-
-    .work-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .work-header {
-      margin-bottom: 3.5rem;
-    }
-
-    .work-header .section-intro {
-      color: rgba(250,247,242,0.55);
-      margin-top: 0.85rem;
-    }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-
-    .work-card {
-      border: 1px solid rgba(250,247,242,0.08);
-      border-radius: 4px;
-      padding: 2.25rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .work-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 0;
-      background: linear-gradient(180deg, var(--gold), var(--gold-light));
-      transition: height 0.4s ease;
-    }
-
-    .work-card:hover {
-      border-color: rgba(201,149,92,0.3);
-      background: rgba(201,149,92,0.04);
-      transform: translateY(-2px);
-    }
-
-    .work-card:hover::before { height: 100%; }
-
-    .work-card-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-    }
-
-    .work-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--warm-white);
-      line-height: 1.2;
-    }
-
-    .work-card-desc {
-      font-size: 0.875rem;
-      color: rgba(250,247,242,0.55);
-      line-height: 1.8;
-      flex-grow: 1;
-    }
-
-    .work-card-link {
-      font-size: 0.76rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: gap 0.25s, color 0.25s;
-      padding-top: 0.5rem;
-      border-top: 1px solid rgba(250,247,242,0.08);
-    }
-
-    .work-card-link:hover {
-      gap: 0.8rem;
-      color: var(--gold);
-    }
-
-    /* ─────────────────────────────── QUOTE STRIP ── */
-    .quote-strip {
-      padding: 5rem 4rem;
-      background: var(--gold-pale);
-      border-top: 1px solid rgba(201,149,92,0.15);
-      border-bottom: 1px solid rgba(201,149,92,0.15);
-      text-align: center;
-    }
-
-    .quote-strip blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 3vw, 2.4rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      max-width: 820px;
-      margin: 0 auto;
-      line-height: 1.5;
-      letter-spacing: -0.01em;
-    }
-
-    .quote-strip blockquote em {
-      font-style: normal;
-      color: var(--gold-deep);
-    }
-
-    .quote-attr {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    /* ─────────────────────────────── CONNECT ── */
-    .connect {
-      text-align: center;
-      padding: 7.5rem 4rem;
-      background: var(--warm-white);
-      border-top: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .connect::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse, var(--gold-pale) 0%, transparent 65%);
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .connect-inner {
-      max-width: 620px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .connect h2 { margin-bottom: 1rem; }
-
-    .connect .section-label {
-      justify-content: center;
-    }
-
-    .connect .section-label::before { display: none; }
-
-    .connect .section-intro {
-      margin: 0 auto 2.75rem;
-      text-align: center;
-    }
-
-    .connect-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* ─────────────────────────────── FOOTER ── */
-    footer {
-      padding: 2rem 4rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--cream);
-    }
-
-    .footer-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      color: var(--ink-faint);
-      letter-spacing: 0.03em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-links a {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--gold); }
-
-    .footer-copy {
-      font-size: 0.72rem;
-      color: var(--ink-faint);
-    }
-
-    /* ─────────────────────────────── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* Hero stagger */
-    .hero-text > * {
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .hero-text > *:nth-child(1) { animation-delay: 0.1s; }
-    .hero-text > *:nth-child(2) { animation-delay: 0.22s; }
-    .hero-text > *:nth-child(3) { animation-delay: 0.34s; }
-    .hero-text > *:nth-child(4) { animation-delay: 0.46s; }
-
-    .stat-card {
-      opacity: 0;
-      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .stat-card:nth-child(1) { animation-delay: 0.55s; }
-    .stat-card:nth-child(2) { animation-delay: 0.68s; }
-    .stat-card:nth-child(3) { animation-delay: 0.81s; }
-
-    /* Scroll-triggered */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .stagger-children > * {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .stagger-children.visible > * { opacity: 1; transform: translateY(0); }
-    .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
-    .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; }
-    .stagger-children.visible > *:nth-child(3) { transition-delay: 0.16s; }
-    .stagger-children.visible > *:nth-child(4) { transition-delay: 0.24s; }
-    .stagger-children.visible > *:nth-child(5) { transition-delay: 0.32s; }
-    .stagger-children.visible > *:nth-child(6) { transition-delay: 0.40s; }
-
-    /* ─────────────────────────────── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      nav { padding: 1.25rem 2rem; }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 7rem 2rem 4rem;
-        gap: 3rem;
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Human Curator | Operations &amp; Impact</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#653e0c",
+              "on-tertiary-fixed-variant": "#494643",
+              "secondary-fixed-dim": "#a4d1b0",
+              "primary-fixed-dim": "#f4bc7f",
+              "on-surface-variant": "#50453a",
+              "on-surface": "#1c1c19",
+              "outline-variant": "#d4c4b5",
+              "tertiary-container": "#a39e99",
+              "surface-tint": "#805522",
+              "on-error": "#ffffff",
+              "surface-variant": "#e5e2dd",
+              "surface-container-highest": "#e5e2dd",
+              "secondary-container": "#bfeecb",
+              "surface-container": "#f0ede9",
+              "inverse-on-surface": "#f3f0eb",
+              "on-primary-container": "#502e00",
+              "on-secondary-fixed-variant": "#264f36",
+              "secondary": "#3e674c",
+              "surface-container-low": "#f6f3ee",
+              "surface": "#fcf9f4",
+              "surface-dim": "#dcdad5",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#31302d",
+              "secondary-fixed": "#bfeecb",
+              "outline": "#827568",
+              "on-primary-fixed": "#2c1700",
+              "tertiary-fixed-dim": "#cbc5c0",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#446d52",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#00210f",
+              "inverse-primary": "#f4bc7f",
+              "on-background": "#1c1c19",
+              "tertiary": "#615e5a",
+              "on-primary": "#ffffff",
+              "on-tertiary-container": "#383632",
+              "on-tertiary-fixed": "#1d1b18",
+              "tertiary-fixed": "#e7e1dc",
+              "background": "#fcf9f4",
+              "primary-container": "#c9955c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#ebe8e3",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f4",
+              "primary-fixed": "#ffdcbb",
+              "primary": "#805522"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
       }
-
-      .hero::before { display: none; }
-
-      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .about-sticky { position: static; }
-
-      .values-grid { grid-template-columns: 1fr; }
-
-      .cap-grid { grid-template-columns: repeat(2, 1fr); }
-
-      .work-grid { grid-template-columns: 1fr; }
-
-      section { padding: 5rem 2rem; }
-      .capabilities-section { padding: 5rem 2rem; }
-      .work { padding: 5rem 2rem; }
-      footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.75rem 2rem; }
-      footer .footer-links { justify-content: center; }
-      .stat-card:nth-child(2) { margin-left: 0; }
-      .stat-card:nth-child(3) { margin-left: 0; }
-      .quote-strip { padding: 4rem 2rem; }
-      .connect { padding: 5.5rem 2rem; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-
-      h1 { font-size: 2.8rem; }
-      h2 { font-size: 2rem; }
-
-      .hero { padding: 5.5rem 1.5rem 3rem; }
-      .hero-sub { font-size: 0.95rem; }
-
-      .cap-grid { grid-template-columns: 1fr; }
-      .cap-header { flex-direction: column; align-items: flex-start; }
-
-      section { padding: 4rem 1.5rem; }
-      .capabilities-section { padding: 4rem 1.5rem; }
-      .work { padding: 4rem 1.5rem; }
-      .connect { padding: 4.5rem 1.5rem; }
-      footer { padding: 1.5rem; }
-    }
-  </style>
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body>
-
-  <!-- ── NAV ── -->
-  <nav id="main-nav">
-    <a href="#" class="nav-logo">Asaf Peled</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#work">Work With Me</a></li>
-      <li><a href="#connect">Connect</a></li>
-      <li><a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener" class="nav-cta">Book a Call ↗</a></li>
-    </ul>
-  </nav>
-
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-eyebrow">
-        Product Leader
-        <span class="hero-eyebrow-sep">·</span>
-        Coach
-        <span class="hero-eyebrow-sep">·</span>
-        Builder
-      </div>
-      <h1>Where <em>operations</em><br>meets genuine<br>human impact</h1>
-      <p class="hero-sub">
-        12+ years leading product operations in global fintech — and a lifelong belief that the most meaningful work happens when systems serve people, not the other way around.
-      </p>
-      <div class="hero-ctas">
-        <a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener" class="btn btn-primary">
-          Book a Call on Clarity ↗
-        </a>
-        <a href="https://www.linkedin.com/in/asafpel" target="_blank" rel="noopener" class="btn btn-secondary">
-          LinkedIn
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="stat-card">
-        <div class="stat-icon icon-gold">🌍</div>
-        <div>
-          <div class="stat-label">Experience</div>
-          <div class="stat-value">12+ Years · Global Fintech</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon icon-sage">🌱</div>
-        <div>
-          <div class="stat-label">Impact Area</div>
-          <div class="stat-value">Youth Life Skills Coaching</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon icon-ink">⚙️</div>
-        <div>
-          <div class="stat-label">Superpower</div>
-          <div class="stat-value">Turning complexity into clarity</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── ABOUT ── -->
-  <section class="about" id="about">
-    <div class="about-inner">
-      <div class="about-sticky fade-in">
-        <div class="section-label">About</div>
-        <h2>Two worlds.<br><em>One thread.</em></h2>
-        <span class="ornament">— · —</span>
-      </div>
-
-      <div class="about-body fade-in">
-        <p>
-          I'm <strong>Asaf Peled</strong> — a product operations leader who has spent over a decade inside global fintech, building the invisible scaffolding that makes companies actually work. From governance frameworks to cross-functional delivery to regulatory accountability, I've learned that the difference between a good organization and a great one is almost always operational clarity.
-        </p>
-        <p>
-          At the same time, I believe the most enduring investments we can make are in people — especially young people. That conviction led me to build a life skills coaching practice for children and youth, applying the same product operations thinking — structured outcomes, measurable progress, iterative design — to help the next generation develop the emotional, social, and cognitive tools they'll carry for life.
-        </p>
-        <p>
-          Whether I'm sitting with a leadership team untangling a broken process or working with a group of teenagers learning to navigate conflict, the underlying work is the same: <strong>helping people move from confusion to capability.</strong>
-        </p>
-
-        <div class="values-grid stagger-children">
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Clarity over complexity — always</span></div>
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Systems thinking with human warmth</span></div>
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Measurable outcomes, not just good intentions</span></div>
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Professional excellence &amp; personal growth</span></div>
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Lifelong learning — especially about AI</span></div>
-          <div class="value-chip"><span class="value-chip-dot"></span><span>Iteration as a way of life</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CAPABILITIES ── -->
-  <section class="capabilities-section" id="capabilities">
-    <div class="capabilities-inner">
-      <div class="cap-header fade-in">
-        <div class="cap-header-left">
-          <div class="section-label">Capabilities</div>
-          <h2>What I bring<br>to the <em>table</em></h2>
-        </div>
-      </div>
-
-      <div class="cap-grid stagger-children">
-
-        <div class="cap-card fade-in">
-          <div class="cap-number">01</div>
-          <div class="cap-title">Product Operations Leadership</div>
-          <p class="cap-desc">Designing and running the operational backbone of product organizations — from knowledge management and delivery governance to cross-functional alignment and scalable processes.</p>
-          <div class="cap-tags">
-            <span class="tag">Fintech</span>
-            <span class="tag">Governance</span>
-            <span class="tag">Delivery</span>
-          </div>
-        </div>
-
-        <div class="cap-card fade-in">
-          <div class="cap-number">02</div>
-          <div class="cap-title">Strategic Consulting & Advisory</div>
-          <p class="cap-desc">Helping teams and leaders cut through noise, define what matters, and build the structures to execute it. Especially effective in regulated environments where rigor and agility must coexist.</p>
-          <div class="cap-tags">
-            <span class="tag">Regulated Entities</span>
-            <span class="tag">Technology Governance</span>
-            <span class="tag">Ops Design</span>
-          </div>
-        </div>
-
-        <div class="cap-card sage-card fade-in">
-          <div class="cap-number">03</div>
-          <div class="cap-title">Life Skills Coaching for Youth</div>
-          <p class="cap-desc">Group workshops for children and teenagers covering emotional intelligence, communication, resilience, and AI literacy — delivered in schools, municipalities, and private settings across Israel.</p>
-          <div class="cap-tags">
-            <span class="tag tag-sage">Workshops</span>
-            <span class="tag tag-sage">AI Literacy</span>
-            <span class="tag tag-sage">Youth Development</span>
-          </div>
-        </div>
-
-        <div class="cap-card sage-card fade-in">
-          <div class="cap-number">04</div>
-          <div class="cap-title">AI Literacy & Future Readiness</div>
-          <p class="cap-desc">A dedicated module helping young people understand, navigate, and develop a healthy relationship with AI — one of the most underserved areas in youth education today.</p>
-          <div class="cap-tags">
-            <span class="tag tag-sage">AI for Kids</span>
-            <span class="tag tag-sage">Critical Thinking</span>
-            <span class="tag tag-sage">Future Skills</span>
-          </div>
-        </div>
-
-        <div class="cap-card fade-in">
-          <div class="cap-number">05</div>
-          <div class="cap-title">Cross-Functional Alignment</div>
-          <p class="cap-desc">Bridging product, technology, compliance, and business teams — translating between disciplines so decisions get made and work actually moves forward.</p>
-          <div class="cap-tags">
-            <span class="tag">Stakeholder Mgmt</span>
-            <span class="tag">Translation Layer</span>
-            <span class="tag">Decision Cadence</span>
-          </div>
-        </div>
-
-        <div class="cap-card fade-in">
-          <div class="cap-number">06</div>
-          <div class="cap-title">Outcomes-Driven Methodology</div>
-          <p class="cap-desc">Everything I build — from internal frameworks to coaching curricula — is grounded in measurable outcomes. I don't believe in activity for its own sake. What changes? How do we know?</p>
-          <div class="cap-tags">
-            <span class="tag">Product Ops Lens</span>
-            <span class="tag">Measurement</span>
-            <span class="tag">Impact Design</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── QUOTE STRIP ── -->
-  <div class="quote-strip fade-in">
-    <blockquote>
-      "The most enduring work I've done — whether in fintech boardrooms or with teenagers in a school hall — always starts the same way: <em>helping someone see clearly what was murky before.</em>"
-    </blockquote>
-    <p class="quote-attr">— Asaf Peled</p>
-  </div>
-
-  <!-- ── WORK WITH ME ── -->
-  <section class="work" id="work">
-    <div class="work-inner">
-      <div class="work-header fade-in">
-        <div class="section-label">Work With Me</div>
-        <h2>Let's build<br><em>something real</em></h2>
-        <p class="section-intro">
-          Whether you're a leader navigating operational complexity or a parent investing in your child's future, there's a way I can help.
-        </p>
-      </div>
-
-      <div class="work-grid stagger-children">
-
-        <div class="work-card">
-          <div class="work-card-icon">💬</div>
-          <div class="work-card-title">1-on-1 Advisory Call</div>
-          <p class="work-card-desc">Book a focused call on Clarity to explore your challenge — whether it's a product ops problem, a career pivot, or an organizational question. Direct, honest, practical.</p>
-          <a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener" class="work-card-link">Book on Clarity →</a>
-        </div>
-
-        <div class="work-card">
-          <div class="work-card-icon">🏫</div>
-          <div class="work-card-title">School & Youth Programs</div>
-          <p class="work-card-desc">Bring structured life skills workshops to your school, youth organization, or municipality. Serving Herzliya, Ramat HaSharon, Ra'anana, Kfar Saba and surrounding areas.</p>
-          <a href="mailto:asaf@getclarity.studio" class="work-card-link">Get in Touch →</a>
-        </div>
-
-        <div class="work-card">
-          <div class="work-card-icon">🤝</div>
-          <div class="work-card-title">Strategic Partnership</div>
-          <p class="work-card-desc">Looking for a senior product operations voice on your board, advisory panel, or as a fractional leader? Let's talk about what value looks like for your organization.</p>
-          <a href="https://www.linkedin.com/in/asafpel" target="_blank" rel="noopener" class="work-card-link">Connect on LinkedIn →</a>
-        </div>
-
-        <div class="work-card">
-          <div class="work-card-icon">👨‍👩‍👧</div>
-          <div class="work-card-title">For Parents</div>
-          <p class="work-card-desc">Private group workshops designed for children and teens — building the real-world skills school doesn't always teach: emotional intelligence, communication, resilience, and AI literacy.</p>
-          <a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener" class="work-card-link">Learn More →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CONNECT ── -->
-  <section class="connect" id="connect">
-    <div class="connect-inner fade-in">
-      <div class="section-label">Connect</div>
-      <h2>Let's start a<br><em>conversation</em></h2>
-      <p class="section-intro">
-        I'm always open to meaningful exchanges — whether about product, coaching, or just a good idea. Find me where you're most comfortable.
-      </p>
-      <div class="connect-links">
-        <a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener" class="btn btn-primary">Book a Call on Clarity ↗</a>
-        <a href="https://www.linkedin.com/in/asafpel" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn Profile</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-name">Asaf Peled</div>
-    <div class="footer-links">
-      <a href="https://clarity.fm/asafpeled" target="_blank" rel="noopener">Clarity</a>
-      <a href="https://www.linkedin.com/in/asafpel" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:asaf@getclarity.studio">Contact</a>
-    </div>
-    <div class="footer-copy">© 2026 · Built with intention</div>
-  </footer>
-
-  <script>
-    // ── Scroll-triggered animations ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Unobserve after triggering so it doesn't re-animate
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
-
-    document.querySelectorAll('.fade-in, .stagger-children').forEach(el => observer.observe(el));
-
-    // ── Nav scroll state ──
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-
-    // ── Active nav link highlight ──
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.style.color = link.getAttribute('href') === '#' + entry.target.id
-              ? 'var(--gold)'
-              : '';
-          });
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px' });
-
-    sections.forEach(s => sectionObserver.observe(s));
-
-    // ── Smooth scroll for anchor links ──
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
-
-</body>
-</html>
+<body class="bg-surface text-on-surface overflow-x-hidden">
+<div class="fixed inset-0 grain-overlay z-[60]"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex justify-between items-center w-full px-8 py-5 max-w-7xl mx-auto">
+<div class="text-xl font-serif font-bold text-primary tracking-tight">Human Curator</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-xs tracking-widest uppercase transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 lg:py-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="text-on-surface-variant font-label font-semibold tracking-[0.2em] uppercase text-[10px] mb-8 block">The Curated Perspective</span>
+<h1 class="text-6xl lg:text-8xl font-headline font-bold text-on-surface leading-[1.05] mb-8 tracking-tight">
+                        Where <span class="italic font-normal">Operations</span> <br/>meets <span class="italic font-normal text-primary">Human Impact</span>.
+                    </h1>
+<p class="text-lg lg:text-xl text-on-surface-variant font-body leading-relaxed max-w-xl mb-12">
+                        Bridging the gap between systematic efficiency and the people who drive it. A boutique advisory for leaders who refuse to choose between scale and soul.
+                    </p>
+<div class="flex flex-wrap items-center gap-8">
+<button class="bg-surface-tint text-on-primary px-8 py-4 rounded font-label font-bold text-sm tracking-widest uppercase flex items-center gap-3 group hover:shadow-xl transition-all">
+                            Explore Capabilities
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="text-on-surface-variant font-label font-bold text-sm tracking-widest uppercase border-b border-outline-variant/50 hover:border-primary hover:text-primary transition-all pb-1">
+                            View Case Studies
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-lg shadow-2xl relative z-10">
+<img alt="User's Professional Portrait" class="w-full h-full object-cover grayscale brightness-110 contrast-105" data-alt="Professional headshot of the Human Curator founder with a clean, light background" src="https://lh3.googleusercontent.com/aida/ADBb0uh-i_sbnqJLwsarzycvT8ZlxZVuBFkKnBHD3OyIviP2vmWNOw8hzOt7bny06iZ6ad7arkkvhIJVHTs9FzrRMPjYysA6-kky8ptMtDeSFJorbPXODPKZVVyRMPh1u8QxFPVRVUpI1ZD7-dGf3wZ_t7r20NAg7LZAZjpEuAywNcgR0S9gGhgE7zBRVMqzos3l7jnFF1K5paN0cArmxmUwtWp5TsEjQjXBHAwVHImjLbFsx7ogiohMp3f0lmn08JOYAhgyABPXD51S_w"/>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/5 -z-0 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Two Worlds Concept -->
+<section class="bg-surface-container-low py-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-20 max-w-2xl">
+<h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">Two Worlds, One Thread.</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg">Most consultants see people and processes as separate entities. I see them as the warp and weft of a single fabric.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Column 1: Systems -->
+<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
+<div class="w-10 h-10 rounded bg-primary/5 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-primary/70">architecture</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-6">Systemic Precision</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Designing operational frameworks that eliminate friction and enable sustainable growth without the burnout.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-primary/80">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span> Workflow Optimization
+                            </li>
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-primary/80">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span> Resource Governance
+                            </li>
+</ul>
+</div>
+<!-- Column 2: Large Impact (The Thread) -->
+<div class="md:col-span-1 bg-surface-tint p-12 rounded-lg text-on-primary flex flex-col justify-between overflow-hidden relative shadow-xl">
+<div class="relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block">Core Philosophy</span>
+<h3 class="text-3xl font-headline italic leading-snug mb-8">"Culture is the silent output of your operations."</h3>
+</div>
+<div class="relative z-10">
+<p class="text-[15px] opacity-90 leading-relaxed mb-10">Systems don't just move tasks; they communicate value. My work ensures your systems value your people.</p>
+<button class="bg-on-primary text-primary px-6 py-3 text-[11px] font-bold uppercase tracking-widest rounded hover:bg-surface-container transition-colors">Read the Thesis</button>
+</div>
+<!-- Abstract Background Decoration -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 border border-on-primary/10 rounded-full"></div>
+</div>
+<!-- Column 3: Humans -->
+<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
+<div class="w-10 h-10 rounded bg-secondary/5 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-secondary/70">groups</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-6">Human Flourishing</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Transforming leadership teams into cohesive units that operate with radical clarity and shared empathy.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-secondary/80">
+<span class="w-1 h-1 rounded-full bg-secondary/40"></span> Leadership Mentorship
+                            </li>
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-secondary/80">
+<span class="w-1 h-1 rounded-full bg-secondary/40"></span> Cultural Architecture
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Pull Quote -->
+<section class="max-w-7xl mx-auto px-8 py-40 text-center">
+<div class="max-w-4xl mx-auto">
+<blockquote class="text-5xl lg:text-6xl font-headline font-normal leading-[1.2] text-on-surface italic">
+                    "The most effective systems are those <br/>that <span class="text-surface-tint not-italic font-bold">breathe</span> with the people <br/>who use them."
+                </blockquote>
+<div class="mt-12 flex items-center justify-center gap-6">
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+<cite class="not-italic font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface-variant">The Human Curator Manifesto</cite>
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+</div>
+</div>
+</section>
+<!-- Expertise in Practice -->
+<section class="max-w-7xl mx-auto px-8 py-32 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-xl">
+<h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">Expertise in Practice.</h2>
+<p class="text-on-surface-variant text-lg">Applied intelligence for organizations ready for their next evolution.</p>
+</div>
+<div class="text-surface-tint font-label text-[11px] font-bold uppercase tracking-widest border-b border-primary/20 pb-1 cursor-pointer hover:border-primary transition-all">View All Solutions</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16">
+<!-- Practice Item 1 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Analytical Work" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4knL5aohwJtCIxzsyboTI00QmjESk5YFkBOAatRKZbVgAcfXo1YqhYl8vxSidmbmJ_u40Hz22iK-HMgNIqqkynIWhe5AsZh3BZX_pD_6Bv7jLVD-CjHUVjsZcXc-axjZqUCu-5Zzm3k9FlGvPkx9JM1-Dhe0oHeYFv2KdDfFihQRb5dNi_cKgPPVu_Gl-iG5ymV-Qj6EQ4Go-GQu1REgf8buZ2JU5PYEwhEyUFnUZPJenEmBl_lXOJTlymcF-Bidct3OuSQY8i87Z"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Fractional COO Engagement</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">High-level operational leadership without the overhead. I join your team to stabilize volatility and build for scale.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Define Your Needs <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 2 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Collaboration" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVjMTx65xp3gWl3TU48n984sM3_WF96GYvs9uLnoWMXRQjpVAZqhkmB97CtEB2dS2SOXlcYk964qtxFtLJQ0sr5osB0AdSFh1eanmFjkjXp3FPHLj0Nc2zcKL1Aw8348p61DVtXeQAXllmX6qL8DSdj9xCJXW2w-rUHrtnjS7Lbep39_bn2N_QG-54ErRhzggi4P9cewok74SYVOvjjdZMgGEGpt96dyyozSED8vVub9Op0ilv0recp1QvryVStthWTX_GRsckbAWC"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Leadership Calibration</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Aligning founder vision with executive execution. We remove the bottlenecks that exist between the 'what' and the 'how'.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Calibrate Your Team <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 3 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Strategic Focus" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqSL-E4c7pSPnR-LniRnUj_K-YCo0mfvqXK5UdmADJwRqCoASedgTMiiu-AA9h5QYBYu2MmXLOWM8vECDinpNiRZOpde-eee20VAvZ94xK1IFI0E5FxuRS7pY4tivkBzjjFfXil93OmBcZ3YM_FlovTm0vC105D2hSCmQ3sDGUfJMlQgCq_l_i6vVpAOjGP-QopuHIwXE3g2zn8jSWaXjze0JnEzE8cfGbXkHDbNbnWvYCEAundNnAQS0lrTMgHECXmZOA46vyQKmS"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Strategic Architecture</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Constructing long-term roadmaps that integrate product milestones with team development goals for holistic success.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Architect Your Future <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 4 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Refined Clarity" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSk8FWhx16ylcQJX2B9xKVStkZx0wUf19wSeJ0j3-3gKB_YZRrfuh9ChQAQv_pBnCl5mrX1PwH33TfEuY4KrJlaNDqUqpzTTuJIS9zpi7fLqkQZuiwfanmS4r6TAnhT6YyRzYPDK9BFJsAmJpfQioarYwg5kguHEusdIBrVNirm-NmXvA5XsI5wHwjAs3gbjJynjy5tbvNmLcGtwMOFZZIW8oo8VO1pyS3bAdierH2uTseWbzjLgqs_RJEytoQAx1aWhv5IbAmmrJi"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Operational Audits</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">A deep dive into your current state to identify the 20% of friction points causing 80% of your operational drag.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Begin Audit <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 5: Clarity AI -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden border border-outline-variant/10">
+<img alt="Clarity AI Workspace" class="w-full h-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKWewOZbjvuYqIndAHEH7xfo5LqUuBt1REvxrG50z_g0jUSerdaygqdUo7pYTMuvOde1URSdJo2FDRTdrIDlRAbpFczBRHCnOcmO8Nx5H_do84pBBH4mfZRAh2Aof8B3P6sdbE9EMY6USMp5_wm3Snq-CLmEZ4oCooBbunbJ1hJqH0y8FEQfEu4TI3frEaf25eK46mV-9MlhkGXkJr9rOQWqZg2HlUD5N8v2CZ9Q7LPBDXD7GUL0RksR2O39qE998hy-WeTog2-oEK"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Clarity AI</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Personal AI Workspace for Curated Thinking. A seamless environment where your thoughts are organized and enhanced by intelligent synthesis.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="https://www.getclarity.studio/" target="_blank">
+                            Explore Workspace <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="bg-surface-container-high rounded-lg p-16 md:p-24 text-center relative overflow-hidden">
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-5xl font-headline font-bold mb-8 text-on-surface leading-tight">Intentional growth starts with a conversation.</h2>
+<p class="text-on-surface-variant text-lg mb-12 leading-relaxed">Ready to build systems that honor your people? Let’s explore how we can thread operations and impact together.</p>
+<button class="bg-surface-tint text-on-primary px-12 py-5 rounded font-label font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all shadow-xl hover:-translate-y-1">
+                        Schedule a Consultation
+                    </button>
+</div>
+<!-- Artistic Flourish -->
+<div class="absolute top-0 right-0 p-12">
+<span class="material-symbols-outlined text-primary/10 text-9xl select-none">auto_awesome</span>
+</div>
+<div class="absolute bottom-0 left-0 p-12">
+<span class="material-symbols-outlined text-primary/5 text-8xl select-none">flare</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-8 bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-serif italic text-2xl font-bold text-primary">Human Curator</div>
+<div class="text-on-surface-variant/70 font-sans text-xs tracking-widest uppercase">
+                    © 2024 The Human Curator. Built with intention.
+                </div>
+</div>
+<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Terms</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Substack</a>
+</div>
+</div>
+</footer>
+</body></html>
