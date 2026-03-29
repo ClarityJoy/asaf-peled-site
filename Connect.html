@@ -83,6 +83,7 @@
             background: linear-gradient(135deg, #805522 0%, #c9955c 100%);
         }
     </style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
 <div class="noise-overlay fixed inset-0 z-[100]"></div>
@@ -116,21 +117,14 @@
 <span class="material-symbols-outlined text-[#3e674c] mt-1" style="font-variation-settings: 'FILL' 1;">mail</span>
 <div class="space-y-1">
 <p class="font-bold text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Direct Outreach</p>
-<p class="serif italic text-2xl text-on-surface">hello@humancurator.com</p>
-</div>
-</div>
-<div class="flex items-start gap-6">
-<span class="material-symbols-outlined text-[#3e674c] mt-1" style="font-variation-settings: 'FILL' 1;">location_on</span>
-<div class="space-y-1">
-<p class="font-bold text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Based In</p>
-<p class="serif italic text-2xl text-on-surface">San Francisco / Remote</p>
+<p class="serif italic text-2xl text-on-surface"><a href="mailto:hello@asafpeled.com">hello@asafpeled.com</a></p>
 </div>
 </div>
 <div class="flex items-start gap-6">
 <span class="material-symbols-outlined text-[#3e674c] mt-1" style="font-variation-settings: 'FILL' 1;">person</span>
 <div class="space-y-1">
 <p class="font-bold text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">LinkedIn Profile</p>
-<p class="serif italic text-2xl text-on-surface leading-snug">Professional networking and daily thoughts on leadership</p>
+<p class="serif italic text-2xl text-on-surface leading-snug"><a href="https://www.linkedin.com/in/asafpel/">https://www.linkedin.com/in/asafpel/</a></p>
 </div>
 </div>
 </div>
@@ -142,39 +136,42 @@
 </div>
 <!-- Right Side: Interaction Form -->
 <div class="bg-surface-container-low p-10 md:p-16 rounded-sm relative overflow-hidden">
-<form class="space-y-12 relative z-10">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-<div class="space-y-3">
-<label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="name">Your Name</label>
-<input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="name" name="name" placeholder="Elias Thorne" type="text"/>
-</div>
-<div class="space-y-3">
-<label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="email">Email Address</label>
-<input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="email" name="email" placeholder="elias@example.com" type="email"/>
-</div>
-</div>
-<div class="space-y-3">
-<label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="intent">Nature of Inquiry</label>
-<div class="relative">
-<select class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 appearance-none text-on-surface-variant text-sm" id="intent" name="intent">
-<option value="ops">Product Operations Advisory</option>
-<option value="leadership">Leadership Mentorship</option>
-<option value="speaking">Speaking &amp; Workshops</option>
-<option value="other">General Curiosity</option>
-</select>
-<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg">expand_more</span>
-</div>
-</div>
-<div class="space-y-3">
-<label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="message">What's on your mind?</label>
-<textarea class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 resize-none text-sm" id="message" name="message" placeholder="I'm interested in discussing..." rows="6"></textarea>
-</div>
-<div class="pt-4">
-<button class="signature-gradient text-on-primary px-10 py-5 font-bold text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group" type="submit">
-                            Send Message
-                            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</div>
+<form id="contact-form" class="space-y-12 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="space-y-3">
+            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="name">Your Name</label>
+            <input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="name" name="user_name" placeholder="Elias Thorne" type="text" required />
+        </div>
+        <div class="space-y-3">
+            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="email">Email Address</label>
+            <input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="email" name="user_email" placeholder="elias@example.com" type="email" required />
+        </div>
+    </div>
+    
+    <div class="space-y-3">
+        <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="intent">Nature of Inquiry</label>
+        <div class="relative">
+            <select class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 appearance-none text-on-surface-variant text-sm" id="intent" name="inquiry_type">
+                <option value="ops">Product Operations Advisory</option>
+                <option value="leadership">Leadership Mentorship</option>
+                <option value="speaking">Speaking & Workshops</option>
+                <option value="other">General Curiosity</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg">expand_more</span>
+        </div>
+    </div>
+    
+    <div class="space-y-3">
+        <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="message">What's on your mind?</label>
+        <textarea class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 resize-none text-sm" id="message" name="message" placeholder="I'm interested in discussing..." rows="6" required></textarea>
+    </div>
+    
+    <div class="pt-4">
+        <button id="submit-button" class="signature-gradient text-on-primary px-10 py-5 font-bold text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group" type="submit">
+            <span id="button-text">Send Message</span>
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+    </div>
 </form>
 </div>
 </div>
@@ -214,4 +211,49 @@
 <p class="text-stone-400 dark:text-stone-500 font-sans text-[11px] tracking-tight">© 2024 The Human Curator. Built with intention.</p>
 </div>
 </footer>
+<script type="text/javascript">
+    (function() {
+        // REPLACE "YOUR_PUBLIC_KEY" with your actual Public Key from EmailJS
+        emailjs.init("ddxNyTSb25ta-RR6h");
+    })();
+
+    window.onload = function() {
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-button');
+        const btnText = document.getElementById('button-text');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Visual feedback
+            btnText.innerText = 'Sending...';
+            btn.style.opacity = '0.7';
+            btn.style.pointerEvents = 'none';
+
+            // REPLACE these strings with your actual Service and Template IDs
+            const serviceID = 'service_e3zyesc';
+            const templateID = 'template_6kmiypo';
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    btnText.innerText = 'Message Sent!';
+                    btn.style.backgroundColor = '#10b981'; // Success green
+                    form.reset();
+                    
+                    // Reset button after 5 seconds
+                    setTimeout(() => {
+                        btnText.innerText = 'Send Message';
+                        btn.style.opacity = '1';
+                        btn.style.pointerEvents = 'auto';
+                        btn.style.backgroundColor = ''; 
+                    }, 5000);
+                }, (err) => {
+                    btnText.innerText = 'Error! Try Again';
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                    alert(JSON.stringify(err));
+                });
+        });
+    }
+</script>
 </body></html>
