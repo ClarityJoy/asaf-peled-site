@@ -90,6 +90,9 @@
         line-height: 1.6;
       }
       /* Google Translate */
+      [dir="rtl"] { text-align: right; }
+      [dir="rtl"] #translate-menu { right: auto; left: 0; }
+      [dir="rtl"] .material-symbols-outlined { transform: scaleX(-1); }
       iframe[id$=".container"].skiptranslate,
       .goog-te-banner-frame { display: none !important; }
       body { top: 0px !important; }
@@ -112,7 +115,7 @@
 <!-- Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fcf9f4]/80 backdrop-blur-xl border-b border-surface-container">
 <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-<div class="text-xl font-headline font-bold text-primary">Human Curator</div>
+<div class="text-xl font-headline font-bold text-primary notranslate" translate="no">Human Curator</div>
 <div class="hidden md:flex items-center gap-10">
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-[10px] hover:text-primary transition-colors" href="/index.html">Home</a>
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
@@ -128,6 +131,7 @@
 <div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
 <button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
 <button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
+<button type="button" onclick="doTranslate('ar')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">عربي</button>
 <button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
 <button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
 <button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
@@ -136,14 +140,47 @@
 <form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
 </div>
 </div>
+<!-- Mobile Menu Icon -->
+<div class="md:hidden flex items-center">
+<button id="mobile-open" type="button" aria-label="Open menu"><span class="material-symbols-outlined text-primary notranslate" translate="no">menu</span></button>
+</div>
+</div>
 </nav>
+<!-- Mobile Menu Panel -->
+<div id="mobile-menu" class="hidden fixed inset-0 z-[200] bg-[#fcf9f4]">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-center px-8 py-5 border-b border-outline-variant/20">
+<div class="text-xl font-headline font-bold text-primary notranslate" translate="no">Human Curator</div>
+<button id="mobile-close" type="button" class="text-primary"><span class="material-symbols-outlined notranslate" translate="no">close</span></button>
+</div>
+<div class="flex flex-col flex-grow justify-center items-center gap-8 px-8 text-center">
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/index.html">Home</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/Capabilities.html">Capabilities</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Insights.html">Insights</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Work With Me.html">Work With Me</a>
+<a class="bg-primary text-on-primary px-8 py-3 font-label text-[10px] uppercase tracking-widest mt-2 hover:bg-on-primary-container transition-colors" href="/Connect.html">Connect</a>
+<div class="mt-6 pt-6 border-t border-outline-variant/20 w-full">
+<div class="flex flex-wrap justify-center gap-2">
+<button onclick="doTranslate('en')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">English</button>
+<button onclick="doTranslate('he')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">עברית</button>
+<button onclick="doTranslate('ar')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">عربي</button>
+<button onclick="doTranslate('es')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Español</button>
+<button onclick="doTranslate('fr')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Français</button>
+<button onclick="doTranslate('de')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Deutsch</button>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script type="text/javascript">
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,es,fr,de'}, 'gt-hidden');
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,ar,es,fr,de'}, 'gt-hidden');
 }
 function doTranslate(lang) {
   document.getElementById('translate-menu').classList.add('hidden');
+  var rtl = ['he', 'ar'];
   if (lang === 'en') {
+    document.documentElement.setAttribute('dir', 'ltr');
     var frames = document.querySelectorAll('iframe.skiptranslate');
     for (var i = 0; i < frames.length; i++) {
       try {
@@ -155,6 +192,7 @@ function doTranslate(lang) {
     location.reload();
     return;
   }
+  document.documentElement.setAttribute('dir', rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr');
   var gtLang = lang === 'he' ? 'iw' : lang;
   function apply() {
     var select = document.querySelector('.goog-te-combo');
@@ -182,6 +220,23 @@ document.addEventListener('DOMContentLoaded', function() {
       menu.classList.add('hidden');
     });
   }
+  var mobileOpen = document.getElementById('mobile-open');
+  var mobileClose = document.getElementById('mobile-close');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (mobileOpen && mobileMenu) {
+    mobileOpen.addEventListener('click', function() {
+      mobileMenu.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+    mobileClose.addEventListener('click', function() {
+      mobileMenu.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  }
+  document.querySelectorAll('.material-symbols-outlined').forEach(function(el) {
+    el.setAttribute('translate', 'no');
+    el.classList.add('notranslate');
+  });
 });
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
