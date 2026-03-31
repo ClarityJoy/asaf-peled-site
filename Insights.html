@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#653e0c",
+              "on-tertiary-fixed-variant": "#494643",
+              "secondary-fixed-dim": "#a4d1b0",
+              "primary-fixed-dim": "#f4bc7f",
+              "on-surface-variant": "#50453a",
+              "on-surface": "#1c1c19",
+              "outline-variant": "#d4c4b5",
+              "tertiary-container": "#a39e99",
+              "surface-tint": "#805522",
+              "on-error": "#ffffff",
+              "surface-variant": "#e5e2dd",
+              "surface-container-highest": "#e5e2dd",
+              "secondary-container": "#bfeecb",
+              "surface-container": "#f0ede9",
+              "inverse-on-surface": "#f3f0eb",
+              "on-primary-container": "#502e00",
+              "on-secondary-fixed-variant": "#264f36",
+              "secondary": "#3e674c",
+              "surface-container-low": "#f6f3ee",
+              "surface": "#fcf9f4",
+              "surface-dim": "#dcdad5",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#31302d",
+              "secondary-fixed": "#bfeecb",
+              "outline": "#827568",
+              "on-primary-fixed": "#2c1700",
+              "tertiary-fixed-dim": "#cbc5c0",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#446d52",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#00210f",
+              "inverse-primary": "#f4bc7f",
+              "on-background": "#1c1c19",
+              "tertiary": "#615e5a",
+              "on-primary": "#ffffff",
+              "on-tertiary-container": "#383632",
+              "on-tertiary-fixed": "#1d1b18",
+              "tertiary-fixed": "#e7e1dc",
+              "background": "#fcf9f4",
+              "primary-container": "#c9955c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#ebe8e3",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f4",
+              "primary-fixed": "#ffdcbb",
+              "primary": "#805522"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+            vertical-align: middle
+        }
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #fcf9f4;
+            color: #1c1c19;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDeYGhAnLF3BF9hvD0LCbt-jPfdnYj_cR_-Hhp_gPbnP0ExTANavUY4642JTBIRoPVfanTNEa6DRRrm0j4CfJDxkbyOI9z3b6xrkVAGy3-xrsjHAQtwhn--D61IqsD9fPA5BIHEmDneE8pbuIUdov972W24HFLFzZQZX26LWB5XkPcVcupDTA-bHYh1lqKOsvTrHuyL0y-2zZGKBwXT3_PrwQ8cufgoYsWrndzk-LKpW-KdsmrH7AUqpCMVUrtiXbYReFMufL2di1Pv);
+            background-blend-mode: multiply;
+            background-attachment: fixed;
+        }
+        h1, h2, h3, .serif-italic {
+            font-family: "Noto Serif", serif
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #805522 0%, #c9955c 100%)
+        }
+        /* Google Translate */
+        iframe[id$=".container"].skiptranslate,
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element select {
+            background-color: transparent;
+            border: none;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #50453a;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        #google_translate_element select:focus { outline: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f4]/80 dark:bg-stone-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-serif font-bold text-[#805522] dark:text-[#c9955c]">
+                Human Curator
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-[10px] hover:text-primary transition-colors" href="/index.html">Home</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
+<div class="flex items-center gap-6 border-l border-outline-variant/30 pl-6">
+<div class="relative" id="translate-wrapper">
+<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
+<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
+</button>
+<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
+<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
+<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
+<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
+<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
+<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
+<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
+</div>
+</div>
+<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
+</div>
+</div>
+<!-- Mobile Menu Icon -->
+<div class="md:hidden flex items-center gap-4">
+<div id="google_translate_element_mobile"></div>
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+</div>
+</nav>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,es,fr,de'}, 'gt-hidden');
+}
+function doTranslate(lang) {
+  document.getElementById('translate-menu').classList.add('hidden');
+  if (lang === 'en') {
+    var frames = document.querySelectorAll('iframe.skiptranslate');
+    for (var i = 0; i < frames.length; i++) {
+      try {
+        var d = frames[i].contentDocument || frames[i].contentWindow.document;
+        var btn = d.querySelector('[id$=".restore"]');
+        if (btn) { btn.click(); return; }
+      } catch(e) {}
+    }
+    location.reload();
+    return;
+  }
+  var gtLang = lang === 'he' ? 'iw' : lang;
+  function apply() {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) return false;
+    select.value = gtLang;
+    var evt = document.createEvent('HTMLEvents');
+    evt.initEvent('change', false, true);
+    select.dispatchEvent(evt);
+    return true;
+  }
+  if (!apply()) {
+    var tries = 0;
+    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('translate-btn');
+  var menu = document.getElementById('translate-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function() {
+      menu.classList.add('hidden');
+    });
+  }
+});
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<main class="pt-24 pb-16">
+<!-- Hero Header -->
+<header class="max-w-7xl mx-auto px-8 mb-20 text-center">
+<div class="inline-block px-4 py-1 bg-surface-container-high text-primary text-[10px] tracking-[0.2em] uppercase font-bold mb-6">The Curator's Journal</div>
+<h1 class="text-5xl md:text-7xl font-headline tracking-tight text-on-surface leading-tight mb-8">
+                Where <i>wisdom</i> meets <br/>the <i>velocity</i> of modern scale.
+            </h1>
+<p class="max-w-2xl mx-auto text-lg text-on-surface-variant font-body leading-relaxed">
+                Reflections on product operations, leadership development, and the intentional pursuit of building meaningful organizations.
+            </p>
+</header>
+<!-- Featured Article -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<div class="aspect-[16/10] overflow-hidden group">
+<img alt="Featured insight" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoUpOI_mVriqz5L34YxIEyHeiHroobw-FwRYqjSQfo7aiJMq040Cy_yVoDbkaRP-3voR5ozTqebYq2irSFkF98GtmjhqA-dPS9VHOjT9-4KBfKAPtQ51UaHUJ7qYA2PET1LRP0c-ZAFY_842ZfG0h9OmIwfiCJmvTtPXlo8-rMODJiVe6h3HOxSc-rfUemIV3Q0HTOQdsWdtOIQhXTD7188Ar7-sUjzWpWzeMERQlJlhdVvlUaJZODk7GA5N-ULQbryQNSwSu2KlJM"/>
+</div>
+</div>
+<div class="lg:col-span-5 flex flex-col justify-center">
+<span class="text-secondary font-body font-bold text-xs tracking-widest uppercase mb-4">Lead Article — 01</span>
+<h2 class="text-4xl font-headline leading-tight text-on-surface mb-6">
+                        The <i>Architecture</i> of Quiet Leadership in Loud Environments
+                    </h2>
+<p class="text-on-surface-variant font-body leading-relaxed mb-8 italic">
+                        "In an era obsessed with velocity, the most effective leaders are those who curate silence to make space for clarity."
+                    </p>
+<a class="inline-flex items-center gap-2 text-primary font-label font-semibold hover:gap-4 transition-all group" href="#">
+                        Read the Essay 
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Insights Grid -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="flex justify-between items-end mb-12">
+<h3 class="text-2xl font-headline">Latest <i>Curations</i></h3>
+<div class="flex gap-4">
+<button class="text-xs uppercase tracking-widest text-primary border-b border-primary/20 pb-1">Recent</button>
+<button class="text-xs uppercase tracking-widest text-on-surface-variant pb-1">Popular</button>
+<button class="text-xs uppercase tracking-widest text-on-surface-variant pb-1">Archive</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-12">
+<!-- Article 1 -->
+<article class="flex flex-col">
+<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden">
+<img alt="The Human Curator on a swing" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="https://lh3.googleusercontent.com/aida/ADBb0uj0nBblXt3BiK3kY9uefAEc0-Lk4bzgzBQWA1iCieLldTXVO2nv2AfVuGUAgJy1d6sMhgBmdLbcBALP-fiCggJs6AqfhbmQhF8EPpW2KrDgWHWeAQ_aUaTq-Nol5Fh9wbNvHPJ2tKHWLHk1O-DL4UyxJtgcBHIYZNzG75Rzr1V2ZTi0AQdk23tZqg7Kd-vrwBtaAxha2drdFhUZ809OCLAUw8QTCo0HkuCEgPQ_IYIkpKFi2qbOty_QmCPgrDtd7gLxaTHkcLrKT9g"/>
+</div>
+<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Product Operations</span>
+<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Scalable Systems for <i>Unscalable</i> Teams</h4>
+<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">How to implement rigorous operational standards without crushing the human spirit of innovation.</p>
+</article>
+<!-- Article 2 -->
+<article class="flex flex-col">
+<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden">
+<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6E4GDjNCUgiFdrz4AOf6HuDCU2i7C6PHQqGBMq0ngsaeKXd6o6PwLbBnwTKLQPtIIu1SKbCiWuONtJ1tc-5n4U3n97QuVZwHMdOb1PgZD-Ns4_vANJA4mqfC6W7UCstqCgh2N5uEwJTPx3kgb5g6Z1gJV21XRpA8aBUEjiePI1jPoFnYmg-TZQpIJnr6Nze_br0xw7F_LZOOqWzRtEmtws1G0enFs0EHdlnW7RBQQptlHL6eL7sy9bT5l2DeX5Le3J7DfC6YG68Dm"/>
+</div>
+<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Culture</span>
+<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">The <i>Emotional</i> ROI of Radical Intentionality</h4>
+<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">Measuring the impact of presence and focus on high-stakes team outcomes and retention.</p>
+</article>
+<!-- Article 3 -->
+<article class="flex flex-col">
+<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden">
+<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgph2oux08vOMp9aLJhx2VcKQkE-Au1jC54b7yFyb7hu2m-Wgfs3wSwLUa4h1xHKZke1D93NQ29awZF38h3NvWiz92q_qUxD7L8VGvskCqE46WfrJJ0UBYRKXamyOi_S6X2i-WHTwesR2j2UYubBnqtaWhym2uCkJofG6RFhsHoRmE0ZyRZCSWvUIrWs1ltqDgeeNSN0lfClTehF-LIfOEhK8T5cU5qCU7ZsIEexJSQXZXG-DDWxqE3uXtorUVNcWdVhd3LZXoN56h"/>
+</div>
+<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Development</span>
+<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Curating Your <i>Executive</i> Presence</h4>
+<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">A guide to developing authority through competence, nuance, and strategic vulnerability.</p>
+</article>
+<!-- Article 4 (Horizontal / Spanning) -->
+<article class="md:col-span-2 flex flex-col md:flex-row gap-8 items-center bg-surface-container-lowest p-8 rounded-lg shadow-sm">
+<div class="md:w-1/2 aspect-video overflow-hidden">
+<img alt="Insights item" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiVxr45jimBUE6vcNabs1LdoccyMwx-iHb6xVjfhNwrZZ2LVx_C-E_fi-J99RnRVTIMb7zqSAncc5r60qDSprvsVaDHmnXOU9mphKPqKHhm91Gxv9Z6g0Un8CbG43raWhAeTpS1639itxtyGpEVeOwwT_ZqhFocrCT1yrozJZgBk2j5kVFSi6uTo3NL-LvKK-13xWnEH9rRJRy1SbCctKChRN4CVwOZ0LB_bMyfv3sDt_WXIQFovQ_vPRP_LQUsxxt4ZAOjATsoLXS"/>
+</div>
+<div class="md:w-1/2">
+<span class="text-xs uppercase tracking-widest text-secondary font-bold mb-3 inline-block">Long Read</span>
+<h4 class="text-3xl font-headline leading-tight text-on-surface mb-4">Why we must <i>rethink</i> the roadmap.</h4>
+<p class="text-on-surface-variant text-sm font-body leading-relaxed mb-6">Linear progression is a myth of the 20th century. In a complex world, we need maps that evolve as fast as our context.</p>
+<button class="text-primary font-label text-xs tracking-widest uppercase border-b-2 border-primary pb-1">Access Manuscript</button>
+</div>
+</article>
+<!-- Article 5 -->
+<article class="flex flex-col">
+<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden">
+<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYsn6ZMVhYVnlRMhFpujAM40CYaxr7_G8ybK8lkJzbZd9Hzh2RZ8ukwZl7_f4hazd6IcdswcT4ozqLqzKSVjduRPJiv0XbICnC85CsrWvlGdKg5pxJ1mcuFqzum6V3LcVxN9PcfzXXrEQC4A6Y3saZMv-H722yCkxncLh3ffPGN4cVAvnaB1y9EBvDSb4TEkCm59y1lvaaVLOpj3KFmtd_-LayzIbMsI5B_sQxTPe51xkmlYO2pp9eP0TU_XE7uTaegXn2AsPBpOhS"/>
+</div>
+<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Environment</span>
+<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Space as a <i>Lever</i> for Creative Flow</h4>
+<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">Exploring how physical and digital environments dictate the quality of our highest-level work.</p>
+</article>
+</div>
+</section>
+<!-- Newsletter Subscription -->
+<section class="max-w-5xl mx-auto px-8 mb-24">
+<div class="bg-surface-container-low p-12 md:p-20 text-center relative overflow-hidden">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-[#805522] text-4xl mb-6">mail</span>
+<h2 class="text-4xl font-headline text-on-surface mb-6">Curated <i>Directly</i> to You.</h2>
+<p class="max-w-lg mx-auto text-on-surface-variant font-body mb-10 leading-relaxed">
+                        Join a community of 5,000+ intentional leaders. Receive one deep-dive essay every second Tuesday. No noise, just insight.
+                    </p>
+<form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+<input class="flex-grow bg-surface-container-lowest border-none border-b border-outline-variant/40 focus:border-primary focus:ring-0 px-4 py-3 text-sm font-body transition-all outline-none" placeholder="email@example.com" type="email"/>
+<button class="bg-[#805522] text-white px-8 py-3 text-xs font-bold tracking-[0.2em] uppercase rounded-md hover:bg-[#653e0c] transition-all shadow-md" type="submit">Subscribe</button>
+</form>
+<p class="mt-6 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-medium">Privacy respected. One-click unsubscribe.</p>
+</div>
+</div>
+</section>
+<!-- Signature Quote -->
+<section class="max-w-4xl mx-auto px-8 py-12 text-center">
+<blockquote class="text-3xl md:text-4xl font-headline italic text-secondary leading-relaxed">
+                "The role of the curator is not just to select, but to provide the *meaning* between the selections."
+            </blockquote>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f6f3ee] dark:bg-stone-900 w-full py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-6">
+<div class="font-serif italic text-lg text-[#805522]">Human Curator</div>
+<div class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight text-center md:text-left">
+                © 2024 The Human Curator. Built with intention.
+            </div>
+<div class="flex gap-8">
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Privacy</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Terms</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">LinkedIn</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Substack</a>
+</div>
+</div>
+</footer>
+</body></html>

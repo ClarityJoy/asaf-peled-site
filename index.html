@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Human Curator | Operations &amp; Impact</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#653e0c",
+              "on-tertiary-fixed-variant": "#494643",
+              "secondary-fixed-dim": "#a4d1b0",
+              "primary-fixed-dim": "#f4bc7f",
+              "on-surface-variant": "#50453a",
+              "on-surface": "#1c1c19",
+              "outline-variant": "#d4c4b5",
+              "tertiary-container": "#a39e99",
+              "surface-tint": "#805522",
+              "on-error": "#ffffff",
+              "surface-variant": "#e5e2dd",
+              "surface-container-highest": "#e5e2dd",
+              "secondary-container": "#bfeecb",
+              "surface-container": "#f0ede9",
+              "inverse-on-surface": "#f3f0eb",
+              "on-primary-container": "#502e00",
+              "on-secondary-fixed-variant": "#264f36",
+              "secondary": "#3e674c",
+              "surface-container-low": "#f6f3ee",
+              "surface": "#fcf9f4",
+              "surface-dim": "#dcdad5",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#31302d",
+              "secondary-fixed": "#bfeecb",
+              "outline": "#827568",
+              "on-primary-fixed": "#2c1700",
+              "tertiary-fixed-dim": "#cbc5c0",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#446d52",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#00210f",
+              "inverse-primary": "#f4bc7f",
+              "on-background": "#1c1c19",
+              "tertiary": "#615e5a",
+              "on-primary": "#ffffff",
+              "on-tertiary-container": "#383632",
+              "on-tertiary-fixed": "#1d1b18",
+              "tertiary-fixed": "#e7e1dc",
+              "background": "#fcf9f4",
+              "primary-container": "#c9955c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#ebe8e3",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f4",
+              "primary-fixed": "#ffdcbb",
+              "primary": "#805522"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        /* Google Translate */
+        iframe[id$=".container"].skiptranslate,
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element select {
+            background-color: transparent;
+            border: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #50453a;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        #google_translate_element select:focus { outline: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-x-hidden">
+<div class="fixed inset-0 grain-overlay z-[60]"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex justify-between items-center w-full px-8 py-5 max-w-7xl mx-auto">
+<div class="text-xl font-serif font-bold text-primary tracking-tight">Human Curator</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-xs tracking-widest uppercase transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
+<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
+</div>
+<div class="hidden md:flex items-center gap-6 border-l border-outline-variant/30 pl-6">
+<div class="relative" id="translate-wrapper">
+<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
+<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
+</button>
+<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
+<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
+<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
+<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
+<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
+<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
+<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
+</div>
+</div>
+<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
+</div>
+</div>
+</nav>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,es,fr,de'}, 'gt-hidden');
+}
+function doTranslate(lang) {
+  document.getElementById('translate-menu').classList.add('hidden');
+  if (lang === 'en') {
+    var frames = document.querySelectorAll('iframe.skiptranslate');
+    for (var i = 0; i < frames.length; i++) {
+      try {
+        var d = frames[i].contentDocument || frames[i].contentWindow.document;
+        var btn = d.querySelector('[id$=".restore"]');
+        if (btn) { btn.click(); return; }
+      } catch(e) {}
+    }
+    location.reload();
+    return;
+  }
+  var gtLang = lang === 'he' ? 'iw' : lang;
+  function apply() {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) return false;
+    select.value = gtLang;
+    var evt = document.createEvent('HTMLEvents');
+    evt.initEvent('change', false, true);
+    select.dispatchEvent(evt);
+    return true;
+  }
+  if (!apply()) {
+    var tries = 0;
+    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('translate-btn');
+  var menu = document.getElementById('translate-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function() {
+      menu.classList.add('hidden');
+    });
+  }
+});
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 lg:py-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="text-on-surface-variant font-label font-semibold tracking-[0.2em] uppercase text-[10px] mb-8 block">The Curated Perspective</span>
+<h1 class="text-6xl lg:text-8xl font-headline font-bold text-on-surface leading-[1.05] mb-8 tracking-tight">
+                        Where <span class="italic font-normal">Operations</span> <br/>meets <span class="italic font-normal text-primary">Human Impact</span>.
+                    </h1>
+<p class="text-lg lg:text-xl text-on-surface-variant font-body leading-relaxed max-w-xl mb-12">
+                        Bridging the gap between systematic efficiency and the people who drive it. A boutique advisory for leaders who refuse to choose between scale and soul.
+                    </p>
+<div class="flex flex-wrap items-center gap-8">
+<button class="bg-surface-tint text-on-primary px-8 py-4 rounded font-label font-bold text-sm tracking-widest uppercase flex items-center gap-3 group hover:shadow-xl transition-all">
+                            Explore Capabilities
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="text-on-surface-variant font-label font-bold text-sm tracking-widest uppercase border-b border-outline-variant/50 hover:border-primary hover:text-primary transition-all pb-1">
+                            View Case Studies
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-lg shadow-2xl relative z-10">
+<img alt="User's Professional Portrait" class="w-full h-full object-cover grayscale brightness-110 contrast-105" data-alt="Professional headshot of the Human Curator founder with a clean, light background" src="https://lh3.googleusercontent.com/aida/ADBb0uh-i_sbnqJLwsarzycvT8ZlxZVuBFkKnBHD3OyIviP2vmWNOw8hzOt7bny06iZ6ad7arkkvhIJVHTs9FzrRMPjYysA6-kky8ptMtDeSFJorbPXODPKZVVyRMPh1u8QxFPVRVUpI1ZD7-dGf3wZ_t7r20NAg7LZAZjpEuAywNcgR0S9gGhgE7zBRVMqzos3l7jnFF1K5paN0cArmxmUwtWp5TsEjQjXBHAwVHImjLbFsx7ogiohMp3f0lmn08JOYAhgyABPXD51S_w"/>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/5 -z-0 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Two Worlds Concept -->
+<section class="bg-surface-container-low py-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-20 max-w-2xl">
+<h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">Two Worlds, One Thread.</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg">Most consultants see people and processes as separate entities. I see them as the warp and weft of a single fabric.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Column 1: Systems -->
+<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
+<div class="w-10 h-10 rounded bg-primary/5 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-primary/70">architecture</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-6">Systemic Precision</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Designing operational frameworks that eliminate friction and enable sustainable growth without the burnout.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-primary/80">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span> Workflow Optimization
+                            </li>
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-primary/80">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span> Resource Governance
+                            </li>
+</ul>
+</div>
+<!-- Column 2: Large Impact (The Thread) -->
+<div class="md:col-span-1 bg-surface-tint p-12 rounded-lg text-on-primary flex flex-col justify-between overflow-hidden relative shadow-xl">
+<div class="relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block">Core Philosophy</span>
+<h3 class="text-3xl font-headline italic leading-snug mb-8">"Culture is the silent output of your operations."</h3>
+</div>
+<div class="relative z-10">
+<p class="text-[15px] opacity-90 leading-relaxed mb-10">Systems don't just move tasks; they communicate value. My work ensures your systems value your people.</p>
+<button class="bg-on-primary text-primary px-6 py-3 text-[11px] font-bold uppercase tracking-widest rounded hover:bg-surface-container transition-colors">Read the Thesis</button>
+</div>
+<!-- Abstract Background Decoration -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 border border-on-primary/10 rounded-full"></div>
+</div>
+<!-- Column 3: Humans -->
+<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
+<div class="w-10 h-10 rounded bg-secondary/5 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-secondary/70">groups</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-6">Human Flourishing</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Transforming leadership teams into cohesive units that operate with radical clarity and shared empathy.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-secondary/80">
+<span class="w-1 h-1 rounded-full bg-secondary/40"></span> Leadership Mentorship
+                            </li>
+<li class="flex items-center gap-3 text-[11px] font-label font-bold uppercase tracking-widest text-secondary/80">
+<span class="w-1 h-1 rounded-full bg-secondary/40"></span> Cultural Architecture
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Pull Quote -->
+<section class="max-w-7xl mx-auto px-8 py-40 text-center">
+<div class="max-w-4xl mx-auto">
+<blockquote class="text-5xl lg:text-6xl font-headline font-normal leading-[1.2] text-on-surface italic">
+                    "The most effective systems are those <br/>that <span class="text-surface-tint not-italic font-bold">breathe</span> with the people <br/>who use them."
+                </blockquote>
+<div class="mt-12 flex items-center justify-center gap-6">
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+<cite class="not-italic font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface-variant">The Human Curator Manifesto</cite>
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+</div>
+</div>
+</section>
+<!-- Expertise in Practice -->
+<section class="max-w-7xl mx-auto px-8 py-32 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-xl">
+<h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">Expertise in Practice.</h2>
+<p class="text-on-surface-variant text-lg">Applied intelligence for organizations ready for their next evolution.</p>
+</div>
+<div class="text-surface-tint font-label text-[11px] font-bold uppercase tracking-widest border-b border-primary/20 pb-1 cursor-pointer hover:border-primary transition-all">View All Solutions</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16">
+<!-- Practice Item 1 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Analytical Work" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4knL5aohwJtCIxzsyboTI00QmjESk5YFkBOAatRKZbVgAcfXo1YqhYl8vxSidmbmJ_u40Hz22iK-HMgNIqqkynIWhe5AsZh3BZX_pD_6Bv7jLVD-CjHUVjsZcXc-axjZqUCu-5Zzm3k9FlGvPkx9JM1-Dhe0oHeYFv2KdDfFihQRb5dNi_cKgPPVu_Gl-iG5ymV-Qj6EQ4Go-GQu1REgf8buZ2JU5PYEwhEyUFnUZPJenEmBl_lXOJTlymcF-Bidct3OuSQY8i87Z"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Fractional COO Engagement</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">High-level operational leadership without the overhead. I join your team to stabilize volatility and build for scale.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Define Your Needs <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 2 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Collaboration" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVjMTx65xp3gWl3TU48n984sM3_WF96GYvs9uLnoWMXRQjpVAZqhkmB97CtEB2dS2SOXlcYk964qtxFtLJQ0sr5osB0AdSFh1eanmFjkjXp3FPHLj0Nc2zcKL1Aw8348p61DVtXeQAXllmX6qL8DSdj9xCJXW2w-rUHrtnjS7Lbep39_bn2N_QG-54ErRhzggi4P9cewok74SYVOvjjdZMgGEGpt96dyyozSED8vVub9Op0ilv0recp1QvryVStthWTX_GRsckbAWC"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Leadership Calibration</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Aligning founder vision with executive execution. We remove the bottlenecks that exist between the 'what' and the 'how'.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Calibrate Your Team <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 3 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Strategic Focus" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqSL-E4c7pSPnR-LniRnUj_K-YCo0mfvqXK5UdmADJwRqCoASedgTMiiu-AA9h5QYBYu2MmXLOWM8vECDinpNiRZOpde-eee20VAvZ94xK1IFI0E5FxuRS7pY4tivkBzjjFfXil93OmBcZ3YM_FlovTm0vC105D2hSCmQ3sDGUfJMlQgCq_l_i6vVpAOjGP-QopuHIwXE3g2zn8jSWaXjze0JnEzE8cfGbXkHDbNbnWvYCEAundNnAQS0lrTMgHECXmZOA46vyQKmS"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Strategic Architecture</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Constructing long-term roadmaps that integrate product milestones with team development goals for holistic success.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Architect Your Future <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 4 -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<img alt="Refined Clarity" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSk8FWhx16ylcQJX2B9xKVStkZx0wUf19wSeJ0j3-3gKB_YZRrfuh9ChQAQv_pBnCl5mrX1PwH33TfEuY4KrJlaNDqUqpzTTuJIS9zpi7fLqkQZuiwfanmS4r6TAnhT6YyRzYPDK9BFJsAmJpfQioarYwg5kguHEusdIBrVNirm-NmXvA5XsI5wHwjAs3gbjJynjy5tbvNmLcGtwMOFZZIW8oo8VO1pyS3bAdierH2uTseWbzjLgqs_RJEytoQAx1aWhv5IbAmmrJi"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Operational Audits</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">A deep dive into your current state to identify the 20% of friction points causing 80% of your operational drag.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="#">
+                            Begin Audit <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- Practice Item 5: Clarity AI -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden border border-outline-variant/10">
+<img alt="Clarity AI Workspace" class="w-full h-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKWewOZbjvuYqIndAHEH7xfo5LqUuBt1REvxrG50z_g0jUSerdaygqdUo7pYTMuvOde1URSdJo2FDRTdrIDlRAbpFczBRHCnOcmO8Nx5H_do84pBBH4mfZRAh2Aof8B3P6sdbE9EMY6USMp5_wm3Snq-CLmEZ4oCooBbunbJ1hJqH0y8FEQfEu4TI3frEaf25eK46mV-9MlhkGXkJr9rOQWqZg2HlUD5N8v2CZ9Q7LPBDXD7GUL0RksR2O39qE998hy-WeTog2-oEK"/>
+</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-4">Clarity AI</h3>
+<p class="text-[15px] text-on-surface-variant leading-relaxed mb-6">Personal AI Workspace for Curated Thinking. A seamless environment where your thoughts are organized and enhanced by intelligent synthesis.</p>
+<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all" href="https://www.getclarity.studio/" target="_blank">
+                            Explore Workspace <span class="material-symbols-outlined text-lg">trending_flat</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="bg-surface-container-high rounded-lg p-16 md:p-24 text-center relative overflow-hidden">
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-5xl font-headline font-bold mb-8 text-on-surface leading-tight">Intentional growth starts with a conversation.</h2>
+<p class="text-on-surface-variant text-lg mb-12 leading-relaxed">Ready to build systems that honor your people? Let’s explore how we can thread operations and impact together.</p>
+<button class="bg-surface-tint text-on-primary px-12 py-5 rounded font-label font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all shadow-xl hover:-translate-y-1">
+                        Schedule a Consultation
+                    </button>
+</div>
+<!-- Artistic Flourish -->
+<div class="absolute top-0 right-0 p-12">
+<span class="material-symbols-outlined text-primary/10 text-9xl select-none">auto_awesome</span>
+</div>
+<div class="absolute bottom-0 left-0 p-12">
+<span class="material-symbols-outlined text-primary/5 text-8xl select-none">flare</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-8 bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-serif italic text-2xl font-bold text-primary">Human Curator</div>
+<div class="text-on-surface-variant/70 font-sans text-xs tracking-widest uppercase">
+                    © 2024 The Human Curator. Built with intention.
+                </div>
+</div>
+<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Terms</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Substack</a>
+</div>
+</div>
+</footer>
+</body></html>
