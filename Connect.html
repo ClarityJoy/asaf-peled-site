@@ -82,6 +82,22 @@
         .signature-gradient {
             background: linear-gradient(135deg, #805522 0%, #c9955c 100%);
         }
+        /* Google Translate */
+        iframe[id$=".container"].skiptranslate,
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element select {
+            background-color: transparent;
+            border: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #50453a;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        #google_translate_element select:focus { outline: none; }
     </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -97,9 +113,72 @@
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
 </div>
+<div class="hidden md:flex items-center gap-6 border-l border-outline-variant/30 pl-6">
+<div class="relative" id="translate-wrapper">
+<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
+<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
+</button>
+<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
+<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
+<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
+<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
+<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
+<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
+<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
+</div>
+</div>
 <a class="text-[#805522] dark:text-[#c9955c] font-bold border-b-2 border-[#805522] pb-1 font-serif italic tracking-tight hover:text-[#c9955c] transition-colors duration-300" href="#">Connect</a>
 </div>
+</div>
 </nav>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,es,fr,de'}, 'gt-hidden');
+}
+function doTranslate(lang) {
+  document.getElementById('translate-menu').classList.add('hidden');
+  if (lang === 'en') {
+    var frames = document.querySelectorAll('iframe.skiptranslate');
+    for (var i = 0; i < frames.length; i++) {
+      try {
+        var d = frames[i].contentDocument || frames[i].contentWindow.document;
+        var btn = d.querySelector('[id$=".restore"]');
+        if (btn) { btn.click(); return; }
+      } catch(e) {}
+    }
+    location.reload();
+    return;
+  }
+  var gtLang = lang === 'he' ? 'iw' : lang;
+  function apply() {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) return false;
+    select.value = gtLang;
+    var evt = document.createEvent('HTMLEvents');
+    evt.initEvent('change', false, true);
+    select.dispatchEvent(evt);
+    return true;
+  }
+  if (!apply()) {
+    var tries = 0;
+    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('translate-btn');
+  var menu = document.getElementById('translate-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function() {
+      menu.classList.add('hidden');
+    });
+  }
+});
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 <main class="flex-grow pt-40 pb-24 px-8">
 <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 <!-- Left Side: Editorial Intent -->

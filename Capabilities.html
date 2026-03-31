@@ -73,6 +73,7 @@
         },
       }
     </script>
+
 <style>
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
@@ -87,6 +88,23 @@
         .editorial-title {
             letter-spacing: -0.02em
         }
+        /* Google Translate RTL support */
+        [dir="rtl"] .material-symbols-outlined { transform: scaleX(-1); }
+        iframe[id$=".container"].skiptranslate,
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element select {
+            background-color: transparent;
+            border: none;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #50453a;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        #google_translate_element select:focus { outline: none; ring: 0; }
     </style>
 </head>
 <body class="text-on-surface">
@@ -99,26 +117,96 @@
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
 <a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
-<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
+
+
+<div class="flex items-center gap-6 border-l border-outline-variant/30 pl-6">
+<!-- Language Switcher -->
+<div class="relative" id="translate-wrapper">
+<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
+<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
+</button>
+<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
+<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
+<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
+<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
+<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
+<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
+<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
+</div>
+</div>
+<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2 rounded-[0.125rem] font-label text-[10px] uppercase tracking-widest hover:bg-on-primary-container transition-all active:scale-95 duration-200">Connect</button></form>
+</div>
 </div>
 <!-- Mobile Menu Icon -->
-<div class="md:hidden">
+<div class="md:hidden flex items-center gap-4">
+<div id="google_translate_element_mobile"></div>
 <span class="material-symbols-outlined text-primary">menu</span>
 </div>
 </div>
 </nav>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,es,fr,de'}, 'gt-hidden');
+}
+function doTranslate(lang) {
+  document.getElementById('translate-menu').classList.add('hidden');
+  if (lang === 'en') {
+    var frames = document.querySelectorAll('iframe.skiptranslate');
+    for (var i = 0; i < frames.length; i++) {
+      try {
+        var d = frames[i].contentDocument || frames[i].contentWindow.document;
+        var btn = d.querySelector('[id$=".restore"]');
+        if (btn) { btn.click(); return; }
+      } catch(e) {}
+    }
+    location.reload();
+    return;
+  }
+  var gtLang = lang === 'he' ? 'iw' : lang;
+  function apply() {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) return false;
+    select.value = gtLang;
+    var evt = document.createEvent('HTMLEvents');
+    evt.initEvent('change', false, true);
+    select.dispatchEvent(evt);
+    return true;
+  }
+  if (!apply()) {
+    var tries = 0;
+    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('translate-btn');
+  var menu = document.getElementById('translate-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function() {
+      menu.classList.add('hidden');
+    });
+  }
+});
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 <main class="pt-40 pb-24">
 <!-- Hero Section -->
 <header class="max-w-7xl mx-auto px-8 mb-32">
 <div class="max-w-3xl">
-<h1 class="font-headline text-6xl md:text-7xl editorial-title text-primary leading-[1.1] mb-10">
-                    The intersection of <br/><em class="italic font-normal">precision</em> and <em class="italic font-normal">empathy</em>.
-                </h1>
-<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-2xl">
-                    A curated suite of services designed to scale systems without losing the human pulse. Operations, strategy, and leadership for a new era.
-                </p>
+<h1 class="font-headline text-6xl md:text-7xl editorial-title text-primary leading-[1.1] mb-10 rtl:text-right">
+                The intersection of <br/><em class="italic font-normal">precision</em> and <em class="italic font-normal">empathy</em>.
+            </h1>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-2xl rtl:text-right">
+                A curated suite of services designed to scale systems without losing the human pulse. Operations, strategy, and leadership for a new era.
+            </p>
 </div>
 </header>
+
+
+
 <!-- Section 1: Core Expertise -->
 <section class="max-w-7xl mx-auto px-8 mb-40">
 <div class="flex flex-col md:flex-row gap-20">
