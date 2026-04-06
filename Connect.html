@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="light scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Connect — Asaf Peled</title>
+<meta name="description" content="Get in touch with Asaf Peled. Product operations advisory, process design, and organizational strategy."/>
+<meta property="og:title" content="Connect — Asaf Peled"/>
+<meta property="og:description" content="Get in touch. Product operations advisory, process design, and organizational strategy."/>
+<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
+<meta property="og:url" content="https://www.asafpeled.com/Connect.html"/>
+<meta property="og:type" content="website"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -82,6 +88,19 @@
         .signature-gradient {
             background: linear-gradient(135deg, #805522 0%, #c9955c 100%);
         }
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
         /* Google Translate */
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] #translate-menu { right: auto; left: 0; }
@@ -319,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </main>
 <!-- Content-rich secondary section -->
-<section class="bg-surface-container-low py-32 px-8">
+<section class="bg-surface-container-low py-32 px-8 reveal">
 <div class="max-w-7xl mx-auto">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
 <div class="space-y-6">
@@ -345,10 +364,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-10">
 <div class="font-serif italic text-2xl text-[#805522] notranslate" translate="no">Asaf Peled</div>
 <div class="flex gap-10">
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="#">Privacy</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="#">Terms</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="#">LinkedIn</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="#">Substack</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="mailto:hello@asafpeled.com">Email</a>
 </div>
 <p class="text-stone-400 dark:text-stone-500 font-sans text-[11px] tracking-tight">© 2026 Asaf Peled</p>
 </div>
@@ -397,5 +414,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+});
 </script>
 </body></html>

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="light scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Insights | Asaf Peled</title>
+<meta name="description" content="Thinking out loud about how work works. Lessons from operations, technology, and organizational change."/>
+<meta property="og:title" content="Insights — Asaf Peled"/>
+<meta property="og:description" content="Thinking out loud about how work works. Lessons from operations, technology, and organizational change."/>
+<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
+<meta property="og:url" content="https://www.asafpeled.com/Insights.html"/>
+<meta property="og:type" content="website"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -91,6 +98,19 @@
         .editorial-gradient {
             background: linear-gradient(135deg, #805522 0%, #c9955c 100%)
         }
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
         /* Google Translate */
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] #translate-menu { right: auto; left: 0; }
@@ -259,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
 </header>
 <!-- Featured Article -->
-<section class="max-w-7xl mx-auto px-8 mb-24">
+<section class="max-w-7xl mx-auto px-8 mb-24 reveal">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 <div class="lg:col-span-7">
 <div class="aspect-[16/10] overflow-hidden group">
@@ -282,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- Insights Grid -->
-<section class="max-w-7xl mx-auto px-8 mb-24">
+<section class="max-w-7xl mx-auto px-8 mb-24 reveal">
 <div class="flex justify-between items-end mb-12">
 <h3 class="text-2xl font-headline">Latest <i>Articles</i></h3>
 <div class="flex gap-4">
@@ -343,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- Signature Quote -->
-<section class="max-w-4xl mx-auto px-8 py-12 text-center">
+<section class="max-w-4xl mx-auto px-8 py-12 text-center reveal">
 <blockquote class="text-3xl md:text-4xl font-headline italic text-secondary leading-relaxed">
                 "The best process documentation is the one nobody needs to read — because the system itself makes the right path obvious."
             </blockquote>
@@ -357,11 +377,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 © 2026 Asaf Peled
             </div>
 <div class="flex gap-8">
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Privacy</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Terms</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">LinkedIn</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="#">Substack</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="mailto:hello@asafpeled.com">Email</a>
 </div>
 </div>
 </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+});
+</script>
 </body></html>

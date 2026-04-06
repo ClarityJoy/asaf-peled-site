@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="light scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Asaf Peled | Product Operations &amp; Strategy</title>
+<meta name="description" content="I build operational systems that work for people. Product operations leader with a background in financial services, technology, and organizational strategy."/>
+<meta property="og:title" content="Asaf Peled — Product Operations Leader"/>
+<meta property="og:description" content="I build operational systems that work for people. Background in financial services, technology, and organizational strategy."/>
+<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
+<meta property="og:url" content="https://www.asafpeled.com/"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -82,6 +89,19 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
         .grain-overlay {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             opacity: 0.04;
@@ -276,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- Two Worlds Concept -->
-<section class="bg-surface-container-low py-32">
+<section class="bg-surface-container-low py-32 reveal">
 <div class="max-w-7xl mx-auto px-8">
 <div class="mb-20 max-w-2xl">
 <h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">Process, People, Purpose.</h2>
@@ -332,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- Signature Pull Quote -->
-<section class="max-w-7xl mx-auto px-8 py-40 text-center">
+<section class="max-w-7xl mx-auto px-8 py-40 text-center reveal">
 <div class="max-w-4xl mx-auto">
 <blockquote class="text-5xl lg:text-6xl font-headline font-normal leading-[1.2] text-on-surface italic">
                     "Good operations should feel <br/><span class="text-surface-tint not-italic font-bold">invisible</span> to the people <br/>they serve."
@@ -345,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- Expertise in Practice -->
-<section class="max-w-7xl mx-auto px-8 py-32 border-t border-outline-variant/10">
+<section class="max-w-7xl mx-auto px-8 py-32 border-t border-outline-variant/10 reveal">
 <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
 <div class="max-w-xl">
 <h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">What I've Done.</h2>
@@ -422,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 <!-- CTA Section -->
-<section class="max-w-7xl mx-auto px-8 py-32">
+<section class="max-w-7xl mx-auto px-8 py-32 reveal">
 <div class="bg-gradient-to-br from-surface-container-high to-surface-container rounded-xl p-16 md:p-24 text-center relative overflow-hidden border border-outline-variant/15">
 <div class="relative z-10 max-w-2xl mx-auto">
 <h2 class="text-5xl font-headline font-bold mb-8 text-on-surface leading-tight">Let’s talk about what’s not working.</h2>
@@ -451,11 +471,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
 </div>
 <div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Privacy</a>
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Terms</a>
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">LinkedIn</a>
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Substack</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="mailto:hello@asafpeled.com">Email</a>
 </div>
 </div>
 </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+});
+</script>
 </body></html>
