@@ -71,7 +71,7 @@
               "body": ["Plus Jakarta Sans"],
               "label": ["Plus Jakarta Sans"]
             },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            borderRadius: {"DEFAULT": "0.375rem", "lg": "0.625rem", "xl": "0.875rem", "full": "9999px"},
           },
         },
       }
@@ -111,7 +111,7 @@
 <body class="bg-surface text-on-surface overflow-x-hidden">
 <div class="fixed inset-0 grain-overlay z-[60]"></div>
 <!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<nav class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/15">
 <div class="flex justify-between items-center w-full px-8 py-5 max-w-7xl mx-auto">
 <div class="text-xl font-serif font-bold text-primary tracking-tight notranslate" translate="no">Asaf Peled</div>
 <div class="hidden md:flex items-center gap-10">
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         I come from leadership, technology, and financial services. I've spent years untangling operational complexity so teams can focus on what actually matters — their customers and each other.
                     </p>
 <div class="flex flex-wrap items-center gap-8">
-<a href="/Capabilities.html" class="bg-surface-tint text-on-primary px-8 py-4 rounded font-label font-bold text-sm tracking-widest uppercase flex items-center gap-3 group hover:shadow-xl transition-all">
+<a href="/Capabilities.html" class="bg-surface-tint text-on-primary px-8 py-4 rounded-lg font-label font-bold text-sm tracking-widest uppercase flex items-center gap-3 group shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
                             What I Do
                             <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
@@ -266,11 +266,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 <div class="lg:col-span-5 relative">
-<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-lg shadow-2xl relative z-10">
-<img alt="Asaf Peled" class="w-full h-full object-cover brightness-105 contrast-[1.02]" src="images/headshot.jpg" onerror="this.style.display='none'"/>
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-xl shadow-2xl relative z-10 ring-1 ring-outline-variant/20">
+<img alt="Asaf Peled" class="w-full h-full object-cover brightness-[1.03] contrast-[1.02] saturate-[1.05]" src="images/headshot.jpg" onerror="this.style.display='none'"/>
 </div>
-<!-- Decorative Element -->
-<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/5 -z-0 rounded-full blur-3xl"></div>
+<!-- Decorative Elements -->
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/8 -z-0 rounded-full blur-3xl"></div>
+<div class="absolute -top-6 -right-6 w-32 h-32 bg-secondary/6 -z-0 rounded-full blur-2xl"></div>
 </div>
 </div>
 </section>
@@ -283,9 +284,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- Column 1: Systems -->
-<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
-<div class="w-10 h-10 rounded bg-primary/5 flex items-center justify-center mb-10">
-<span class="material-symbols-outlined text-primary/70">architecture</span>
+<div class="bg-surface p-12 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
+<div class="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-primary/80">architecture</span>
 </div>
 <h3 class="text-xl font-headline font-bold mb-6">Operational Excellence</h3>
 <p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Standardizing workflows, building KPI frameworks, and turning fragmented processes into systems that scale — without losing sight of the people running them.</p>
@@ -299,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 </div>
 <!-- Column 2: Large Impact (The Thread) -->
-<div class="md:col-span-1 bg-surface-tint p-12 rounded-lg text-on-primary flex flex-col justify-between overflow-hidden relative shadow-xl">
+<div class="md:col-span-1 bg-surface-tint p-12 rounded-xl text-on-primary flex flex-col justify-between overflow-hidden relative shadow-xl">
 <div class="relative z-10">
 <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block">What I Believe</span>
 <h3 class="text-3xl font-headline italic leading-snug mb-8">"Every process tells your team what you value. Make sure it's telling the right story."</h3>
@@ -312,9 +313,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="absolute -right-16 -bottom-16 w-64 h-64 border border-on-primary/10 rounded-full"></div>
 </div>
 <!-- Column 3: Humans -->
-<div class="bg-surface p-12 rounded-lg group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md border border-outline-variant/10">
-<div class="w-10 h-10 rounded bg-secondary/5 flex items-center justify-center mb-10">
-<span class="material-symbols-outlined text-secondary/70">groups</span>
+<div class="bg-surface p-12 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
+<div class="w-10 h-10 rounded-lg bg-secondary/8 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-secondary/80">groups</span>
 </div>
 <h3 class="text-xl font-headline font-bold mb-6">Customer & Team Focus</h3>
 <p class="text-[15px] text-on-surface-variant leading-relaxed mb-8">Designing customer journeys and knowledge bases that actually get used — and building the cross-functional alignment to keep them evolving.</p>
@@ -355,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16">
 <!-- Practice Item 1 -->
 <div class="flex flex-col md:flex-row gap-8 items-start group">
-<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded-lg overflow-hidden">
 <img alt="Analytical Work" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="images/analytical-work.jpg"/>
 </div>
 <div>
@@ -368,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- Practice Item 2 -->
 <div class="flex flex-col md:flex-row gap-8 items-start group">
-<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded-lg overflow-hidden">
 <img alt="Collaboration" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="images/collaboration.jpg"/>
 </div>
 <div>
@@ -381,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- Practice Item 3 -->
 <div class="flex flex-col md:flex-row gap-8 items-start group">
-<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded-lg overflow-hidden">
 <img alt="Strategic Focus" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="images/strategic-focus.jpg"/>
 </div>
 <div>
@@ -394,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- Practice Item 4 -->
 <div class="flex flex-col md:flex-row gap-8 items-start group">
-<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded-lg overflow-hidden">
 <img alt="Refined Clarity" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="images/refined-clarity.jpg"/>
 </div>
 <div>
@@ -407,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- Practice Item 5: Clarity AI -->
 <div class="flex flex-col md:flex-row gap-8 items-start group">
-<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded overflow-hidden border border-outline-variant/10">
+<div class="flex-shrink-0 w-32 h-24 bg-surface-container rounded-lg overflow-hidden border border-outline-variant/10">
 <img alt="Clarity AI Workspace" class="w-full h-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" src="images/clarity-ai-workspace.jpg"/>
 </div>
 <div>
@@ -422,11 +423,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 <!-- CTA Section -->
 <section class="max-w-7xl mx-auto px-8 py-32">
-<div class="bg-surface-container-high rounded-lg p-16 md:p-24 text-center relative overflow-hidden">
+<div class="bg-gradient-to-br from-surface-container-high to-surface-container rounded-xl p-16 md:p-24 text-center relative overflow-hidden border border-outline-variant/15">
 <div class="relative z-10 max-w-2xl mx-auto">
 <h2 class="text-5xl font-headline font-bold mb-8 text-on-surface leading-tight">Let’s talk about what’s not working.</h2>
 <p class="text-on-surface-variant text-lg mb-12 leading-relaxed">I’m most helpful when there’s a real problem to solve — a process that’s breaking, a team that’s stuck, or a transition that needs a steady hand.</p>
-<a href="/Connect.html" class="inline-block bg-surface-tint text-on-primary px-12 py-5 rounded font-label font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all shadow-xl hover:-translate-y-1">
+<a href="/Connect.html" class="inline-block bg-surface-tint text-on-primary px-12 py-5 rounded-lg font-label font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1">
                         Get in Touch
                     </a>
 </div>
@@ -441,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 </main>
 <!-- Footer -->
-<footer class="w-full py-20 px-8 bg-surface-container-low border-t border-outline-variant/10">
+<footer class="w-full py-20 px-8 bg-surface-container-low border-t border-outline-variant/20">
 <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-12">
 <div class="flex flex-col items-center md:items-start gap-4">
 <div class="font-serif italic text-2xl font-bold text-primary notranslate" translate="no">Asaf Peled</div>
