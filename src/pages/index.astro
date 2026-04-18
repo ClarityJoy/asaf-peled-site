@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import profilePhoto from '../assets/asaf-peled.webp';
 ---
 <Layout title="Home">
   <section class="min-h-[90vh] flex items-center px-6 md:px-12 max-w-6xl mx-auto relative gap-16">
@@ -29,10 +31,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
         
         <div class="relative rounded-full aspect-square w-64 md:w-80 h-64 md:h-80 border-4 border-base-light shadow-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500 shadow-primary/10">
-          <img 
-            src="/images/asaf-peled.webp" 
-            alt="Asaf Peled - Distributed Systems Architect" 
-            class="w-full h-full object-cover" 
+          <Image 
+  src={profilePhoto} 
+  alt="Asaf Peled - AI Governance and Operations Leader" 
+  class="w-full h-full object-cover" 
           />
         </div>
       </div>
