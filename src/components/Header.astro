@@ -1,0 +1,23 @@
+---
+const navItems = [
+  { path: '/', label: 'Home' },
+  { path: '/capabilities', label: 'The Work' },
+  { path: '/insights', label: 'Writing' },
+  { path: '/work-with-me', label: 'Work Together' }
+];
+---
+<nav class="fixed top-0 left-0 right-0 z-50 bg-base/90 backdrop-blur-md border-b border-base-light h-20 flex items-center px-8 md:px-12 justify-between shadow-2xl shadow-primary/5">
+  
+  <a href="/" class="font-serif text-2xl font-semibold text-text-main hover:text-primary transition tracking-tight group">
+    <span class="relative inline-block">
+      As<span class="absolute left-0 -bottom-1 w-full h-[2px] bg-primary group-hover:bg-accent transition-colors"></span>
+    </span>af Peled
+  </a>
+
+  <div class="hidden md:flex gap-8 items-center">
+    {navItems.map(item => (
+      <a href={item.path} class="text-sm font-medium text-text-muted hover:text-primary transition tracking-wide">{item.label}</a>
+    ))}
+    <a href="/connect" class="bg-primary text-black px-6 py-2 rounded-lg font-semibold hover:bg-accent transition shadow-lg shadow-primary/20 text-black">Connect</a>
+  </div>
+</nav>

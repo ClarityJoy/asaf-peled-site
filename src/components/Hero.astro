@@ -1,0 +1,32 @@
+---
+const headshotUrl = '/images/asaf-peled.webp';
+---
+<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-20 px-4">
+  <div class="absolute inset-0 z-0 opacity-10">
+    <svg width="100%" height="100%">
+      <pattern id="pattern-circles" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1" fill="#2DD4BF"></circle>
+      </pattern>
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
+    </svg>
+  </div>
+  <div class="container mx-auto max-w-6xl z-10 flex flex-col md:flex-row items-center gap-12">
+    <div class="relative group flex-shrink-0">
+      <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000 animate-pulse"></div>
+      <div class="relative rounded-full w-48 h-48 md:w-56 md:h-56 bg-base-light border-4 border-base-light shadow-2xl flex items-center justify-center overflow-hidden">
+         <span class="text-text-muted italic">Image Placeholder</span>
+      </div>
+    </div>
+    <div class="text-center md:text-left">
+      <h1 class="font-mono text-sm text-accent mb-2 tracking-widest uppercase text-left">Technology Leader & Software Architect</h1>
+      <h2 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-text-main mb-4 text-left">Asaf Peled</h2>
+      <p class="text-xl text-text-muted max-w-2xl mb-8 text-left">
+        Specializing in building resilient, high-performance distributed systems, cloud infrastructure, and data-driven solutions that scale.
+      </p>
+      <div class="flex gap-4 justify-center md:justify-start">
+        <a href="#cv" class="px-8 py-3 bg-primary text-base font-semibold rounded-lg shadow hover:bg-accent transition duration-200">View Experience</a>
+        <a href="#projects" class="px-8 py-3 bg-base-light border border-base-light text-text-main rounded-lg hover:border-text-muted transition duration-200">Explore Projects</a>
+      </div>
+    </div>
+  </div>
+</section>

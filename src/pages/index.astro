@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Home">
+  <section class="min-h-[90vh] flex items-center px-6 md:px-12 max-w-6xl mx-auto relative gap-16">
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+      <svg width="100%" height="100%"><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2DD4BF" stroke-width="1"/></pattern><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    </div>
+
+    <div class="z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+      
+      <div class="order-2 lg:order-1">
+        <div class="font-mono text-xs text-primary uppercase tracking-[0.2em] mb-8 flex items-center gap-4">
+          <span class="w-10 h-px bg-primary"></span> AI Governance · Fintech Ops · Tel Aviv
+        </div>
+        <h1 class="font-serif text-5xl md:text-6xl font-semibold text-text-main leading-tight mb-8 tracking-tight">
+          Everyone is racing into AI. <br/><em class="text-accent italic font-light">Almost no one is building the thing that makes it pay off.</em>
+        </h1>
+        <p class="font-serif text-2xl text-text-muted italic max-w-3xl mb-12 border-l-2 border-accent pl-8 py-2">
+          I build the invisible scaffolding that turns AI from a bet into a business.
+        </p>
+        <div class="flex gap-6 items-center">
+          <a href="/work-with-me" class="bg-primary text-black px-8 py-4 rounded-lg font-semibold hover:bg-accent transition shadow-lg shadow-primary/20">Let's talk &rarr;</a>
+          <a href="/capabilities" class="text-accent font-medium hover:text-accent transition">See capabilities</a>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 flex justify-center relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+        
+        <div class="relative rounded-full aspect-square w-64 md:w-80 h-64 md:h-80 border-4 border-base-light shadow-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500 shadow-primary/10">
+          <img 
+            src="/images/asaf-peled.webp" 
+            alt="Asaf Peled - Distributed Systems Architect" 
+            class="w-full h-full object-cover" 
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="story" class="py-32 px-6 md:px-12 bg-base-light/50 border-y border-base-light relative overflow-hidden">
+    <div class="absolute inset-0 z-0 bg-no-repeat bg-cover bg-center pointer-events-none opacity-[0.05]" style="background-image: url('/images/ai-governance-matrix.jpg'); filter: grayscale(1);"></div>
+
+    <div class="max-w-3xl mx-auto z-10 relative">
+      <div class="font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">The Shift</div>
+      <h2 class="font-serif text-4xl md:text-5xl text-text-main mb-12 leading-tight">I thought I'd <em class="text-accent italic">missed the train.</em></h2>
+      <div class="space-y-6 text-lg text-text-muted leading-relaxed">
+        <p><strong class="text-text-main font-semibold">A few months ago I had some unexpected time on my hands,</strong> and I did the thing you're not supposed to do at forty-four: I looked up from the work and asked where it was actually taking me.</p>
+        <p>Fifteen years in knowledge management. Then a bold detour into fintech operations... I built KYC frameworks for a company operating across nine jurisdictions. But when I looked up, something felt wrong. The market was turning...</p>
+        <blockquote class="font-serif text-3xl text-primary italic my-12 border-l-2 border-primary pl-8 bg-base p-6 rounded-r-lg shadow-xl shadow-primary/5">
+          Then something shifted. I realized the train I thought I'd missed hadn't actually left yet.
+        </blockquote>
+        <p>The AI rush has almost no operational spine. That's an operations gap. And operations is what I do.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 px-6 md:px-12 max-w-6xl mx-auto">
+    <div class="mb-16 max-w-2xl">
+      <div class="font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">AI Practice</div>
+      <h2 class="font-serif text-4xl md:text-5xl text-text-main mb-6 leading-tight">Four questions I help <em class="text-accent italic">organizations answer.</em></h2>
+      <p class="text-lg text-text-muted">Questions with consequences — the kind you can't afford to get wrong, and can't afford to ignore any longer.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-base-light p-8 rounded-2xl border border-transparent hover:border-primary/30 transition group flex flex-col gap-6 shadow-xl shadow-primary/5 hover:-translate-y-1">
+        <div class="font-mono text-4xl text-primary/50 group-hover:text-primary transition">01</div>
+        <h3 class="font-serif text-2xl text-text-main leading-snug">Which of your AI systems are actually high-risk?</h3>
+        <p class="text-text-muted leading-relaxed flex-grow">Most companies can't produce a clean inventory of the AI touching their business, let alone a classification against the regulations coming for them.</p>
+        <div class="text-xs font-mono text-accent">Classification & Inventory</div>
+      </div>
+      <div class="bg-base-light p-8 rounded-2xl border border-transparent hover:border-primary/30 transition group flex flex-col gap-6 shadow-xl shadow-primary/5 hover:-translate-y-1">
+        <div class="font-mono text-4xl text-primary/50 group-hover:text-primary transition">02</div>
+        <h3 class="font-serif text-2xl text-text-main leading-snug">Can you show your work to a regulator?</h3>
+        <p class="text-text-muted leading-relaxed flex-grow">Documentation, audit trails, decision logs, the chain of accountability when something goes sideways. The boring stuff that turns into the expensive stuff.</p>
+        <div class="text-xs font-mono text-accent">Audit Readiness</div>
+      </div>
+      <div class="bg-base-light p-8 rounded-2xl border border-transparent hover:border-primary/30 transition group flex flex-col gap-6 shadow-xl shadow-primary/5 hover:-translate-y-1">
+        <div class="font-mono text-4xl text-primary/50 group-hover:text-primary transition">03</div>
+        <h3 class="font-serif text-2xl text-text-main leading-snug">How do you know your AI is still doing what you hired it to do?</h3>
+        <p class="text-text-muted leading-relaxed flex-grow">Models drift. Data shifts. Ongoing monitoring isn't optional — it's the only thing standing between you and surprise.</p>
+        <div class="text-xs font-mono text-accent">Monitoring & Compliance</div>
+      </div>
+      <div class="bg-base-light p-8 rounded-2xl border border-transparent hover:border-primary/30 transition group flex flex-col gap-6 shadow-xl shadow-primary/5 hover:-translate-y-1">
+        <div class="font-mono text-4xl text-primary/50 group-hover:text-primary transition">04</div>
+        <h3 class="font-serif text-2xl text-text-main leading-snug">Can your AI governance flex as you grow?</h3>
+        <p class="text-text-muted leading-relaxed flex-grow">The worst governance systems are rigid. The real work is building something that flexes as you grow and doesn't need to be rebuilt.</p>
+        <div class="text-xs font-mono text-accent">Adaptability</div>
+      </div>
+    </div>
+  </section>
+</Layout>
