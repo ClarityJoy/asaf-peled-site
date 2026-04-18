@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ls -lh \"C:\\\\Users\\\\The Master\\\\Downloads\\\\1742868604501\"*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)",
+      "Bash(git -C /c/Projects/Asaf-Peled-Site log --oneline -3)",
+      "Bash(curl -sI https://clarityjoy.github.io/asaf-peled-site/)",
+      "Bash(curl -sI https://asafpeled.com)",
+      "Bash(curl -sI https://www.asafpeled.com/)",
+      "Bash(curl -s \"https://www.asafpeled.com/\")",
+      "Bash(ls /c/Projects/Asaf-Peled-Site/public/favicon*)",
+      "Bash(ls /c/Projects/Asaf-Peled-Site/public/*.ico)"
     ]
   }
 }

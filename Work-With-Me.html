@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work Together — Asaf Peled</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2; --warm-white: #FFFDF9; --gold: #C9A84C; --gold-light: #E8D5A0;
+      --gold-muted: #B89B3E; --navy: #1B2A4A; --navy-light: #2B3F6B; --charcoal: #2C2C2C;
+      --gray: #6B6B6B; --gray-light: #A0A0A0; --border: #E8E2D8;
+      --display: 'Cormorant Garamond', Georgia, serif; --body: 'DM Sans', -apple-system, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: var(--cream); color: var(--charcoal); line-height: 1.75; font-size: 17px; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.3s; letter-spacing: 0.03em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+    .nav-cta { background: var(--navy) !important; color: var(--cream) !important; padding: 10px 24px !important; border-radius: 6px; }
+    .mobile-toggle { display: none; cursor: pointer; font-size: 1.6rem; color: var(--navy); }
+
+    .page-hero { padding: 140px 48px 60px; }
+    .page-hero-inner { max-width: 720px; margin: 0 auto; }
+    .page-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 20px; }
+    .page-hero h1 { font-family: var(--display); font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 32px; }
+    .page-hero h1 em { font-style: italic; color: var(--gold-muted); }
+    .page-hero-lead { font-family: var(--display); font-size: 1.4rem; font-style: italic; color: var(--charcoal); line-height: 1.5; }
+
+    section { padding: 80px 48px; }
+    .inner { max-width: 780px; margin: 0 auto; }
+
+    .prose p { font-size: 1.08rem; line-height: 1.9; color: var(--charcoal); margin-bottom: 28px; }
+    .prose h2 { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; color: var(--navy); line-height: 1.25; margin: 56px 0 28px; }
+    .prose h2:first-child { margin-top: 0; }
+    .prose h2 em { font-style: italic; color: var(--gold-muted); }
+    .prose strong { color: var(--navy); font-weight: 600; }
+    .prose em { color: var(--charcoal); font-style: italic; }
+
+    /* Engagements */
+    .engagements { background: var(--warm-white); padding: 100px 48px; }
+    .engagements-inner { max-width: 900px; margin: 0 auto; }
+    .engagements-intro {
+      font-family: var(--display); font-size: 1.6rem; font-style: italic;
+      color: var(--navy); line-height: 1.4; margin-bottom: 64px; max-width: 680px;
+    }
+
+    .engagement {
+      padding: 40px 0; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 200px; gap: 48px; align-items: start;
+    }
+    .engagement:last-of-type { border-bottom: 1px solid var(--border); }
+    .engagement h3 {
+      font-family: var(--display); font-size: 1.6rem; font-weight: 500;
+      color: var(--navy); margin-bottom: 16px; line-height: 1.3; letter-spacing: -0.01em;
+    }
+    .engagement h3 em { font-style: italic; color: var(--gold-muted); }
+    .engagement p { font-size: 1rem; color: var(--charcoal); line-height: 1.85; }
+    .engagement-meta {
+      padding-top: 8px; border-left: 1px solid var(--border); padding-left: 28px;
+    }
+    .engagement-meta .label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gray-light); margin-bottom: 6px;
+    }
+    .engagement-meta .value {
+      font-family: var(--display); font-size: 1.15rem; color: var(--navy);
+      margin-bottom: 16px; font-weight: 500;
+    }
+
+    /* Who I work with — as voices */
+    .voices { padding: 100px 48px; }
+    .voices-inner { max-width: 780px; margin: 0 auto; }
+    .voices h2 { font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 400; color: var(--navy); line-height: 1.25; margin-bottom: 48px; }
+    .voices h2 em { font-style: italic; color: var(--gold-muted); }
+    .voice-list { display: flex; flex-direction: column; gap: 32px; }
+    .voice {
+      padding: 28px 32px; background: var(--warm-white); border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+    }
+    .voice .who { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 10px; }
+    .voice .says { font-family: var(--display); font-size: 1.25rem; font-style: italic; color: var(--navy); line-height: 1.5; }
+
+    /* Process */
+    .process { background: var(--navy); color: var(--cream); padding: 120px 48px; }
+    .process-inner { max-width: 780px; margin: 0 auto; }
+    .process h2 { font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 400; color: var(--cream); line-height: 1.25; margin-bottom: 48px; }
+    .process h2 em { font-style: italic; color: var(--gold-light); }
+    .process p.lead { font-size: 1.15rem; line-height: 1.85; color: rgba(250,247,242,0.85); margin-bottom: 48px; }
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      padding: 32px 0; border-bottom: 1px solid rgba(232,213,160,0.15);
+      display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: start;
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num { font-family: var(--display); font-size: 2rem; font-weight: 500; color: var(--gold-light); line-height: 1; }
+    .step h4 { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--cream); margin-bottom: 8px; }
+    .step p { font-size: 0.98rem; color: rgba(250,247,242,0.8); line-height: 1.8; }
+
+    /* CTA */
+    .cta { padding: 120px 48px; text-align: center; }
+    .cta-inner { max-width: 620px; margin: 0 auto; }
+    .cta h2 { font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--navy); line-height: 1.25; margin-bottom: 24px; }
+    .cta h2 em { font-style: italic; color: var(--gold-muted); }
+    .cta p { font-size: 1.1rem; color: var(--charcoal); line-height: 1.75; margin-bottom: 36px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--navy); color: var(--cream); padding: 16px 32px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
+    .btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+    footer { padding: 48px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: var(--display); font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    .footer-links a { font-size: 0.88rem; color: var(--gray); text-decoration: none; }
+    footer small { font-size: 0.8rem; color: var(--gray-light); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; } .nav-links { display: none; } .mobile-toggle { display: block; }
+      section, .page-hero, .engagements, .voices, .process, .cta { padding-left: 24px; padding-right: 24px; }
+      .engagement { grid-template-columns: 1fr; gap: 16px; }
+      .engagement-meta { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
+      .step { grid-template-columns: 1fr; gap: 8px; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Asaf Peled</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="Capabilities.html">The Work</a>
+      <a href="Insights.html">Writing</a>
+      <a href="Work-With-Me.html" class="active">Work Together</a>
+      <a href="Connect.html" class="nav-cta">Connect</a>
+    </div>
+    <span class="material-icons-outlined mobile-toggle">menu</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-label">Work Together</div>
+      <h1>Let's build the thing your AI strategy is <em>quietly missing.</em></h1>
+      <p class="page-hero-lead">Not a deck. Not a workshop. The actual operational machinery that keeps your AI paying off as the company changes.</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section>
+    <div class="inner">
+      <div class="prose">
+        <h2>How I think about <em>working together</em></h2>
+
+        <p>Most consulting engagements are built around a framework. The consultant has a framework. The client has a problem. The consultant applies the framework to the problem and produces a report. Everyone shakes hands.</p>
+
+        <p>I don't work like that.</p>
+
+        <p>The reason I've been useful across knowledge management, financial regulation, and now AI governance is that the work isn't about applying a template. It's about listening carefully to a specific organization, understanding what it's actually trying to become, and then building — with the people who'll have to live with it — the operational scaffolding that makes that transformation possible.</p>
+
+        <p>So the engagements below are less "products I sell" and more "shapes these collaborations tend to take." The real thing happens when we talk and figure out what you actually need.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENTS -->
+  <section class="engagements">
+    <div class="engagements-inner fade-in">
+      <p class="engagements-intro">Five shapes an engagement tends to take. Your situation might look like one of these — <em>or it might look like something we need to invent together.</em></p>
+
+      <article class="engagement">
+        <div>
+          <h3>The <em>reckoning</em></h3>
+          <p>You know your AI governance is not where it needs to be. You don't know exactly how bad it is. We start there — with a clear-eyed look at what you've actually deployed, what's coming for you regulatorily, and what the gap is between those two things. No judgment, no panic. Just a map you can actually act on.</p>
+        </div>
+        <div class="engagement-meta">
+          <div class="label">Usually takes</div>
+          <div class="value">4–6 weeks</div>
+          <div class="label">Shape</div>
+          <div class="value">Assessment</div>
+        </div>
+      </article>
+
+      <article class="engagement">
+        <div>
+          <h3>The <em>scaffolding</em></h3>
+          <p>You've done the reckoning — or you've already got the urgency — and now you need to actually build. Governance structures, policies, risk classification, documentation architecture, human oversight mechanisms, audit trails. The invisible infrastructure that turns good intentions into defensible operations.</p>
+        </div>
+        <div class="engagement-meta">
+          <div class="label">Usually takes</div>
+          <div class="value">8–12 weeks</div>
+          <div class="label">Shape</div>
+          <div class="value">Build</div>
+        </div>
+      </article>
+
+      <article class="engagement">
+        <div>
+          <h3>The <em>translation</em></h3>
+          <p>You're a fintech or financial services company with real regulatory operations already in place. You need those same muscles pointed at AI. This is the engagement where I do what I do best: take a compliance operation that works, and extend it into a domain the company hasn't governed before without breaking what already works.</p>
+        </div>
+        <div class="engagement-meta">
+          <div class="label">Usually takes</div>
+          <div class="value">6–10 weeks</div>
+          <div class="label">Shape</div>
+          <div class="value">Extension</div>
+        </div>
+      </article>
+
+      <article class="engagement">
+        <div>
+          <h3>The <em>second opinion</em></h3>
+          <p>You've got a plan. Your legal team signed off. Your technology team signed off. Something's still bothering you. This is the engagement where I pressure-test what you've built — from the operations side, the side that has to actually run it when you're not in the room. Sometimes I find nothing and you sleep better. Sometimes I find the thing.</p>
+        </div>
+        <div class="engagement-meta">
+          <div class="label">Usually takes</div>
+          <div class="value">2–3 weeks</div>
+          <div class="label">Shape</div>
+          <div class="value">Review</div>
+        </div>
+      </article>
+
+      <article class="engagement">
+        <div>
+          <h3>The <em>standing conversation</em></h3>
+          <p>You want someone in your corner as you navigate AI governance over time. Not a full-time hire. Not a consultant for a defined project. Someone who knows your situation, who you can call when something comes up, who reads the regulatory landscape so you don't have to. Monthly cadence, ad-hoc availability.</p>
+        </div>
+        <div class="engagement-meta">
+          <div class="label">Usually takes</div>
+          <div class="value">Ongoing</div>
+          <div class="label">Shape</div>
+          <div class="value">Retainer</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="voices">
+    <div class="voices-inner fade-in">
+      <h2>The conversations that tend to <em>end up with us working together</em></h2>
+
+      <div class="voice-list">
+        <div class="voice">
+          <div class="who">The CEO</div>
+          <p class="says">"We've bet a lot on AI. I don't think we can explain — to a regulator or to our board — what our governance actually is. That scares me a little."</p>
+        </div>
+
+        <div class="voice">
+          <div class="who">The Chief Risk Officer</div>
+          <p class="says">"My team understands financial risk. I don't think they understand AI risk. And I can feel us getting exposed on a flank we haven't learned to defend yet."</p>
+        </div>
+
+        <div class="voice">
+          <div class="who">The Head of Compliance</div>
+          <p class="says">"We've spent a decade building the KYC program. I can see the AI regulations coming. Nobody on my team has the bandwidth or the experience to build that same infrastructure all over again for a different domain."</p>
+        </div>
+
+        <div class="voice">
+          <div class="who">The Head of Product</div>
+          <p class="says">"Our engineers are shipping AI features faster than our governance can keep up. I need someone who can build the operational layer around what we're shipping, without slowing down the shipping."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-inner fade-in">
+      <h2>What happens after you <em>get in touch</em></h2>
+
+      <p class="lead">Short version: we talk, I tell you honestly whether I can help, and if we both want to keep going, we figure out what that looks like. Here's the longer version.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <h4>A real conversation, not a sales call</h4>
+            <p>Thirty minutes. You tell me what's actually keeping you up at night. I ask questions. I'm trying to understand your situation, not pitch you. If at the end of the call I don't think I'm the right person, I'll tell you — and probably recommend someone else.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <h4>A proposal you can actually read</h4>
+            <p>If we're going forward, I write you a proposal that fits on two pages. Scope, deliverables, timeline, investment, assumptions. No consultant-speak. No hidden change orders. If you have questions, we get on a second call and I change the proposal.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <h4>The work, with you — not at you</h4>
+            <p>I don't disappear for six weeks and come back with a deck. I work alongside your teams, with weekly checkpoints, with drafts you see as they develop. The best deliverables are the ones your own people helped shape — because those are the ones that actually get used after I'm gone.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <h4>A handoff, not a dependency</h4>
+            <p>My goal isn't to become indispensable. It's to leave you with something your team owns and can run without me. Documentation, training, a transition plan. If we set it up right, the last conversation we have is short — because nothing is on fire.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-inner fade-in">
+      <h2>The first call is <em>free and worth it either way.</em></h2>
+      <p>Even if we don't end up working together, you'll leave the conversation with a sharper view of what you're dealing with. Worst case, you've had a thirty-minute chat with someone who's thought about this for a long time. Best case, we figure out how to solve something that's been bothering you.</p>
+      <a href="Connect.html" class="btn-primary">Let's have the conversation <span class="material-icons-outlined" style="font-size:18px">arrow_forward</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Asaf Peled</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+      <a href="mailto:asaf@getclarity.studio">Email</a>
+    </div>
+    <small>&copy; 2026 Asaf Peled</small>
+  </footer>
+
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const open = navLinks.style.display === 'flex';
+        navLinks.style.display = open ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '72px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(250,247,242,0.98)';
+        navLinks.style.padding = '16px 24px 24px';
+        navLinks.style.borderBottom = '1px solid #E8E2D8';
+        navLinks.style.gap = '16px';
+        toggle.textContent = open ? 'menu' : 'close';
+      });
+    }
+
+    // Scroll-triggered fade-ins
+    const fadeEls = document.querySelectorAll('.fade-in');
+    if (fadeEls.length) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(el => obs.observe(el));
+    }
+  </script>
+</body>
+</html>

@@ -1,511 +1,455 @@
 <!DOCTYPE html>
-
-<html class="light scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Asaf Peled | Product Operations &amp; Strategy</title>
-<meta name="description" content="I build operational systems that work for people. Product operations leader with a background in financial services, technology, and organizational strategy."/>
-<meta property="og:title" content="Asaf Peled — Product Operations Leader"/>
-<meta property="og:description" content="I build operational systems that work for people. Background in financial services, technology, and organizational strategy."/>
-<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
-<meta property="og:url" content="https://www.asafpeled.com/"/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<!-- Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-primary-fixed-variant": "#653e0c",
-              "on-tertiary-fixed-variant": "#494643",
-              "secondary-fixed-dim": "#a4d1b0",
-              "primary-fixed-dim": "#f4bc7f",
-              "on-surface-variant": "#50453a",
-              "on-surface": "#1c1c19",
-              "outline-variant": "#d4c4b5",
-              "tertiary-container": "#a39e99",
-              "surface-tint": "#805522",
-              "on-error": "#ffffff",
-              "surface-variant": "#e5e2dd",
-              "surface-container-highest": "#e5e2dd",
-              "secondary-container": "#bfeecb",
-              "surface-container": "#f0ede9",
-              "inverse-on-surface": "#f3f0eb",
-              "on-primary-container": "#502e00",
-              "on-secondary-fixed-variant": "#264f36",
-              "secondary": "#3e674c",
-              "surface-container-low": "#f6f3ee",
-              "surface": "#fcf9f4",
-              "surface-dim": "#dcdad5",
-              "on-tertiary": "#ffffff",
-              "inverse-surface": "#31302d",
-              "secondary-fixed": "#bfeecb",
-              "outline": "#827568",
-              "on-primary-fixed": "#2c1700",
-              "tertiary-fixed-dim": "#cbc5c0",
-              "on-secondary": "#ffffff",
-              "on-secondary-container": "#446d52",
-              "on-error-container": "#93000a",
-              "on-secondary-fixed": "#00210f",
-              "inverse-primary": "#f4bc7f",
-              "on-background": "#1c1c19",
-              "tertiary": "#615e5a",
-              "on-primary": "#ffffff",
-              "on-tertiary-container": "#383632",
-              "on-tertiary-fixed": "#1d1b18",
-              "tertiary-fixed": "#e7e1dc",
-              "background": "#fcf9f4",
-              "primary-container": "#c9955c",
-              "error-container": "#ffdad6",
-              "surface-container-lowest": "#ffffff",
-              "surface-container-high": "#ebe8e3",
-              "error": "#ba1a1a",
-              "surface-bright": "#fcf9f4",
-              "primary-fixed": "#ffdcbb",
-              "primary": "#805522"
-            },
-            fontFamily: {
-              "headline": ["Noto Serif"],
-              "body": ["Plus Jakarta Sans"],
-              "label": ["Plus Jakarta Sans"]
-            },
-            borderRadius: {"DEFAULT": "0.375rem", "lg": "0.625rem", "xl": "0.875rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
-<style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        /* Scroll Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .grain-overlay {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04;
-            pointer-events: none;
-        }
-        /* Google Translate */
-        [dir="rtl"] { text-align: right; }
-        [dir="rtl"] #translate-menu { right: auto; left: 0; }
-        [dir="rtl"] .material-symbols-outlined { transform: scaleX(-1); }
-        iframe[id$=".container"].skiptranslate,
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element select {
-            background-color: transparent;
-            border: none;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #50453a;
-            cursor: pointer;
-            padding: 0 4px;
-        }
-        #google_translate_element select:focus { outline: none; }
-    </style>
-</head>
-<body class="bg-surface text-on-surface overflow-x-hidden">
-<div class="fixed inset-0 grain-overlay z-[60]"></div>
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/15">
-<div class="flex justify-between items-center w-full px-8 py-5 max-w-7xl mx-auto">
-<div class="text-xl font-serif font-bold text-primary tracking-tight notranslate" translate="no">Asaf Peled</div>
-<div class="hidden md:flex items-center gap-10">
-<a class="text-primary font-bold border-b-2 border-primary pb-1 text-xs tracking-widest uppercase transition-colors duration-300" href="#">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
-</div>
-<div class="hidden md:flex items-center gap-6 border-l border-outline-variant/30 pl-6">
-<div class="relative" id="translate-wrapper">
-<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
-<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
-</button>
-<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
-<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
-<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
-<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
-<button type="button" onclick="doTranslate('ar')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">عربي</button>
-<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
-<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
-<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
-</div>
-</div>
-<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
-</div>
-</div>
-<!-- Mobile Menu Icon -->
-<div class="md:hidden flex items-center">
-<button id="mobile-open" type="button" aria-label="Open menu"><span class="material-symbols-outlined text-primary notranslate" translate="no">menu</span></button>
-</div>
-</div>
-</nav>
-<!-- Mobile Menu Panel -->
-<div id="mobile-menu" class="hidden fixed inset-0 z-[200] bg-[#fcf9f4]">
-<div class="flex flex-col h-full">
-<div class="flex justify-between items-center px-8 py-5 border-b border-outline-variant/20">
-<div class="text-xl font-headline font-bold text-primary notranslate" translate="no">Asaf Peled</div>
-<button id="mobile-close" type="button" class="text-primary"><span class="material-symbols-outlined notranslate" translate="no">close</span></button>
-</div>
-<div class="flex flex-col flex-grow justify-center items-center gap-8 px-8 text-center">
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/index.html">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Work With Me.html">Work With Me</a>
-<a class="bg-primary text-on-primary px-8 py-3 font-label text-[10px] uppercase tracking-widest mt-2 hover:bg-on-primary-container transition-colors" href="/Connect.html">Connect</a>
-<div class="mt-6 pt-6 border-t border-outline-variant/20 w-full">
-<div class="flex flex-wrap justify-center gap-2">
-<button onclick="doTranslate('en')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">English</button>
-<button onclick="doTranslate('he')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">עברית</button>
-<button onclick="doTranslate('ar')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">عربي</button>
-<button onclick="doTranslate('es')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Español</button>
-<button onclick="doTranslate('fr')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Français</button>
-<button onclick="doTranslate('de')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Deutsch</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script type="text/javascript">
-(function() {
-  var m = document.cookie.match(/googtrans=\/en\/(iw|ar)/);
-  if (m) document.documentElement.setAttribute('dir', 'rtl');
-  else document.documentElement.setAttribute('dir', 'ltr');
-})();
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,ar,es,fr,de'}, 'gt-hidden');
-}
-function doTranslate(lang) {
-  document.getElementById('translate-menu').classList.add('hidden');
-  var rtl = ['he', 'ar'];
-  if (lang === 'en') {
-    document.documentElement.setAttribute('dir', 'ltr');
-    var frames = document.querySelectorAll('iframe.skiptranslate');
-    for (var i = 0; i < frames.length; i++) {
-      try {
-        var d = frames[i].contentDocument || frames[i].contentWindow.document;
-        var btn = d.querySelector('[id$=".restore"]');
-        if (btn) { btn.click(); return; }
-      } catch(e) {}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asaf Peled</title>
+  <meta name="description" content="Everyone's racing into AI. Almost no one is building the scaffolding to make it pay off.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2; --warm-white: #FFFDF9; --gold: #C9A84C; --gold-light: #E8D5A0;
+      --gold-muted: #B89B3E; --navy: #1B2A4A; --navy-light: #2B3F6B; --charcoal: #2C2C2C;
+      --gray: #6B6B6B; --gray-light: #A0A0A0; --border: #E8E2D8;
+      --display: 'Cormorant Garamond', Georgia, serif; --body: 'DM Sans', -apple-system, sans-serif;
     }
-    location.reload();
-    return;
-  }
-  document.documentElement.setAttribute('dir', rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr');
-  var gtLang = lang === 'he' ? 'iw' : lang;
-  function apply() {
-    var select = document.querySelector('.goog-te-combo');
-    if (!select) return false;
-    select.value = gtLang;
-    var evt = document.createEvent('HTMLEvents');
-    evt.initEvent('change', false, true);
-    select.dispatchEvent(evt);
-    return true;
-  }
-  if (!apply()) {
-    var tries = 0;
-    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
-  }
-}
-document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('translate-btn');
-  var menu = document.getElementById('translate-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', function() {
-      menu.classList.add('hidden');
-    });
-  }
-  var mobileOpen = document.getElementById('mobile-open');
-  var mobileClose = document.getElementById('mobile-close');
-  var mobileMenu = document.getElementById('mobile-menu');
-  if (mobileOpen && mobileMenu) {
-    mobileOpen.addEventListener('click', function() {
-      mobileMenu.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    });
-    mobileClose.addEventListener('click', function() {
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = '';
-    });
-  }
-  document.querySelectorAll('.material-symbols-outlined').forEach(function(el) {
-    el.setAttribute('translate', 'no');
-    el.classList.add('notranslate');
-  });
-});
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-<main class="pt-24">
-<!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-8 py-20 lg:py-32">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7">
-<span class="text-on-surface-variant font-label font-semibold tracking-[0.2em] uppercase text-[10px] mb-8 block">Product Operations Leader</span>
-<h1 class="text-6xl lg:text-8xl font-headline font-bold text-on-surface leading-[1.05] mb-8 tracking-tight">
-                        I build <span class="italic font-normal">systems</span> <br/>that work for <span class="italic font-normal text-primary">people</span>.
-                    </h1>
-<p class="text-lg lg:text-xl text-on-surface-variant font-body leading-relaxed max-w-xl mb-12">
-                        I come from leadership, technology, and financial services. I've spent years untangling operational complexity so teams can focus on what actually matters — their customers and each other.
-                    </p>
-<div class="flex flex-wrap items-center gap-8">
-<a href="/Capabilities.html" class="bg-surface-tint text-on-primary px-8 py-4 rounded-lg font-label font-bold text-sm tracking-widest uppercase flex items-center gap-3 group shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
-                            What I Do
-                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-<a href="/Work With Me.html" class="text-on-surface-variant font-label font-bold text-sm tracking-widest uppercase border-b border-outline-variant/50 hover:border-primary hover:text-primary transition-all pb-1">
-                            Work With Me
-                        </a>
-</div>
-</div>
-<div class="lg:col-span-5 relative">
-<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-xl shadow-2xl relative z-10 ring-1 ring-outline-variant/20">
-<img alt="Asaf Peled" class="w-full h-full object-cover object-[center_15%] brightness-[1.03] contrast-[1.02] saturate-[1.05]" src="images/swing.jpg" onerror="this.style.display='none'"/>
-</div>
-<!-- Decorative Elements -->
-<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/8 -z-0 rounded-full blur-3xl"></div>
-<div class="absolute -top-6 -right-6 w-32 h-32 bg-secondary/6 -z-0 rounded-full blur-2xl"></div>
-</div>
-</div>
-</section>
-<!-- My Story -->
-<section class="bg-surface-container-low py-32 reveal">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div>
-<span class="text-[10px] font-label font-bold uppercase tracking-[0.3em] text-surface-tint mb-6 block">My Story</span>
-<h2 class="text-4xl font-headline font-bold mb-8 text-on-surface leading-tight">From ideas to tangible outcomes.</h2>
-<div class="space-y-6 text-on-surface-variant text-[16px] leading-relaxed">
-<p>I combine human relationships, processes, and technology to create tangible outcomes from ideas. That's been the thread through everything I've done.</p>
-<p>My professional journey started in Knowledge Management and management consulting — learning how organizations actually think and share what they know. From there, I shifted toward designing and implementing product flows, with a deep focus on regulations and compliance.</p>
-<p>Today, I specialize in building operational systems that work at scale: KPI frameworks, standardized workflows, cross-functional alignment — always with the people who use them in mind.</p>
-<p>I'm also practicing in AI creations, exploring how intelligent tools can enhance how we think, decide, and build.</p>
-</div>
-<a href="/Capabilities.html" class="inline-flex items-center gap-3 mt-10 text-[11px] font-bold uppercase tracking-widest text-surface-tint hover:gap-4 transition-all">
-                        See My Full Capabilities <span class="material-symbols-outlined text-lg">trending_flat</span>
-</a>
-</div>
-<div class="relative">
-<div class="bg-surface rounded-xl p-10 shadow-sm border border-outline-variant/15">
-<div class="space-y-8">
-<div class="flex items-start gap-5">
-<div class="w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary/80">menu_book</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface mb-1">Knowledge Management</h4>
-<p class="text-sm text-on-surface-variant">Where it started — building systems for how organizations learn and share</p>
-</div>
-</div>
-<div class="w-full h-[1px] bg-outline-variant/15"></div>
-<div class="flex items-start gap-5">
-<div class="w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary/80">account_tree</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface mb-1">Product & Compliance</h4>
-<p class="text-sm text-on-surface-variant">Designing product flows with regulatory precision</p>
-</div>
-</div>
-<div class="w-full h-[1px] bg-outline-variant/15"></div>
-<div class="flex items-start gap-5">
-<div class="w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary/80">architecture</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface mb-1">Operations at Scale</h4>
-<p class="text-sm text-on-surface-variant">KPI frameworks, process standardization, cross-functional alignment</p>
-</div>
-</div>
-<div class="w-full h-[1px] bg-outline-variant/15"></div>
-<div class="flex items-start gap-5">
-<div class="w-12 h-12 rounded-lg bg-secondary/8 flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-secondary/80">smart_toy</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface mb-1">AI Creations</h4>
-<p class="text-sm text-on-surface-variant">Exploring intelligent tools for thinking, deciding, and building</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Metrics Strip -->
-<section class="bg-surface-tint py-16 reveal">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-on-primary">
-<div>
-<div class="text-5xl font-headline font-bold mb-3">17K</div>
-<p class="text-sm opacity-80 uppercase tracking-widest font-label">Monthly document checks standardized</p>
-</div>
-<div class="md:border-x md:border-on-primary/15">
-<div class="text-5xl font-headline font-bold mb-3">85.4%</div>
-<p class="text-sm opacity-80 uppercase tracking-widest font-label">Revenue retained through compliance</p>
-</div>
-<div>
-<div class="text-5xl font-headline font-bold mb-3">3</div>
-<p class="text-sm opacity-80 uppercase tracking-widest font-label">Cross-organizational forums led</p>
-</div>
-</div>
-</div>
-</section>
-<!-- What I Do -->
-<section class="max-w-7xl mx-auto px-8 py-32 reveal">
-<div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-<div class="max-w-xl">
-<h2 class="text-4xl font-headline font-bold mb-6 text-on-surface">What I Do.</h2>
-<p class="text-on-surface-variant text-lg">Turning complexity into clarity across operations, product, and strategy.</p>
-</div>
-<a href="/Capabilities.html" class="text-surface-tint font-label text-[11px] font-bold uppercase tracking-widest border-b border-primary/20 pb-1 cursor-pointer hover:border-primary transition-all">See Full Capabilities</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Card 1 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary/80 text-[28px]">verified</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">KYC & Compliance Strategy</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">End-to-end strategies — from operating models and KPI definitions to turnaround time targets that drive investment decisions.</p>
-</div>
-<!-- Card 2 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary/80 text-[28px]">sync_alt</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">Process Standardization</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">Consolidating thousands of fragmented workflows into standardized paths — increasing throughput without adding headcount.</p>
-</div>
-<!-- Card 3 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary/80 text-[28px]">hub</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">Cross-Functional Alignment</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">Leading forums across Product, Platform, and Operations to define shared metrics and a unified methodology.</p>
-</div>
-<!-- Card 4 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary/80 text-[28px]">shield</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">Risk & Revenue Retention</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">Implementing regulatory processes that protect the business without losing it — retaining 85% of revenue through new compliance rollouts.</p>
-</div>
-<!-- Card 5 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-secondary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-secondary/80 text-[28px]">auto_awesome</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">Clarity AI</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">Personal AI Workspace for Curated Thinking — where your thoughts are organized and enhanced by intelligent synthesis.</p>
-<a class="text-[11px] font-bold uppercase tracking-widest text-surface-tint flex items-center gap-3 hover:gap-4 transition-all mt-6" href="https://www.getclarity.studio/" target="_blank">
-                            Explore Workspace <span class="material-symbols-outlined text-lg">trending_flat</span>
-</a>
-</div>
-<!-- Card 6 -->
-<div class="bg-surface p-10 rounded-xl group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg border border-outline-variant/15">
-<div class="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary/80 text-[28px]">library_books</span>
-</div>
-<h3 class="text-xl font-headline font-bold mb-4">Knowledge Base Design</h3>
-<p class="text-[15px] text-on-surface-variant leading-relaxed">Designing knowledge systems that teams actually use — structuring institutional know-how so it scales with the organization.</p>
-</div>
-</div>
-</section>
-<!-- Testimonial -->
-<section class="bg-surface-container-low py-28 reveal">
-<div class="max-w-4xl mx-auto px-8 text-center">
-<span class="material-symbols-outlined text-primary/20 text-6xl mb-8 block">format_quote</span>
-<blockquote class="text-3xl lg:text-4xl font-headline font-normal leading-snug text-on-surface italic mb-10">
-                    "Asaf has a rare ability to see both the system and the people inside it. He doesn't just optimize processes — he makes them work for the humans who run them."
-                </blockquote>
-<div class="flex items-center justify-center gap-4">
-<div class="h-[1px] w-10 bg-outline-variant/30"></div>
-<div>
-<p class="font-label text-[12px] font-bold text-on-surface">Senior Director, Product Operations</p>
-<p class="font-label text-[11px] text-on-surface-variant mt-1">Global Financial Services</p>
-</div>
-<div class="h-[1px] w-10 bg-outline-variant/30"></div>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="max-w-7xl mx-auto px-8 py-32 reveal">
-<div class="bg-gradient-to-br from-surface-container-high to-surface-container rounded-xl p-16 md:p-24 text-center relative overflow-hidden border border-outline-variant/15">
-<div class="relative z-10 max-w-2xl mx-auto">
-<h2 class="text-5xl font-headline font-bold mb-8 text-on-surface leading-tight">Let’s talk about what’s not working.</h2>
-<p class="text-on-surface-variant text-lg mb-12 leading-relaxed">I’m most helpful when there’s a real problem to solve — a process that’s breaking, a team that’s stuck, or a transition that needs a steady hand.</p>
-<a href="/Connect.html" class="inline-block bg-surface-tint text-on-primary px-12 py-5 rounded-lg font-label font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1">
-                        Get in Touch
-                    </a>
-</div>
-<!-- Artistic Flourish -->
-<div class="absolute top-0 right-0 p-12">
-<span class="material-symbols-outlined text-primary/10 text-9xl select-none">auto_awesome</span>
-</div>
-<div class="absolute bottom-0 left-0 p-12">
-<span class="material-symbols-outlined text-primary/5 text-8xl select-none">flare</span>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-20 px-8 bg-surface-container-low border-t border-outline-variant/20">
-<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-12">
-<div class="flex flex-col items-center md:items-start gap-4">
-<div class="font-serif italic text-2xl font-bold text-primary notranslate" translate="no">Asaf Peled</div>
-<div class="text-on-surface-variant/70 font-sans text-xs tracking-widest uppercase">
-                    © 2026 Asaf Peled
-                </div>
-</div>
-<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
-<a class="text-on-surface-variant/80 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors" href="mailto:hello@asafpeled.com">Email</a>
-</div>
-</div>
-</footer>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-});
-</script>
-</body></html>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--cream); color: var(--charcoal); line-height: 1.75; font-size: 17px; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.3s; letter-spacing: 0.03em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+    .nav-cta { background: var(--navy) !important; color: var(--cream) !important; padding: 10px 24px !important; border-radius: 6px; }
+    .mobile-toggle { display: none; cursor: pointer; font-size: 1.6rem; color: var(--navy); }
+
+    /* HERO — storytelling */
+    .hero {
+      min-height: 92vh;
+      display: flex; align-items: center;
+      padding: 140px 48px 80px;
+    }
+    .hero-inner { max-width: 900px; margin: 0 auto; }
+    .hero-opener {
+      font-family: var(--body);
+      font-size: 0.88rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      font-weight: 600;
+      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-opener::before {
+      content: ''; width: 40px; height: 1px; background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 36px;
+      letter-spacing: -0.01em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-muted);
+    }
+    .hero-lead {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.5;
+      max-width: 680px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 48px;
+    }
+    .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--navy);
+      color: var(--cream);
+      padding: 16px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+    .btn-text {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+    .btn-text:hover { border-color: var(--gold); }
+
+    /* STORY — long-form narrative */
+    .story { padding: 100px 48px; background: var(--warm-white); }
+    .story-inner { max-width: 720px; margin: 0 auto; }
+    .story-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-muted); margin-bottom: 16px;
+    }
+    .story-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 48px;
+    }
+    .story-title em { font-style: italic; color: var(--gold-muted); }
+
+    .story-body p {
+      font-size: 1.08rem;
+      color: var(--charcoal);
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .story-body p.first-line::first-line {
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .story-body .pull-quote {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.35;
+      margin: 48px 0;
+      padding-left: 32px;
+      border-left: 3px solid var(--gold);
+    }
+    .story-body .pull-quote em { color: var(--gold-muted); }
+    .story-body .break {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.4rem;
+      letter-spacing: 1em;
+      margin: 40px 0 32px;
+    }
+
+    /* THESIS — the sharp moment */
+    .thesis {
+      background: var(--navy);
+      padding: 120px 48px;
+      color: var(--cream);
+    }
+    .thesis-inner { max-width: 780px; margin: 0 auto; }
+    .thesis-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 24px;
+    }
+    .thesis h2 {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 40px;
+      color: var(--cream);
+    }
+    .thesis h2 em { font-style: italic; color: var(--gold-light); }
+    .thesis p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: rgba(250,247,242,0.82);
+      margin-bottom: 24px;
+    }
+    .thesis .emphasis {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      margin-top: 32px;
+      line-height: 1.4;
+    }
+
+    /* WORK — what I actually do, plainly */
+    .work { padding: 100px 48px; }
+    .work-inner { max-width: 900px; margin: 0 auto; }
+    .work-header { margin-bottom: 64px; max-width: 620px; }
+    .work-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-muted); margin-bottom: 16px;
+    }
+    .work-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .work-title em { font-style: italic; color: var(--gold-muted); }
+    .work-intro { font-size: 1.05rem; color: var(--gray); line-height: 1.8; }
+
+    .work-items { display: flex; flex-direction: column; gap: 0; }
+    .work-item {
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .work-item:last-child { border-bottom: 1px solid var(--border); }
+    .work-num {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .work-item h3 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .work-item p {
+      font-size: 1rem;
+      color: var(--charcoal);
+      line-height: 1.8;
+    }
+
+    /* CLOSING — direct and personal */
+    .closing {
+      background: var(--warm-white);
+      padding: 120px 48px;
+    }
+    .closing-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .closing h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 24px;
+    }
+    .closing h2 em { font-style: italic; color: var(--gold-muted); }
+    .closing p {
+      font-size: 1.1rem;
+      color: var(--charcoal);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    footer { padding: 48px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: var(--display); font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    .footer-links a { font-size: 0.88rem; color: var(--gray); text-decoration: none; }
+    .footer-links a:hover { color: var(--navy); }
+    footer small { font-size: 0.8rem; color: var(--gray-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-inner > * { animation: fadeUp 0.8s ease-out backwards; }
+    .hero-opener { animation-delay: 0.1s; }
+    .hero h1 { animation-delay: 0.2s; }
+    .hero-lead { animation-delay: 0.4s; }
+    .hero-sub { animation-delay: 0.5s; }
+    .hero-actions { animation-delay: 0.6s; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+      .hero, .story, .thesis, .work, .closing { padding-left: 24px; padding-right: 24px; }
+      .work-item { grid-template-columns: 1fr; gap: 12px; }
+      .work-num { font-size: 1.6rem; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Asaf Peled</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="Capabilities.html">The Work</a>
+      <a href="Insights.html">Writing</a>
+      <a href="Work-With-Me.html">Work Together</a>
+      <a href="Connect.html" class="nav-cta">Connect</a>
+    </div>
+    <span class="material-icons-outlined mobile-toggle">menu</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-opener">Asaf Peled · Tel Aviv</div>
+      <h1>Everyone is racing into AI. <em>Almost no one is building the thing that makes it pay off.</em></h1>
+      <p class="hero-lead">They forget what they know. They skip the measurements. They abandon the safety rails. Like amateurs sprinting toward a cliff with a pitch deck.</p>
+      <p class="hero-sub">I build the invisible scaffolding that turns AI from a bet into a business. The processes, the guardrails, the mechanisms that decide whether your investment compounds or evaporates. I've done it for financial regulation across nine jurisdictions. The work now is the same work — with stakes that are higher and deadlines that are closer.</p>
+      <div class="hero-actions">
+        <a href="Work-With-Me.html" class="btn-primary">Let's talk <span class="material-icons-outlined" style="font-size:18px">arrow_forward</span></a>
+        <a href="#story" class="btn-text">How I got here</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <div class="story-label">How I got here</div>
+      <h2 class="story-title">I thought I'd <em>missed the train.</em></h2>
+
+      <div class="story-body">
+        <p class="first-line">A few months ago I had some unexpected time on my hands, and I did the thing you're not supposed to do at forty-four: I looked up from the work and asked where it was actually taking me.</p>
+
+        <p>Fifteen years in knowledge management. Then a bold detour into fintech operations, starting from scratch, learning fast, doing well. I built KYC frameworks for a company operating across nine jurisdictions and millions of customers. By most measures, I was succeeding.</p>
+
+        <p>But when I looked up, something felt wrong. The market was turning. The conversations I was sitting in were about things I'd spent a decade learning — and the new conversations, the ones getting the oxygen and the capital, were about something else entirely. I started doing that quiet calculation people do in their forties about the doors that might have closed behind them.</p>
+
+        <div class="pull-quote">Then something shifted. I realized the train I thought I'd missed <em>hadn't actually left yet.</em></div>
+
+        <p>I'd been looking at AI the way most people look at AI — as a technology problem, a thing for engineers and researchers. But the more I paid attention, the more I saw what nobody wanted to say out loud: the AI rush has almost no operational spine. Companies are pouring millions into models and platforms while forgetting the things that make any business actually work. Measurement. Governance. Safety. The boring disciplines that turn a bet into a business.</p>
+
+        <p>That's not a technology gap. That's an operations gap. And operations is what I do.</p>
+
+        <div class="break">· · ·</div>
+
+        <p>The people building AI right now are not amateurs. They are brilliant, ambitious, moving fast. But they are acting like amateurs, because amateurs are what you become when you abandon every discipline you've ever learned in the name of not being left behind.</p>
+
+        <p>I'm not trying to slow anyone down. I'm trying to make sure that when the dust settles, what you've built is still standing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THESIS -->
+  <section class="thesis">
+    <div class="thesis-inner">
+      <div class="thesis-label">The thing nobody is saying</div>
+      <h2>The AI conversation is being held by technologists and lawyers. <em>The operators are missing from the room.</em></h2>
+
+      <p>Risk classification. Human oversight. Audit trails. Escalation paths. Change management. Measurement frameworks. Every one of these is a solved problem in regulated industries. We've been doing them for decades. They just need to be translated.</p>
+
+      <p>The EU AI Act takes full effect in August 2026. Regulators in every major market are following. And the companies that treat this as a paperwork exercise — something to delegate to legal and forget about — are going to discover, the hard way, that governance without operations is just a document nobody reads.</p>
+
+      <p class="emphasis">The companies that win the AI era won't be the ones who move fastest. They'll be the ones who can still move — with their licenses intact, their customers' trust earned, and their systems holding together — five years from now.</p>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work">
+    <div class="work-inner">
+      <div class="work-header">
+        <div class="work-label">What this looks like in practice</div>
+        <h2 class="work-title">Four questions I help <em>organizations answer.</em></h2>
+        <p class="work-intro">Not frameworks. Not methodologies. Questions with consequences — the kind you can't afford to get wrong, and can't afford to ignore any longer.</p>
+      </div>
+
+      <div class="work-items">
+        <div class="work-item">
+          <div class="work-num">01</div>
+          <div>
+            <h3>Which of your AI systems are actually high-risk — and do you know what that means for you?</h3>
+            <p>Most companies can't produce a clean inventory of the AI touching their business, let alone a classification against the regulations coming for them. This is where the work starts. Not with the regulation. With knowing what you've got.</p>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">02</div>
+          <div>
+            <h3>When your AI makes a decision a regulator asks about, can you show your work?</h3>
+            <p>Documentation, audit trails, decision logs, the chain of accountability when something goes sideways. The boring stuff that turns into the expensive stuff the moment an auditor walks in and you don't have it.</p>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">03</div>
+          <div>
+            <h3>How do you know your AI is still doing what you hired it to do?</h3>
+            <p>Models drift. Data shifts. The thing that worked beautifully in Q1 is quietly failing in Q3 and nobody notices until a customer complaint or a regulator's letter. Ongoing monitoring isn't optional — it's the only thing standing between you and surprise.</p>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">04</div>
+          <div>
+            <h3>When the company changes — and it will — can your AI governance change with it?</h3>
+            <p>The worst governance systems are rigid. They're built for the company you were when you hired the consultant, not the company you become. The real work is building something that flexes as you grow, pivots when you pivot, and doesn't need to be torn down and rebuilt every time the strategy shifts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-inner">
+      <h2>If any of this sounds <em>familiar</em> — we should talk.</h2>
+      <p>Not for a pitch. For a real conversation. You tell me what you're actually worried about. I tell you honestly whether I can help. That's it.</p>
+      <a href="Connect.html" class="btn-primary">Start a conversation <span class="material-icons-outlined" style="font-size:18px">arrow_forward</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Asaf Peled</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+      <a href="mailto:asaf@getclarity.studio">Email</a>
+    </div>
+    <small>&copy; 2026 Asaf Peled · Tel Aviv</small>
+  </footer>
+
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const open = navLinks.style.display === 'flex';
+        navLinks.style.display = open ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '72px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(250,247,242,0.98)';
+        navLinks.style.padding = '16px 24px 24px';
+        navLinks.style.borderBottom = '1px solid #E8E2D8';
+        navLinks.style.gap = '16px';
+        toggle.textContent = open ? 'menu' : 'close';
+      });
+    }
+
+    // Scroll-triggered fade-ins
+    const fadeEls = document.querySelectorAll('.fade-in');
+    if (fadeEls.length) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(el => obs.observe(el));
+    }
+  </script>
+</body>
+</html>

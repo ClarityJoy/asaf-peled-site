@@ -1,394 +1,252 @@
 <!DOCTYPE html>
-
-<html class="light scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<title>Insights | Asaf Peled</title>
-<meta name="description" content="Thinking out loud about how work works. Lessons from operations, technology, and organizational change."/>
-<meta property="og:title" content="Insights — Asaf Peled"/>
-<meta property="og:description" content="Thinking out loud about how work works. Lessons from operations, technology, and organizational change."/>
-<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
-<meta property="og:url" content="https://www.asafpeled.com/Insights.html"/>
-<meta property="og:type" content="website"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-primary-fixed-variant": "#653e0c",
-              "on-tertiary-fixed-variant": "#494643",
-              "secondary-fixed-dim": "#a4d1b0",
-              "primary-fixed-dim": "#f4bc7f",
-              "on-surface-variant": "#50453a",
-              "on-surface": "#1c1c19",
-              "outline-variant": "#d4c4b5",
-              "tertiary-container": "#a39e99",
-              "surface-tint": "#805522",
-              "on-error": "#ffffff",
-              "surface-variant": "#e5e2dd",
-              "surface-container-highest": "#e5e2dd",
-              "secondary-container": "#bfeecb",
-              "surface-container": "#f0ede9",
-              "inverse-on-surface": "#f3f0eb",
-              "on-primary-container": "#502e00",
-              "on-secondary-fixed-variant": "#264f36",
-              "secondary": "#3e674c",
-              "surface-container-low": "#f6f3ee",
-              "surface": "#fcf9f4",
-              "surface-dim": "#dcdad5",
-              "on-tertiary": "#ffffff",
-              "inverse-surface": "#31302d",
-              "secondary-fixed": "#bfeecb",
-              "outline": "#827568",
-              "on-primary-fixed": "#2c1700",
-              "tertiary-fixed-dim": "#cbc5c0",
-              "on-secondary": "#ffffff",
-              "on-secondary-container": "#446d52",
-              "on-error-container": "#93000a",
-              "on-secondary-fixed": "#00210f",
-              "inverse-primary": "#f4bc7f",
-              "on-background": "#1c1c19",
-              "tertiary": "#615e5a",
-              "on-primary": "#ffffff",
-              "on-tertiary-container": "#383632",
-              "on-tertiary-fixed": "#1d1b18",
-              "tertiary-fixed": "#e7e1dc",
-              "background": "#fcf9f4",
-              "primary-container": "#c9955c",
-              "error-container": "#ffdad6",
-              "surface-container-lowest": "#ffffff",
-              "surface-container-high": "#ebe8e3",
-              "error": "#ba1a1a",
-              "surface-bright": "#fcf9f4",
-              "primary-fixed": "#ffdcbb",
-              "primary": "#805522"
-            },
-            fontFamily: {
-              "headline": ["Noto Serif"],
-              "body": ["Plus Jakarta Sans"],
-              "label": ["Plus Jakarta Sans"]
-            },
-            borderRadius: {"DEFAULT": "0.375rem", "lg": "0.625rem", "xl": "0.875rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-            vertical-align: middle
-        }
-        body {
-            font-family: "Plus Jakarta Sans", sans-serif;
-            background-color: #fcf9f4;
-            color: #1c1c19;
-            background-image: url(images/insights-bg.jpg);
-            background-blend-mode: multiply;
-            background-attachment: fixed;
-        }
-        h1, h2, h3, .serif-italic {
-            font-family: "Noto Serif", serif
-        }
-        .editorial-gradient {
-            background: linear-gradient(135deg, #805522 0%, #c9955c 100%)
-        }
-        /* Scroll Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        /* Google Translate */
-        [dir="rtl"] { text-align: right; }
-        [dir="rtl"] #translate-menu { right: auto; left: 0; }
-        [dir="rtl"] .material-symbols-outlined { transform: scaleX(-1); }
-        iframe[id$=".container"].skiptranslate,
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element select {
-            background-color: transparent;
-            border: none;
-            font-family: "Plus Jakarta Sans", sans-serif;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #50453a;
-            cursor: pointer;
-            padding: 0 4px;
-        }
-        #google_translate_element select:focus { outline: none; }
-    </style>
-</head>
-<body class="bg-surface text-on-surface">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#fcf9f4]/80 dark:bg-stone-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
-<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-<div class="text-xl font-serif font-bold text-[#805522] dark:text-[#c9955c] notranslate" translate="no">
-                Asaf Peled
-            </div>
-<div class="hidden md:flex items-center space-x-8">
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-[10px] hover:text-primary transition-colors" href="/index.html">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
-<div class="flex items-center gap-6 border-l border-outline-variant/30 pl-6">
-<div class="relative" id="translate-wrapper">
-<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
-<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
-</button>
-<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
-<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
-<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
-<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
-<button type="button" onclick="doTranslate('ar')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">عربي</button>
-<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
-<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
-<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
-</div>
-</div>
-<form action="/Connect.html" method="get"><button class="bg-primary text-on-primary px-6 py-2.5 font-label text-xs font-bold uppercase tracking-widest rounded hover:bg-surface-tint transition-all duration-200">Connect</button></form>
-</div>
-</div>
-<!-- Mobile Menu Icon -->
-<div class="md:hidden flex items-center gap-4">
-<button id="mobile-open" type="button" aria-label="Open menu"><span class="material-symbols-outlined text-primary notranslate" translate="no">menu</span></button>
-</div>
-</div>
-</nav>
-<!-- Mobile Menu Panel -->
-<div id="mobile-menu" class="hidden fixed inset-0 z-[200] bg-[#fcf9f4]">
-<div class="flex flex-col h-full">
-<div class="flex justify-between items-center px-8 py-5 border-b border-outline-variant/20">
-<div class="text-xl font-headline font-bold text-primary notranslate" translate="no">Asaf Peled</div>
-<button id="mobile-close" type="button" class="text-primary"><span class="material-symbols-outlined notranslate" translate="no">close</span></button>
-</div>
-<div class="flex flex-col flex-grow justify-center items-center gap-8 px-8 text-center">
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/index.html">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Work With Me.html">Work With Me</a>
-<a class="bg-primary text-on-primary px-8 py-3 font-label text-[10px] uppercase tracking-widest mt-2 hover:bg-on-primary-container transition-colors" href="/Connect.html">Connect</a>
-<div class="mt-6 pt-6 border-t border-outline-variant/20 w-full">
-<div class="flex flex-wrap justify-center gap-2">
-<button onclick="doTranslate('en')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">English</button>
-<button onclick="doTranslate('he')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">עברית</button>
-<button onclick="doTranslate('ar')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">عربي</button>
-<button onclick="doTranslate('es')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Español</button>
-<button onclick="doTranslate('fr')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Français</button>
-<button onclick="doTranslate('de')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Deutsch</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script type="text/javascript">
-(function() {
-  var m = document.cookie.match(/googtrans=\/en\/(iw|ar)/);
-  if (m) document.documentElement.setAttribute('dir', 'rtl');
-  else document.documentElement.setAttribute('dir', 'ltr');
-})();
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,ar,es,fr,de'}, 'gt-hidden');
-}
-function doTranslate(lang) {
-  document.getElementById('translate-menu').classList.add('hidden');
-  var rtl = ['he', 'ar'];
-  if (lang === 'en') {
-    document.documentElement.setAttribute('dir', 'ltr');
-    var frames = document.querySelectorAll('iframe.skiptranslate');
-    for (var i = 0; i < frames.length; i++) {
-      try {
-        var d = frames[i].contentDocument || frames[i].contentWindow.document;
-        var btn = d.querySelector('[id$=".restore"]');
-        if (btn) { btn.click(); return; }
-      } catch(e) {}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing — Asaf Peled</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2; --warm-white: #FFFDF9; --gold: #C9A84C; --gold-light: #E8D5A0;
+      --gold-muted: #B89B3E; --navy: #1B2A4A; --navy-light: #2B3F6B; --charcoal: #2C2C2C;
+      --gray: #6B6B6B; --gray-light: #A0A0A0; --border: #E8E2D8;
+      --display: 'Cormorant Garamond', Georgia, serif; --body: 'DM Sans', -apple-system, sans-serif;
     }
-    location.reload();
-    return;
-  }
-  document.documentElement.setAttribute('dir', rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr');
-  var gtLang = lang === 'he' ? 'iw' : lang;
-  function apply() {
-    var select = document.querySelector('.goog-te-combo');
-    if (!select) return false;
-    select.value = gtLang;
-    var evt = document.createEvent('HTMLEvents');
-    evt.initEvent('change', false, true);
-    select.dispatchEvent(evt);
-    return true;
-  }
-  if (!apply()) {
-    var tries = 0;
-    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
-  }
-}
-document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('translate-btn');
-  var menu = document.getElementById('translate-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', function() {
-      menu.classList.add('hidden');
-    });
-  }
-  var mobileOpen = document.getElementById('mobile-open');
-  var mobileClose = document.getElementById('mobile-close');
-  var mobileMenu = document.getElementById('mobile-menu');
-  if (mobileOpen && mobileMenu) {
-    mobileOpen.addEventListener('click', function() {
-      mobileMenu.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    });
-    mobileClose.addEventListener('click', function() {
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = '';
-    });
-  }
-  document.querySelectorAll('.material-symbols-outlined').forEach(function(el) {
-    el.setAttribute('translate', 'no');
-    el.classList.add('notranslate');
-  });
-});
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-<main class="pt-24 pb-16">
-<!-- Hero Header -->
-<header class="max-w-7xl mx-auto px-8 mb-20 text-center">
-<div class="inline-block px-4 py-1 bg-surface-container-high text-primary text-[10px] tracking-[0.2em] uppercase font-bold mb-6">Insights</div>
-<h1 class="text-5xl md:text-7xl font-headline tracking-tight text-on-surface leading-tight mb-8">
-                Thinking out loud <br/>about <i>how work works</i>.
-            </h1>
-<p class="max-w-2xl mx-auto text-lg text-on-surface-variant font-body leading-relaxed">
-                Lessons from the intersection of operations, technology, and the human side of organizational change.
-            </p>
-</header>
-<!-- Featured Article -->
-<section class="max-w-7xl mx-auto px-8 mb-24 reveal">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7">
-<div class="aspect-[16/10] overflow-hidden group">
-<img alt="Featured insight" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="images/featured-insight.jpg"/>
-</div>
-</div>
-<div class="lg:col-span-5 flex flex-col justify-center">
-<span class="text-secondary font-body font-bold text-xs tracking-widest uppercase mb-4">Lead Article — 01</span>
-<h2 class="text-4xl font-headline leading-tight text-on-surface mb-6">
-                        What 17,000 Monthly Document Checks Taught Me About <i>Process Design</i>
-                    </h2>
-<p class="text-on-surface-variant font-body leading-relaxed mb-8 italic">
-                        "The biggest operational wins don't come from working faster — they come from eliminating the work that shouldn't exist in the first place."
-                    </p>
-<span class="inline-flex items-center gap-2 text-on-surface-variant/60 font-label font-semibold text-sm">
-                        Coming Soon
-                        <span class="material-symbols-outlined text-sm">schedule</span>
-</span>
-</div>
-</div>
-</section>
-<!-- Insights Grid -->
-<section class="max-w-7xl mx-auto px-8 mb-24 reveal">
-<div class="flex justify-between items-end mb-12">
-<h3 class="text-2xl font-headline">Latest <i>Articles</i></h3>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-12">
-<!-- Article 1 -->
-<article class="flex flex-col">
-<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden rounded-lg">
-<img alt="Asaf Peled" class="w-full h-full object-cover object-[center_20%] hover:opacity-90 transition-opacity" src="images/swing.jpg" onerror="this.style.display='none'"/>
-</div>
-<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Product Operations</span>
-<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">The KPI Problem: Why Most Teams <i>Measure</i> the Wrong Things</h4>
-<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">Building a performance measurement infrastructure from scratch — and what three cross-organizational forums taught me about shared methodology.</p>
-</article>
-<!-- Article 2 -->
-<article class="flex flex-col">
-<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden rounded-lg">
-<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="images/insight-1.jpg"/>
-</div>
-<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Compliance</span>
-<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Retaining 85% of Revenue <i>During</i> a Compliance Overhaul</h4>
-<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">How to implement new regulatory requirements for existing clients without losing the business — a practical playbook.</p>
-</article>
-<!-- Article 3 -->
-<article class="flex flex-col">
-<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden rounded-lg">
-<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="images/insight-2.jpg"/>
-</div>
-<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Customer Operations</span>
-<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Your Knowledge Base Is <i>Lying</i> to Your Team</h4>
-<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">Why most internal knowledge systems fail, and what it takes to build one that people actually trust and maintain.</p>
-</article>
-<!-- Article 4 (Horizontal / Spanning) -->
-<article class="md:col-span-2 flex flex-col md:flex-row gap-8 items-center bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 hover:shadow-lg transition-all duration-300">
-<div class="md:w-1/2 aspect-video overflow-hidden">
-<img alt="Insights item" class="w-full h-full object-cover" src="images/insight-3.jpg"/>
-</div>
-<div class="md:w-1/2">
-<span class="text-xs uppercase tracking-widest text-secondary font-bold mb-3 inline-block">Long Read</span>
-<h4 class="text-3xl font-headline leading-tight text-on-surface mb-4">From Chaos to <i>Cadence</i>: Standardizing at Scale</h4>
-<p class="text-on-surface-variant text-sm font-body leading-relaxed mb-6">The story of consolidating fragmented processing paths into a unified workflow — and why the hardest part was getting people to let go of their workarounds.</p>
-<span class="text-on-surface-variant/60 font-label text-xs tracking-widest uppercase">Coming Soon</span>
-</div>
-</article>
-<!-- Article 5 -->
-<article class="flex flex-col">
-<div class="aspect-square bg-surface-container-low mb-8 overflow-hidden rounded-lg">
-<img alt="Insights item" class="w-full h-full object-cover hover:opacity-90 transition-opacity" src="images/insight-4.jpg"/>
-</div>
-<span class="text-xs uppercase tracking-widest text-on-surface-variant mb-3">Strategy</span>
-<h4 class="text-2xl font-headline leading-snug text-on-surface mb-4">Translating Operational Pain Into a <i>Development</i> Roadmap</h4>
-<p class="text-on-surface-variant text-sm font-body leading-relaxed flex-grow">How to turn impact analyses into a prioritized infrastructure change matrix that Product and Platform teams will actually execute on.</p>
-</article>
-</div>
-</section>
-<!-- Signature Quote -->
-<section class="max-w-4xl mx-auto px-8 py-12 text-center reveal">
-<blockquote class="text-3xl md:text-4xl font-headline italic text-secondary leading-relaxed">
-                "The best process documentation is the one nobody needs to read — because the system itself makes the right path obvious."
-            </blockquote>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-[#f6f3ee] dark:bg-stone-900 w-full py-12 px-8">
-<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-6">
-<div class="font-serif italic text-lg text-[#805522] notranslate" translate="no">Asaf Peled</div>
-<div class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight text-center md:text-left">
-                © 2026 Asaf Peled
-            </div>
-<div class="flex gap-8">
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-tight hover:text-[#805522] underline decoration-[#c9955c]/30 underline-offset-4 transition-all" href="mailto:hello@asafpeled.com">Email</a>
-</div>
-</div>
-</footer>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-});
-</script>
-</body></html>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: var(--cream); color: var(--charcoal); line-height: 1.75; font-size: 17px; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.3s; letter-spacing: 0.03em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+    .nav-cta { background: var(--navy) !important; color: var(--cream) !important; padding: 10px 24px !important; border-radius: 6px; }
+    .mobile-toggle { display: none; cursor: pointer; font-size: 1.6rem; color: var(--navy); }
+
+    .page-hero { padding: 140px 48px 60px; }
+    .page-hero-inner { max-width: 720px; margin: 0 auto; }
+    .page-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 20px; }
+    .page-hero h1 { font-family: var(--display); font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 32px; }
+    .page-hero h1 em { font-style: italic; color: var(--gold-muted); }
+    .page-hero-lead { font-family: var(--display); font-size: 1.3rem; font-style: italic; color: var(--charcoal); line-height: 1.5; }
+
+    section { padding: 60px 48px; }
+    .inner { max-width: 900px; margin: 0 auto; }
+
+    /* Featured essay */
+    .featured {
+      background: var(--navy); color: var(--cream);
+      padding: 72px 56px; border-radius: 14px; margin-bottom: 56px;
+    }
+    .featured-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 24px; }
+    .featured h2 { font-family: var(--display); font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 400; line-height: 1.25; margin-bottom: 28px; }
+    .featured h2 em { font-style: italic; color: var(--gold-light); }
+    .featured-excerpt { font-size: 1.05rem; line-height: 1.85; color: rgba(250,247,242,0.85); margin-bottom: 32px; }
+    .featured-meta { display: flex; align-items: center; gap: 16px; font-size: 0.85rem; color: var(--gold-light); }
+    .featured-meta::before { content: ''; width: 30px; height: 1px; background: var(--gold-light); }
+
+    /* Essay list */
+    .essays { display: flex; flex-direction: column; gap: 0; }
+    .essay {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 32px;
+      align-items: start;
+    }
+    .essay:last-child { border-bottom: 1px solid var(--border); }
+    .essay-date {
+      font-family: var(--body); font-size: 0.82rem; color: var(--gray-light);
+      letter-spacing: 0.08em; text-transform: uppercase; padding-top: 6px;
+    }
+    .essay-content h3 {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 500;
+      color: var(--navy); line-height: 1.3; margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .essay-content h3 em { font-style: italic; color: var(--gold-muted); }
+    .essay-content p { font-size: 1rem; color: var(--charcoal); line-height: 1.8; }
+    .essay-status {
+      font-size: 0.8rem; color: var(--gray-light); display: flex; align-items: center; gap: 6px;
+      padding-top: 10px; white-space: nowrap;
+    }
+    .essay-status .material-icons-outlined { font-size: 16px; }
+    .essay-status.published { color: var(--gold-muted); }
+
+    /* Closing note */
+    .closing {
+      background: var(--warm-white); padding: 100px 48px; text-align: center;
+    }
+    .closing-inner { max-width: 620px; margin: 0 auto; }
+    .closing-inner .quote {
+      font-family: var(--display); font-size: 1.6rem; font-style: italic;
+      color: var(--navy); line-height: 1.5; margin-bottom: 24px;
+    }
+    .closing-inner .quote em { color: var(--gold-muted); }
+    .closing-inner p { font-size: 1rem; color: var(--gray); line-height: 1.8; }
+
+    footer { padding: 48px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: var(--display); font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    .footer-links a { font-size: 0.88rem; color: var(--gray); text-decoration: none; }
+    footer small { font-size: 0.8rem; color: var(--gray-light); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; } .nav-links { display: none; } .mobile-toggle { display: block; }
+      section, .page-hero, .closing { padding-left: 24px; padding-right: 24px; }
+      .featured { padding: 40px 28px; }
+      .essay { grid-template-columns: 1fr; gap: 12px; }
+      .essay-date, .essay-status { padding: 0; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Asaf Peled</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="Capabilities.html">The Work</a>
+      <a href="Insights.html" class="active">Writing</a>
+      <a href="Work-With-Me.html">Work Together</a>
+      <a href="Connect.html" class="nav-cta">Connect</a>
+    </div>
+    <span class="material-icons-outlined mobile-toggle">menu</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-label">Writing</div>
+      <h1>Notes from <em>the operational edge</em> of the AI era.</h1>
+      <p class="page-hero-lead">Things I'm thinking about. Things I wish more people were thinking about. Written for the people building the systems everyone else will eventually depend on.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section>
+    <div class="inner">
+      <article class="featured fade-in">
+        <div class="featured-label">Featured · Published on LinkedIn</div>
+        <h2>The EU AI Act deadline is 4 months away. Here's the thing nobody in AI governance is saying: <em>we've already solved this problem.</em></h2>
+        <p class="featured-excerpt">Risk classification? That's customer risk tiering. Documentation requirements? That's regulatory audit readiness. Human oversight of automated decisions? That's the daily tension between automation and manual review in KYC. The AI governance conversation is dominated by technologists and lawyers. What's missing is the operational layer — the people who know how to take regulation and turn it into working processes at scale. That's not a new discipline.</p>
+        <div class="featured-meta">April 2026</div>
+      </article>
+
+      <!-- ESSAY LIST -->
+      <div class="essays">
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>The open letter I want to send to <em>my CEO</em></h3>
+            <p>A meditation on what happens when the platform organization rushes toward AI without the invisible processes that turn activity into profit. Written as a letter — because sometimes the most honest thing you can do is put it in writing.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>Five things KYC taught me that <em>apply directly to AI</em></h3>
+            <p>Risk-based tiering. Policy-to-process translation. Human override by design. Documentation as the product itself. A single backbone for multi-jurisdiction compliance. The decade-old playbook that the AI industry is about to rediscover the hard way.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>What I want the Minister of Finance to <em>actually do</em></h3>
+            <p>Why Israel is sleepwalking through the AI regulation moment — and what a serious national strategy would look like. Not more innovation grants. A regulatory posture that tells Israeli companies where the cliff is before they drive off it.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>Your AI is quietly failing. <em>You don't know yet.</em></h3>
+            <p>On model drift, silent failures, and the lag between when an AI system breaks and when a human notices. A practical argument for the monitoring infrastructure nobody wants to build but everyone will wish they had.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>The <em>amateur problem</em></h3>
+            <p>Everyone racing into AI is brilliant and ambitious. Most are also — operationally — behaving like amateurs. How the discipline gets abandoned, why it happens to smart people, and what it will cost.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+        <article class="essay">
+          <div class="essay-date">Coming soon</div>
+          <div class="essay-content">
+            <h3>Governance that <em>bends without breaking</em></h3>
+            <p>The worst governance systems are built for the company you were when you hired the consultant. The best ones flex as you grow, pivot when you pivot, and don't need to be rebuilt every time the strategy shifts. A note on designing AI governance for organizations that plan to keep changing.</p>
+          </div>
+          <div class="essay-status"><span class="material-icons-outlined">edit</span> In draft</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-inner fade-in">
+      <p class="quote">"The best process documentation is the one nobody needs to read — <em>because the system itself makes the right path obvious.</em>"</p>
+      <p>Most of what I write starts as an argument I'm having with someone in my head. If you want to argue with me back, I'd love that.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Asaf Peled</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+      <a href="mailto:asaf@getclarity.studio">Email</a>
+    </div>
+    <small>&copy; 2026 Asaf Peled</small>
+  </footer>
+
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const open = navLinks.style.display === 'flex';
+        navLinks.style.display = open ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '72px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(250,247,242,0.98)';
+        navLinks.style.padding = '16px 24px 24px';
+        navLinks.style.borderBottom = '1px solid #E8E2D8';
+        navLinks.style.gap = '16px';
+        toggle.textContent = open ? 'menu' : 'close';
+      });
+    }
+
+    // Scroll-triggered fade-ins
+    const fadeEls = document.querySelectorAll('.fade-in');
+    if (fadeEls.length) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(el => obs.observe(el));
+    }
+  </script>
+</body>
+</html>

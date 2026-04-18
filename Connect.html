@@ -1,432 +1,216 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect — Asaf Peled</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2; --warm-white: #FFFDF9; --gold: #C9A84C; --gold-light: #E8D5A0;
+      --gold-muted: #B89B3E; --navy: #1B2A4A; --navy-light: #2B3F6B; --charcoal: #2C2C2C;
+      --gray: #6B6B6B; --gray-light: #A0A0A0; --border: #E8E2D8;
+      --display: 'Cormorant Garamond', Georgia, serif; --body: 'DM Sans', -apple-system, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: var(--cream); color: var(--charcoal); line-height: 1.75; font-size: 17px; }
 
-<html class="light scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Connect — Asaf Peled</title>
-<meta name="description" content="Get in touch with Asaf Peled. Product operations advisory, process design, and organizational strategy."/>
-<meta property="og:title" content="Connect — Asaf Peled"/>
-<meta property="og:description" content="Get in touch. Product operations advisory, process design, and organizational strategy."/>
-<meta property="og:image" content="https://www.asafpeled.com/images/swing.jpg"/>
-<meta property="og:url" content="https://www.asafpeled.com/Connect.html"/>
-<meta property="og:type" content="website"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-primary-fixed-variant": "#653e0c",
-              "on-tertiary-fixed-variant": "#494643",
-              "secondary-fixed-dim": "#a4d1b0",
-              "primary-fixed-dim": "#f4bc7f",
-              "on-surface-variant": "#50453a",
-              "on-surface": "#1c1c19",
-              "outline-variant": "#d4c4b5",
-              "tertiary-container": "#a39e99",
-              "surface-tint": "#805522",
-              "on-error": "#ffffff",
-              "surface-variant": "#e5e2dd",
-              "surface-container-highest": "#e5e2dd",
-              "secondary-container": "#bfeecb",
-              "surface-container": "#f0ede9",
-              "inverse-on-surface": "#f3f0eb",
-              "on-primary-container": "#502e00",
-              "on-secondary-fixed-variant": "#264f36",
-              "secondary": "#3e674c",
-              "surface-container-low": "#f6f3ee",
-              "surface": "#fcf9f4",
-              "surface-dim": "#dcdad5",
-              "on-tertiary": "#ffffff",
-              "inverse-surface": "#31302d",
-              "secondary-fixed": "#bfeecb",
-              "outline": "#827568",
-              "on-primary-fixed": "#2c1700",
-              "tertiary-fixed-dim": "#cbc5c0",
-              "on-secondary": "#ffffff",
-              "on-secondary-container": "#446d52",
-              "on-error-container": "#93000a",
-              "on-secondary-fixed": "#00210f",
-              "inverse-primary": "#f4bc7f",
-              "on-background": "#1c1c19",
-              "tertiary": "#615e5a",
-              "on-primary": "#ffffff",
-              "on-tertiary-container": "#383632",
-              "on-tertiary-fixed": "#1d1b18",
-              "tertiary-fixed": "#e7e1dc",
-              "background": "#fcf9f4",
-              "primary-container": "#c9955c",
-              "error-container": "#ffdad6",
-              "surface-container-lowest": "#ffffff",
-              "surface-container-high": "#ebe8e3",
-              "error": "#ba1a1a",
-              "surface-bright": "#fcf9f4",
-              "primary-fixed": "#ffdcbb",
-              "primary": "#805522"
-            },
-            fontFamily: {
-              "headline": ["Noto Serif"],
-              "body": ["Plus Jakarta Sans"],
-              "label": ["Plus Jakarta Sans"]
-            },
-            borderRadius: {"DEFAULT": "0.375rem", "lg": "0.625rem", "xl": "0.875rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
-<style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .serif { font-family: 'Noto Serif', serif; }
-        .noise-overlay {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04;
-            pointer-events: none;
-        }
-        .signature-gradient {
-            background: linear-gradient(135deg, #805522 0%, #c9955c 100%);
-        }
-        /* Scroll Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        /* Google Translate */
-        [dir="rtl"] { text-align: right; }
-        [dir="rtl"] #translate-menu { right: auto; left: 0; }
-        [dir="rtl"] .material-symbols-outlined { transform: scaleX(-1); }
-        iframe[id$=".container"].skiptranslate,
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element select {
-            background-color: transparent;
-            border: none;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #50453a;
-            cursor: pointer;
-            padding: 0 4px;
-        }
-        #google_translate_element select:focus { outline: none; }
-    </style>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.3s; letter-spacing: 0.03em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+    .nav-cta { background: var(--navy) !important; color: var(--cream) !important; padding: 10px 24px !important; border-radius: 6px; }
+    .mobile-toggle { display: none; cursor: pointer; font-size: 1.6rem; color: var(--navy); }
+
+    .page { padding: 140px 48px 80px; min-height: 100vh; }
+    .page-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
+
+    .left h1 { font-family: var(--display); font-size: clamp(2.4rem, 4.5vw, 3.4rem); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 28px; }
+    .left h1 em { font-style: italic; color: var(--gold-muted); }
+    .left .lead { font-family: var(--display); font-size: 1.35rem; font-style: italic; color: var(--charcoal); line-height: 1.5; margin-bottom: 40px; }
+    .left p { font-size: 1.05rem; color: var(--charcoal); line-height: 1.85; margin-bottom: 20px; }
+
+    .contact-block { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .contact-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 20px; }
+    .contact-method { margin-bottom: 16px; }
+    .contact-method .type { font-size: 0.82rem; color: var(--gray-light); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; display: block; margin-bottom: 4px; }
+    .contact-method a { font-family: var(--display); font-size: 1.3rem; color: var(--navy); text-decoration: none; font-weight: 500; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    .contact-method a:hover { border-color: var(--gold); }
+
+    .pull-quote {
+      margin-top: 48px; padding: 28px 32px; background: var(--warm-white);
+      border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0;
+    }
+    .pull-quote p { font-family: var(--display); font-size: 1.2rem; font-style: italic; color: var(--navy); line-height: 1.5; margin: 0; }
+    .pull-quote p em { color: var(--gold-muted); }
+
+    /* FORM */
+    .form-wrap {
+      background: var(--warm-white); border: 1px solid var(--border); border-radius: 14px;
+      padding: 48px 40px;
+    }
+    .form-wrap h3 { font-family: var(--display); font-size: 1.6rem; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+    .form-wrap .note { font-size: 0.95rem; color: var(--gray); margin-bottom: 32px; line-height: 1.7; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
+      font-family: var(--body); font-size: 0.98rem; color: var(--charcoal); background: var(--cream);
+      transition: border-color 0.3s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+    .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+    .form-submit {
+      width: 100%; padding: 16px; background: var(--navy); color: var(--cream); border: none;
+      border-radius: 8px; font-family: var(--body); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--navy-light); }
+
+    footer { padding: 48px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: var(--display); font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    .footer-links a { font-size: 0.88rem; color: var(--gray); text-decoration: none; }
+    footer small { font-size: 0.8rem; color: var(--gray-light); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; } .nav-links { display: none; } .mobile-toggle { display: block; }
+      .page { padding: 120px 24px 60px; }
+      .page-inner { grid-template-columns: 1fr; gap: 56px; }
+      .form-wrap { padding: 32px 24px; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
-<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
-<div class="noise-overlay fixed inset-0 z-[100]"></div>
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#fcf9f4]/80 dark:bg-stone-950/80 backdrop-blur-xl">
-<div class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto">
-<div class="text-xl font-serif font-bold text-[#805522] dark:text-[#c9955c] notranslate" translate="no">Asaf Peled</div>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-[10px] hover:text-primary transition-colors" href="/index.html">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-xs hover:text-primary transition-colors duration-300" href="Work With Me.html">Work With Me</a>
-</div>
-<div class="hidden md:flex items-center gap-6 border-l border-outline-variant/30 pl-6">
-<div class="relative" id="translate-wrapper">
-<button type="button" class="flex items-center gap-1 hover:opacity-70 transition-opacity" id="translate-btn">
-<span class="material-symbols-outlined text-[16px] text-stone-500">language</span>
-</button>
-<div id="gt-hidden" style="position:absolute;top:-9999px;left:-9999px;"></div>
-<div class="hidden absolute right-0 top-full mt-1 bg-[#fcf9f4] border border-outline-variant/30 shadow-lg z-[200] py-1 min-w-[110px]" id="translate-menu">
-<button type="button" onclick="doTranslate('en')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">English</button>
-<button type="button" onclick="doTranslate('he')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">עברית</button>
-<button type="button" onclick="doTranslate('ar')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">عربي</button>
-<button type="button" onclick="doTranslate('es')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Español</button>
-<button type="button" onclick="doTranslate('fr')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Français</button>
-<button type="button" onclick="doTranslate('de')" class="block w-full text-left px-4 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors font-sans">Deutsch</button>
-</div>
-</div>
-<a class="text-[#805522] dark:text-[#c9955c] font-bold border-b-2 border-[#805522] pb-1 font-serif italic tracking-tight hover:text-[#c9955c] transition-colors duration-300" href="#">Connect</a>
-</div>
-</div>
-<!-- Mobile Menu Icon -->
-<div class="md:hidden flex items-center">
-<button id="mobile-open" type="button" aria-label="Open menu"><span class="material-symbols-outlined text-primary notranslate" translate="no">menu</span></button>
-</div>
-</div>
-</nav>
-<!-- Mobile Menu Panel -->
-<div id="mobile-menu" class="hidden fixed inset-0 z-[200] bg-[#fcf9f4]">
-<div class="flex flex-col h-full">
-<div class="flex justify-between items-center px-8 py-5 border-b border-outline-variant/20">
-<div class="text-xl font-headline font-bold text-primary notranslate" translate="no">Asaf Peled</div>
-<button id="mobile-close" type="button" class="text-primary"><span class="material-symbols-outlined notranslate" translate="no">close</span></button>
-</div>
-<div class="flex flex-col flex-grow justify-center items-center gap-8 px-8 text-center">
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/index.html">Home</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="/Capabilities.html">Capabilities</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Insights.html">Insights</a>
-<a class="text-on-surface-variant font-sans uppercase tracking-widest text-sm hover:text-primary transition-colors" href="Work With Me.html">Work With Me</a>
-<a class="bg-primary text-on-primary px-8 py-3 font-label text-[10px] uppercase tracking-widest mt-2 hover:bg-on-primary-container transition-colors" href="/Connect.html">Connect</a>
-<div class="mt-6 pt-6 border-t border-outline-variant/20 w-full">
-<div class="flex flex-wrap justify-center gap-2">
-<button onclick="doTranslate('en')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">English</button>
-<button onclick="doTranslate('he')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">עברית</button>
-<button onclick="doTranslate('ar')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">عربي</button>
-<button onclick="doTranslate('es')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Español</button>
-<button onclick="doTranslate('fr')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Français</button>
-<button onclick="doTranslate('de')" class="px-3 py-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary font-sans">Deutsch</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script type="text/javascript">
-(function() {
-  var m = document.cookie.match(/googtrans=\/en\/(iw|ar)/);
-  if (m) document.documentElement.setAttribute('dir', 'rtl');
-  else document.documentElement.setAttribute('dir', 'ltr');
-})();
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,iw,ar,es,fr,de'}, 'gt-hidden');
-}
-function doTranslate(lang) {
-  document.getElementById('translate-menu').classList.add('hidden');
-  var rtl = ['he', 'ar'];
-  if (lang === 'en') {
-    document.documentElement.setAttribute('dir', 'ltr');
-    var frames = document.querySelectorAll('iframe.skiptranslate');
-    for (var i = 0; i < frames.length; i++) {
-      try {
-        var d = frames[i].contentDocument || frames[i].contentWindow.document;
-        var btn = d.querySelector('[id$=".restore"]');
-        if (btn) { btn.click(); return; }
-      } catch(e) {}
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Asaf Peled</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="Capabilities.html">The Work</a>
+      <a href="Insights.html">Writing</a>
+      <a href="Work-With-Me.html">Work Together</a>
+      <a href="Connect.html" class="nav-cta active">Connect</a>
+    </div>
+    <span class="material-icons-outlined mobile-toggle">menu</span>
+  </nav>
+
+  <div class="page">
+    <div class="page-inner">
+
+      <div class="left fade-in">
+        <h1>Tell me what's <em>actually</em> going on.</h1>
+        <p class="lead">The best conversations I have start with someone saying what they haven't said out loud yet.</p>
+
+        <p>Maybe your company is sprinting toward AI and something feels off. Maybe you're the only person in the room who thinks the governance question matters, and you're tired of being that person alone. Maybe you read something here that made you think "finally, someone is saying it" — or "this person is wrong about everything and I want to tell them why."</p>
+
+        <p>All of those are good reasons to get in touch. I read everything, I respond to everything, and I don't run your message through a sales funnel.</p>
+
+        <div class="pull-quote">
+          <p>"The best way to understand an operational challenge is to <em>hear it directly from the person living it.</em>"</p>
+        </div>
+
+        <div class="contact-block">
+          <div class="contact-label">Find me directly</div>
+
+          <div class="contact-method">
+            <span class="type">Email</span>
+            <a href="mailto:asaf@getclarity.studio">asaf@getclarity.studio</a>
+          </div>
+
+          <div class="contact-method">
+            <span class="type">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/asafpel/" target="_blank">linkedin.com/in/asafpel</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap fade-in">
+        <h3>Or use the form.</h3>
+        <p class="note">Same inbox, less typing into "To:" fields. I'll get back to you within a couple of days.</p>
+
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label>What brings you here?</label>
+          <select>
+            <option value="">Pick whatever fits</option>
+            <option>We have an AI governance problem and I don't know where to start</option>
+            <option>We have a compliance operations challenge</option>
+            <option>EU AI Act — we're behind, I know it, I need help</option>
+            <option>I want to argue with something you wrote</option>
+            <option>Speaking, workshop, or collaboration</option>
+            <option>Just want to connect</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>What's on your mind?</label>
+          <textarea placeholder="As much or as little as you want. I read everything."></textarea>
+        </div>
+
+        <button class="form-submit">Send it <span class="material-icons-outlined" style="font-size:18px">arrow_forward</span></button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Asaf Peled</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
+      <a href="mailto:asaf@getclarity.studio">Email</a>
+    </div>
+    <small>&copy; 2026 Asaf Peled</small>
+  </footer>
+
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const open = navLinks.style.display === 'flex';
+        navLinks.style.display = open ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '72px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(250,247,242,0.98)';
+        navLinks.style.padding = '16px 24px 24px';
+        navLinks.style.borderBottom = '1px solid #E8E2D8';
+        navLinks.style.gap = '16px';
+        toggle.textContent = open ? 'menu' : 'close';
+      });
     }
-    location.reload();
-    return;
-  }
-  document.documentElement.setAttribute('dir', rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr');
-  var gtLang = lang === 'he' ? 'iw' : lang;
-  function apply() {
-    var select = document.querySelector('.goog-te-combo');
-    if (!select) return false;
-    select.value = gtLang;
-    var evt = document.createEvent('HTMLEvents');
-    evt.initEvent('change', false, true);
-    select.dispatchEvent(evt);
-    return true;
-  }
-  if (!apply()) {
-    var tries = 0;
-    var t = setInterval(function() { if (apply() || ++tries >= 15) clearInterval(t); }, 200);
-  }
-}
-document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('translate-btn');
-  var menu = document.getElementById('translate-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', function() {
-      menu.classList.add('hidden');
-    });
-  }
-  var mobileOpen = document.getElementById('mobile-open');
-  var mobileClose = document.getElementById('mobile-close');
-  var mobileMenu = document.getElementById('mobile-menu');
-  if (mobileOpen && mobileMenu) {
-    mobileOpen.addEventListener('click', function() {
-      mobileMenu.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    });
-    mobileClose.addEventListener('click', function() {
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = '';
-    });
-  }
-  document.querySelectorAll('.material-symbols-outlined').forEach(function(el) {
-    el.setAttribute('translate', 'no');
-    el.classList.add('notranslate');
-  });
-});
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-<main class="flex-grow pt-40 pb-24 px-8">
-<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-<!-- Left Side: Editorial Intent -->
-<div class="space-y-12">
-<header class="space-y-8">
-<h1 class="serif text-6xl md:text-7xl text-primary leading-[1.1] tracking-tight">
-                        Let’s start a <br/><em class="italic">conversation.</em>
-</h1>
-<p class="text-on-surface-variant text-xl leading-relaxed max-w-lg">
-                        Whether you're looking to evolve your product operations or seeking a partner in leadership growth, I’m here to listen.
-                    </p>
-</header>
-<div class="space-y-10">
-<div class="flex items-start gap-6">
-<span class="material-symbols-outlined text-[#3e674c] mt-1" style="font-variation-settings: 'FILL' 1;">mail</span>
-<div class="space-y-1">
-<p class="font-bold text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Direct Outreach</p>
-<p class="serif italic text-2xl text-on-surface"><a href="mailto:hello@asafpeled.com">hello@asafpeled.com</a></p>
-</div>
-</div>
-<div class="flex items-start gap-6">
-<span class="material-symbols-outlined text-[#3e674c] mt-1" style="font-variation-settings: 'FILL' 1;">person</span>
-<div class="space-y-1">
-<p class="font-bold text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">LinkedIn Profile</p>
-<p class="serif italic text-2xl text-on-surface leading-snug"><a href="https://www.linkedin.com/in/asafpel/">https://www.linkedin.com/in/asafpel/</a></p>
-</div>
-</div>
-</div>
-<div class="mt-8 rounded-xl overflow-hidden shadow-lg max-w-md">
-<img alt="Asaf Peled" class="w-full h-56 object-cover object-[center_25%] brightness-[1.02] saturate-[1.05]" src="images/swing.jpg"/>
-</div>
-<div class="pt-10 border-l border-secondary-container pl-10 max-w-md">
-<blockquote class="serif text-3xl text-secondary italic leading-relaxed">
-                        "The best way to understand an operational challenge is to hear it directly from the person living it."
-                    </blockquote>
-</div>
-</div>
-<!-- Right Side: Interaction Form -->
-<div class="bg-surface-container-low p-10 md:p-16 rounded-xl relative overflow-hidden border border-outline-variant/15 shadow-sm">
-<form id="contact-form" class="space-y-12 relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="space-y-3">
-            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="name">Your Name</label>
-            <input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="name" name="user_name" placeholder="Your name" type="text" required />
-        </div>
-        <div class="space-y-3">
-            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="email">Email Address</label>
-            <input class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 text-sm" id="email" name="user_email" placeholder="you@company.com" type="email" required />
-        </div>
-    </div>
-    
-    <div class="space-y-3">
-        <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="intent">Nature of Inquiry</label>
-        <div class="relative">
-            <select class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 appearance-none text-on-surface-variant text-sm" id="intent" name="inquiry_type">
-                <option value="ops">Product Operations Advisory</option>
-                <option value="leadership">Leadership Mentorship</option>
-                <option value="speaking">Speaking & Workshops</option>
-                <option value="other">General Curiosity</option>
-            </select>
-            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg">expand_more</span>
-        </div>
-    </div>
-    
-    <div class="space-y-3">
-        <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant" for="message">What's on your mind?</label>
-        <textarea class="w-full bg-surface-container px-4 py-4 border-none focus:ring-1 focus:ring-primary/20 transition-all duration-300 placeholder:text-outline-variant/60 resize-none text-sm" id="message" name="message" placeholder="I'm interested in discussing..." rows="6" required></textarea>
-    </div>
-    
-    <div class="pt-4">
-        <button id="submit-button" class="signature-gradient text-on-primary px-10 py-5 rounded-lg font-bold text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 group" type="submit">
-            <span id="button-text">Send Message</span>
-            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </button>
-    </div>
-</form>
-</div>
-</div>
-</main>
-<!-- Content-rich secondary section -->
-<section class="bg-surface-container-low py-32 px-8 reveal">
-<div class="max-w-7xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-<div class="space-y-6">
-<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
-<h3 class="serif text-3xl text-on-surface">Process at Scale</h3>
-<p class="text-on-surface-variant leading-relaxed text-base">Standardizing workflows and building KPI frameworks that bring clarity to complex operations.</p>
-</div>
-<div class="space-y-6">
-<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
-<h3 class="serif text-3xl text-on-surface">People First</h3>
-<p class="text-on-surface-variant leading-relaxed text-base">Every system I build starts with the people who will use it. Good operations should make work easier, not harder.</p>
-</div>
-<div class="space-y-6">
-<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<h3 class="serif text-3xl text-on-surface">Strategic Clarity</h3>
-<p class="text-on-surface-variant leading-relaxed text-base">Translating operational pain into prioritized action — so development teams build what actually matters.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="w-full py-16 px-8 bg-[#f6f3ee] dark:bg-stone-900 border-t border-stone-200/50">
-<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-10">
-<div class="font-serif italic text-2xl text-[#805522] notranslate" translate="no">Asaf Peled</div>
-<div class="flex gap-10">
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="https://www.linkedin.com/in/asafpel/" target="_blank">LinkedIn</a>
-<a class="text-stone-500 dark:text-stone-400 font-sans text-[11px] font-bold uppercase tracking-widest hover:text-[#805522] transition-colors" href="mailto:hello@asafpeled.com">Email</a>
-</div>
-<p class="text-stone-400 dark:text-stone-500 font-sans text-[11px] tracking-tight">© 2026 Asaf Peled</p>
-</div>
-</footer>
-<script type="text/javascript">
-    (function() {
-        // REPLACE "YOUR_PUBLIC_KEY" with your actual Public Key from EmailJS
-        emailjs.init("ddxNyTSb25ta-RR6h");
-    })();
 
-    window.onload = function() {
-        const form = document.getElementById('contact-form');
-        const btn = document.getElementById('submit-button');
-        const btnText = document.getElementById('button-text');
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Visual feedback
-            btnText.innerText = 'Sending...';
-            btn.style.opacity = '0.7';
-            btn.style.pointerEvents = 'none';
-
-            // REPLACE these strings with your actual Service and Template IDs
-            const serviceID = 'service_e3zyesc';
-            const templateID = 'template_6kmiypo';
-
-            emailjs.sendForm(serviceID, templateID, this)
-                .then(() => {
-                    btnText.innerText = 'Message Sent!';
-                    btn.style.backgroundColor = '#10b981'; // Success green
-                    form.reset();
-                    
-                    // Reset button after 5 seconds
-                    setTimeout(() => {
-                        btnText.innerText = 'Send Message';
-                        btn.style.opacity = '1';
-                        btn.style.pointerEvents = 'auto';
-                        btn.style.backgroundColor = ''; 
-                    }, 5000);
-                }, (err) => {
-                    btnText.innerText = 'Error! Try Again';
-                    btn.style.opacity = '1';
-                    btn.style.pointerEvents = 'auto';
-                    alert(JSON.stringify(err));
-                });
-        });
+    // Scroll-triggered fade-ins
+    const fadeEls = document.querySelectorAll('.fade-in');
+    if (fadeEls.length) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(el => obs.observe(el));
     }
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-});
-</script>
-</body></html>
+  </script>
+</body>
+</html>
