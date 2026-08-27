@@ -68,6 +68,13 @@ class JobPosting:
     location_label: str | None = None
     raw: dict[str, Any] = field(default_factory=dict, repr=False)
 
+    # Populated by the store, never by a source. A posting straight out of an
+    # adapter has is_new=None, which means "nobody has asked the database yet"
+    # -- distinct from False, which means "the database says we've seen it".
+    is_new: bool | None = None
+    first_seen: str | None = None
+    times_seen: int | None = None
+
     def fingerprint(self) -> str:
         """Stable identity for cross-run and cross-board deduplication.
 

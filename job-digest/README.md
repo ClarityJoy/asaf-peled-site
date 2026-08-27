@@ -5,9 +5,9 @@ one machine, writes a markdown file, uploads nothing anywhere.
 
 ## Status
 
-Phase 1 complete: job sources working end to end, printed to stdout.
-Phases 2-6 (SQLite dedup across runs, scoring, post search, digest rendering,
-cron) are not built yet.
+Phases 1-2 complete: job sources working end to end, with a SQLite store that
+remembers what it has already shown you. Phases 3-6 (scoring, post search,
+digest rendering, cron) are not built yet.
 
 ## Install
 
@@ -25,10 +25,31 @@ python3 -m venv .venv
 .venv/bin/jobdigest                          # all enabled sources
 .venv/bin/jobdigest --source indeed          # one source
 .venv/bin/jobdigest --max-queries 2 --no-pacing   # quick local look
+.venv/bin/jobdigest --no-store               # ignore history, everything is new
 ```
 
 `--no-pacing` removes the delays between requests. Use it while editing config,
 never from cron.
+
+## What it remembers
+
+State lives in `state/jobs.db` (SQLite, gitignored). JobSpy has no memory
+between runs, so this is the part that turns a repeated search into a digest:
+each run records what it saw, and a posting is reported as new exactly once.
+
+| Table | Holds |
+| --- | --- |
+| `runs` | one row per run, with counts and any abort reason |
+| `source_runs` | per-source status per run, so a source failing for days is visible as a streak |
+| `postings` | one row per job, keyed on the dedup fingerprint, with `first_seen` / `last_seen` / `times_seen` |
+| `sightings` | one row per (run, job, board) -- keeps the fact that a job appeared on both Indeed and LinkedIn |
+
+`first_seen` is never overwritten, and an update only fills fields the
+incoming record actually carries, so a sparse row from one board cannot blank
+out a description another board already gave us.
+
+Delete `state/jobs.db` to start over; the next run will report everything as
+new again.
 
 ## Configuration
 
