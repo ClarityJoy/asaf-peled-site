@@ -10,8 +10,9 @@ from pathlib import Path
 
 from .config import Config, ConfigError
 from .digest import DigestRenderer, write_digest
-from .models import HiringPost, JobPosting, SourceStatus
-from .runner import run_sources
+from .fixtures import export_json, load_from_store, load_json
+from .models import HiringPost, JobPosting, SourceResult, SourceStatus
+from .runner import RunReport, run_sources
 from .scoring import BUCKET_STRETCH, BUCKET_STRONG, BUCKET_WORTH, Score, Scorer
 from .store import Store
 
@@ -48,6 +49,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-pacing", action="store_true",
         help="skip inter-request delays. Local testing only - never in cron.",
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="score and render from cached data. Touches no live service, "
+             "writes nothing to the store. For tuning scoring rules.",
+    )
+    parser.add_argument(
+        "--fixture", type=Path, default=None,
+        help="JSON fixture to replay with --dry-run (default: last run in the store)",
+    )
+    parser.add_argument(
+        "--export-fixture", type=Path, default=None,
+        help="write the last run to a JSON fixture and exit",
+    )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="run even if a run already completed today (one run per day by default)",
     )
     parser.add_argument(
         "--digest-dir", type=Path, default=DEFAULT_DIGEST_DIR,
@@ -149,6 +167,56 @@ def _print_filtered(pairs: list[tuple[JobPosting, Score]]) -> None:
         print(f"      {score.filter_reason}")
 
 
+def _render_dry_run(args, config, postings: list[JobPosting],
+                    posts: list[HiringPost], run_id: int | None, origin: str) -> int:
+    """Re-score cached data. No network, no database writes, no side effects.
+
+    The digest goes to a -dryrun file so experimenting with scoring rules
+    cannot overwrite the digest of a real run.
+    """
+    scorer = Scorer(config.profile)
+    scored = [(p, scorer.score(p)) for p in postings]
+    kept = [pair for pair in scored if not pair[1].filtered]
+    dropped = [pair for pair in scored if pair[1].filtered]
+
+    print("=" * 78)
+    print("DRY RUN - cached data, nothing live was contacted")
+    print("=" * 78)
+    print(f"  replaying: {origin}")
+    print(f"  {len(postings)} postings, {len(posts)} posts")
+    print(f"  scored: {len(kept)} kept, {len(dropped)} filtered out")
+    print("  the store was not written to\n")
+
+    by_bucket: dict[str, list[tuple[JobPosting, Score]]] = {
+        BUCKET_STRONG: [], BUCKET_WORTH: [], BUCKET_STRETCH: []
+    }
+    for pair in kept:
+        by_bucket[pair[1].bucket].append(pair)
+
+    _print_group("STRONG MATCHES", by_bucket[BUCKET_STRONG], args.limit)
+    _print_group("WORTH A LOOK", by_bucket[BUCKET_WORTH], args.limit)
+    _print_stretch(by_bucket[BUCKET_STRETCH], args.limit)
+    _print_filtered(dropped)
+    _print_posts(posts, [p for p in posts if p.is_new], args.limit)
+
+    if not args.no_digest:
+        report = RunReport(results=[SourceResult(
+            source="fixture", status=SourceStatus.OK, items=list(postings),
+            detail=f"dry run replaying {origin}")])
+        markdown = DigestRenderer(
+            run_id=run_id, generated_at=datetime.now(), report=report,
+            scored=scored, posts=posts,
+            new_post_keys={p.fingerprint() for p in posts if p.is_new},
+            profile=config.profile, store_enabled=True,
+        ).render()
+        directory = Path(args.digest_dir)
+        directory.mkdir(parents=True, exist_ok=True)
+        path = directory / f"{datetime.now():%Y-%m-%d}-dryrun.md"
+        path.write_text(markdown, encoding="utf-8")
+        print(f"\n  dry-run digest written: {path}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     logging.basicConfig(
@@ -168,6 +236,34 @@ def main(argv: list[str] | None = None) -> int:
         for source in sources:
             source.queries = source.queries[: args.max_queries]
 
+    # --- export a fixture and stop -------------------------------------
+    if args.export_fixture:
+        with Store(args.db) as store:
+            postings, posts, run_id = load_from_store(store)
+        if not postings and not posts:
+            print("nothing to export: the store has no completed run yet",
+                  file=sys.stderr)
+            return 1
+        path = export_json(args.export_fixture, postings, posts, run_id)
+        print(f"exported run #{run_id}: {len(postings)} postings, "
+              f"{len(posts)} posts -> {path}")
+        return 0
+
+    # --- dry run: cached data, no network, no writes --------------------
+    if args.dry_run:
+        if args.fixture:
+            postings, posts, run_id = load_json(args.fixture)
+            origin = str(args.fixture)
+        else:
+            with Store(args.db) as store:
+                postings, posts, run_id = load_from_store(store)
+            origin = f"{args.db} (run #{run_id})" if run_id else str(args.db)
+        if not postings and not posts:
+            print("dry run has no cached data to replay. Do a real run first, "
+                  "or pass --fixture.", file=sys.stderr)
+            return 1
+        return _render_dry_run(args, config, postings, posts, run_id, origin)
+
     pacer = config.make_pacer(sleeper=(lambda _s: None) if args.no_pacing else None)
     planned = sum(len(s.queries) * len(s.locations) for s in sources if s.enabled)
 
@@ -180,6 +276,23 @@ def main(argv: list[str] | None = None) -> int:
     print()
 
     store = None if args.no_store else Store(args.db)
+
+    # One run per day is a ground rule, so it is enforced rather than left to
+    # the crontab being correct.
+    if store and not args.force:
+        today = datetime.now().date().isoformat()
+        row = store.conn.execute(
+            "SELECT id, started_at FROM runs WHERE finished_at IS NOT NULL "
+            "AND substr(started_at, 1, 10) = ? ORDER BY id DESC LIMIT 1",
+            (today,),
+        ).fetchone()
+        if row:
+            print(f"a run already completed today (run #{row['id']} at "
+                  f"{row['started_at']}). Use --force to run again, or "
+                  f"--dry-run to re-score the cached data.")
+            store.close()
+            return 0
+
     run_id = store.start_run() if store else None
 
     try:

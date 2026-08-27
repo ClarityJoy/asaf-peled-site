@@ -35,7 +35,10 @@ jobspy.scrape_jobs = fake_scrape
 sys.modules["jobdigest.sources.jobspy_source"].__dict__.setdefault("_", None)
 
 db = pathlib.Path(tempfile.mkdtemp()) / "jobs.db"
-ARGS = ["--source", "indeed", "--max-queries", "2", "--no-pacing", "--db", str(db)]
+# --force because this drives several runs in one day on purpose; the
+# once-per-day guard is exercised in test_dryrun.py instead.
+ARGS = ["--source", "indeed", "--max-queries", "2", "--no-pacing",
+        "--db", str(db), "--force", "--no-digest"]
 
 def run():
     buf = io.StringIO()

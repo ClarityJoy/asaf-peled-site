@@ -5,9 +5,14 @@ one machine, writes a markdown file, uploads nothing anywhere.
 
 ## Status
 
-Phases 1-5 complete: job sources, a SQLite store that remembers what it has
-already shown you, deterministic fit scoring, authenticated LinkedIn post
-search, and the markdown digest. Phase 6 (cron, dry-run mode) is not built yet.
+Complete. Collection, cross-run memory, scoring, post search, digest and
+scheduling are all built and tested.
+
+One thing is not verified and cannot be from here: **whether the boards
+return live Israeli rows today.** Every failure path is tested, but the
+happy path against real LinkedIn and Indeed has only ever run against
+fixtures. Your first real run is the test that matters -- start with
+`--source indeed`.
 
 ## Install
 
@@ -27,7 +32,13 @@ python3 -m venv .venv
 .venv/bin/jobdigest --max-queries 2 --no-pacing   # quick local look
 .venv/bin/jobdigest --no-store               # ignore history, everything is new
 .venv/bin/jobdigest --no-digest              # stdout only, write no file
+.venv/bin/jobdigest --dry-run                # re-score cached data, nothing live
+.venv/bin/jobdigest --force                  # run again on a day already done
 ```
+
+Only one run happens per day. A second invocation declines and points you at
+`--dry-run`; `--force` overrides it. That is a ground rule, so it is enforced
+in code rather than left to the crontab being right.
 
 Each run writes `digests/YYYY-MM-DD.md` and prints the path. That directory is
 gitignored -- it is your job search, not repository content.
@@ -86,6 +97,46 @@ applied, and the digest will say so rather than filter silently.
 
 The ordering is deliberate. What broke comes before what was found, because a
 digest that quietly omits a dead source is worse than no digest at all.
+
+## Tuning scoring without touching anything live
+
+`--dry-run` re-scores data already collected. It reads the last completed run
+from the store (or a JSON fixture), never opens a socket, and does not write
+to the database -- verified byte-for-byte in the tests.
+
+```
+.venv/bin/jobdigest --export-fixture fixtures/sample.json   # freeze a run
+.venv/bin/jobdigest --dry-run                               # replay the last run
+.venv/bin/jobdigest --dry-run --fixture fixtures/sample.json
+```
+
+Edit a weight in `config/profile.yaml`, re-run `--dry-run`, see what moved.
+The dry-run digest is written to `YYYY-MM-DD-dryrun.md` so experimenting can
+never overwrite a real digest.
+
+## Scheduling
+
+```
+./scripts/install-cron.sh        # safe to re-run; leaves other cron jobs alone
+```
+
+Installs one entry at **06:40 local time**: late enough that the previous
+day's postings have settled, early enough that the digest is waiting before
+the working day. Not on the hour, because :00 is when every other cron job on
+every machine fires.
+
+`run-daily.sh` then sleeps a **random 0-9 minutes** before doing anything, so
+the actual request lands at a different time each night. Firing at exactly
+06:40:00 daily is a pattern; 06:40 plus jitter is not.
+
+Change the time with `JOBDIGEST_HOUR=7 JOBDIGEST_MINUTE=15 ./scripts/install-cron.sh`.
+Cron uses the machine's local time -- the installer prints the current local
+time so you can check it is what you expect.
+
+The runner also takes a `flock` lock, so a hung run can never have a second
+one start alongside it. Logs go to `logs/run-YYYY-MM-DD.log` and are pruned
+after 31 days. Exit codes: `0` fine, `1` nothing usable, `3` a board blocked
+us and the run stopped.
 
 ## Scoring
 

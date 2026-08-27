@@ -3,10 +3,12 @@
 .env.*
 !.env.example
 
-# Local state
+# Local state -- your job search, not repository content
 *.db
 *.sqlite3
 digests/
+logs/
+.run.lock
 .cache/
 fixtures/live/
 
