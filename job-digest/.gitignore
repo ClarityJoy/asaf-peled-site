@@ -1,0 +1,19 @@
+# Secrets — LinkedIn session cookies live here. Never commit.
+.env
+.env.*
+!.env.example
+
+# Local state
+*.db
+*.sqlite3
+digests/
+.cache/
+fixtures/live/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/

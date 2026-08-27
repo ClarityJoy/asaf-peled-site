@@ -1,0 +1,179 @@
+# Asaf Peled — job search profile.
+# This file is meant to be edited by hand. Scoring (Phase 3) reads it directly;
+# change a weight or a keyword here and re-run with --dry-run to see the effect
+# without touching any live service.
+
+identity:
+  name: Asaf Peled
+  headline: >-
+    Senior Product Manager, fintech regulatory product.
+    Regulatory product manager with AI as an added capability layer.
+  years_experience: 12
+
+background:
+  domains:
+    - regulatory product
+    - KYC / AML
+    - financial licensing
+    - fintech
+    - payments
+    - compliance-tech
+    - regtech
+  current_work: >-
+    Delivering financial licence applications for UAE and Japan.
+  earlier_career:
+    - KYC operations
+    - governance leadership
+    - consulting
+    - knowledge management
+
+# ---------------------------------------------------------------------------
+# What a good role looks like
+# ---------------------------------------------------------------------------
+target_roles:
+  titles:
+    - Senior Product Manager
+    - Product Manager
+    - Principal Product Manager
+    - Group Product Manager
+    - Product Operations Lead
+    - Head of Product Operations
+    - Regulatory Product Manager
+    - Technology Manager
+    - Regulatory Manager
+  # Individual contributor, or leading a small team. Not large-org people management.
+  team_shape:
+    individual_contributor: true
+    small_team_lead: true          # roughly up to 5 reports
+    large_org_people_management: false
+
+industries:
+  - fintech
+  - payments
+  - banking
+  - compliance-tech
+  - regtech
+  - financial services
+
+# ---------------------------------------------------------------------------
+# Geography and commute
+# ---------------------------------------------------------------------------
+location:
+  based_in: Rishon LeZion, Israel
+  primary_markets:
+    - Tel Aviv
+    - Central District
+    - Israel
+  # Beyond this, the role needs WFH days to work at all.
+  acceptable_commute_minutes_peak: 30
+  wfh_days_required_beyond_commute: 2
+  # Fully-remote anywhere, provided they hire in Israel or engage
+  # international contractors.
+  remote_anywhere_ok: true
+  # More remote is better, but substance outweighs format.
+  remote_preference_weight: modest
+
+# ---------------------------------------------------------------------------
+# Compensation
+# ---------------------------------------------------------------------------
+compensation:
+  # PLACEHOLDER — fill this in. Until it is set, the income floor is not
+  # applied and the digest will say so explicitly rather than filter silently.
+  income_floor_monthly_ils: null
+  currency: ILS
+  period: monthly
+  # Open to a step down in level or pay for a better track, provided it
+  # clears the floor above.
+  open_to_step_down: true
+
+# ---------------------------------------------------------------------------
+# Scoring
+# ---------------------------------------------------------------------------
+# Components sum to 100. Phase 3 reports each one separately in the digest.
+scoring:
+  weights:
+    domain_fit: 45        # the thing that actually gets him past resume screen
+    seniority_fit: 20
+    role_type_fit: 20
+    location_fit: 15
+  buckets:
+    strong: 70            # >= 70
+    worth_a_look: 45      # >= 45
+    # below worth_a_look => "stretch — likely resume-screen rejection"
+
+  # Signals that raise domain fit.
+  positive_keywords:
+    strong:
+      - regulatory
+      - regulation
+      - compliance
+      - kyc
+      - aml
+      - anti-money laundering
+      - licensing
+      - regtech
+      - financial crime
+      - sanctions
+      - onboarding
+      - payments
+      - fintech
+      - psd2
+      - open banking
+      - risk
+    moderate:
+      - banking
+      - financial services
+      - trading
+      - crypto
+      - digital wallet
+      - card issuing
+      - acquiring
+      - lending
+      - insurtech
+      - identity verification
+      - fraud
+
+  # Score down. Each entry subtracts from the relevant component.
+  negative_keywords:
+    # Generic PM with no regulatory / payments / compliance surface.
+    # Handled structurally too: a PM role with zero positive_keywords hits
+    # the no_domain_surface penalty below.
+    large_team_management:
+      - vp of product
+      - vp product
+      - chief product officer
+      - cpo
+      - director of product
+      - head of product department
+      - manage a team of
+      - build and scale a team
+      - hire and manage
+      - people manager
+      - managing managers
+    compliance_analyst_dressed_as_product:
+      - compliance analyst
+      - compliance officer
+      - aml analyst
+      - kyc analyst
+      - kyc specialist
+      - compliance associate
+      - transaction monitoring analyst
+      - mlro
+    wrong_discipline:
+      - software engineer
+      - data scientist
+      - account executive
+      - sales
+      - recruiter
+      - customer success
+      - marketing manager
+      - designer
+      - qa engineer
+
+  penalties:
+    no_domain_surface: 30       # generic PM, nothing regulatory/payments/compliance
+    large_team_management: 25
+    compliance_analyst: 35
+    wrong_discipline: 60
+    too_junior: 25
+    too_senior: 15

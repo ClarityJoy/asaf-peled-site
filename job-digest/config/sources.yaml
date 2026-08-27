@@ -1,0 +1,53 @@
+# Per-source budgets.
+#
+# These numbers exist because the boards differ enormously in tolerance:
+#
+#   indeed    — JobSpy's README calls this the only board with no rate limiting.
+#               It also parallelises internally (10 workers). Give it everything.
+#   linkedin  — unauthenticated guest endpoint, rate limits around the 10th page
+#               from a single IP. Upstream JobSpy answers that with proxies; we
+#               do not use proxies, so we answer it by asking for less. Four
+#               queries at 20 results is roughly 8 page requests — under the band.
+#   bayt      — MENA board, low volume, included for Gulf/UAE regtech roles.
+#
+# Boards deliberately absent:
+#   glassdoor      — raises "Glassdoor is not available for ISRAEL" before any
+#                    network call. Cannot work for this profile at all.
+#   google         — JobSpy issue #302, returns 0 results / 403. Open since 2026.
+#   zip_recruiter  — same issue, and US/Canada only in practice.
+
+sources:
+  - name: indeed
+    site: indeed
+    enabled: true
+    max_queries: 12
+    locations: [central-israel, remote-israel]
+    results_wanted: 25
+    fetch_description: true
+
+  - name: linkedin
+    site: linkedin
+    enabled: true
+    max_queries: 4
+    locations: [central-israel]
+    results_wanted: 20
+    # Fetching descriptions costs one extra request per job. At 20 jobs that
+    # is 20 more requests against the board that rate limits. Not worth it.
+    fetch_description: false
+
+  - name: bayt
+    site: bayt
+    enabled: true
+    max_queries: 4
+    locations: [central-israel]
+    results_wanted: 20
+    fetch_description: false
+
+# Pacing. Applies between scrape calls, on top of JobSpy's own internal
+# per-page sleep (LinkedIn already sleeps a random 3-7s between pages).
+pacing:
+  min_delay_seconds: 12
+  max_delay_seconds: 35
+  # Hard ceiling on scrape calls for the whole run, across every source.
+  # Exceeding it ends the run cleanly and says so in the digest.
+  max_scrape_calls: 40

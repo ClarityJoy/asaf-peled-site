@@ -1,0 +1,97 @@
+# job-digest
+
+A local daily digest of job postings and hiring-signal posts. Runs from cron on
+one machine, writes a markdown file, uploads nothing anywhere.
+
+## Status
+
+Phase 1 complete: job sources working end to end, printed to stdout.
+Phases 2-6 (SQLite dedup across runs, scoring, post search, digest rendering,
+cron) are not built yet.
+
+## Install
+
+Python 3.11 or newer.
+
+```
+cd job-digest
+python3 -m venv .venv
+.venv/bin/pip install -e .
+```
+
+## Run
+
+```
+.venv/bin/jobdigest                          # all enabled sources
+.venv/bin/jobdigest --source indeed          # one source
+.venv/bin/jobdigest --max-queries 2 --no-pacing   # quick local look
+```
+
+`--no-pacing` removes the delays between requests. Use it while editing config,
+never from cron.
+
+## Configuration
+
+Everything tunable lives in `config/`, and all three files are meant to be
+edited by hand.
+
+| File | Holds |
+| --- | --- |
+| `profile.yaml` | background, target roles, geography, income floor, scoring weights and keywords |
+| `queries.yaml` | search terms for jobs, and for posts in English and Hebrew |
+| `sources.yaml` | which boards run, per-board budgets, request pacing |
+
+`config/profile.yaml` has one placeholder to fill in:
+`compensation.income_floor_monthly_ils`. Until it is set the floor is not
+applied, and the digest will say so rather than filter silently.
+
+## Sources
+
+Job listings come from JobSpy, which covers several boards in one call and
+needs no authentication of any kind.
+
+| Board | Status | Why |
+| --- | --- | --- |
+| Indeed | primary | supports Israel; the only board upstream reports as not rate limited |
+| LinkedIn | secondary, small budget | unauthenticated guest endpoint; rate limits around the 10th page from one IP |
+| Bayt | included | MENA board, included for Gulf/UAE regtech roles |
+| Glassdoor | excluded | raises "Glassdoor is not available for ISRAEL" before any network call |
+| Google Jobs | excluded | JobSpy issue #302: returns 0 results / 403, open since 2026 |
+| ZipRecruiter | excluded | same issue, and US/Canada only in practice |
+
+## Ground rules encoded in the code
+
+These are not conventions, they are enforced:
+
+- **No proxies, no fingerprint spoofing, no multiple sessions.** The risk
+  strategy is one residential IP, as one person, at low volume. LinkedIn's
+  budget in `sources.yaml` is deliberately small because we answer its rate
+  limit by asking for less rather than by evading it.
+- **A 429 or challenge ends the run.** `blocking.py` classifies JobSpy's log
+  output and raises `RunAborted`; nothing retries. JobSpy's own retry-on-429
+  for LinkedIn is patched out at startup by `disable_jobspy_retries()`.
+- **Sequential only.** One source at a time, one query at a time.
+- **A failed source is reported, never hidden.** JobSpy logs a block and then
+  returns an empty list, so "blocked" and "no jobs today" look identical at
+  the return value. The adapter reads the logs to tell them apart, and the
+  run summary shows per-source status.
+- **Read-only.** Nothing applies, connects, messages, likes or follows.
+- **Secrets stay local.** `.env` is gitignored; `.env.example` shows the shape.
+
+## Layout
+
+```
+config/                 hand-edited YAML
+src/jobdigest/
+  models.py             JobPosting, SourceResult, SourceStatus, dedup key
+  pacing.py             randomised delays + run-wide scrape-call budget
+  blocking.py           tells "blocked" from "quiet" from "network broke"
+  runner.py             sequential execution, cross-board dedup
+  cli.py                stdout report
+  sources/
+    base.py             the interface every source implements
+    jobspy_source.py    Indeed / LinkedIn / Bayt via JobSpy
+```
+
+Every source sits behind `sources/base.Source`. Replacing a broken library
+means writing one new adapter; nothing downstream changes.

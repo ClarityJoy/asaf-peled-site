@@ -1,0 +1,67 @@
+# Search terms. Job queries drive the unauthenticated sources (Phase 1).
+# Post queries drive LinkedIn post search (Phase 4).
+#
+# Keep the job query list short. Each query is a separate scrape call against
+# each enabled board, so cost grows as queries x boards. Twelve queries across
+# three boards is 36 scrape calls — already near the sane ceiling for one run.
+
+jobs:
+  # Ordered roughly by expected signal-to-noise.
+  queries:
+    - product manager fintech
+    - product manager payments
+    - regulatory product manager
+    - compliance product manager
+    - regtech product manager
+    - product manager kyc
+    - product manager aml
+    - senior product manager fintech
+    - product operations manager
+    - product manager financial services
+    - product manager compliance
+    - product manager banking
+
+  locations:
+    - label: central-israel
+      location: Tel Aviv, Israel
+      country_indeed: israel
+      distance: 50
+      is_remote: false
+    - label: remote-israel
+      location: Israel
+      country_indeed: israel
+      distance: 50
+      is_remote: true
+
+  # Only look back this far. 72h with a daily run gives overlap so a missed
+  # or failed run does not create a permanent hole in coverage.
+  hours_old: 72
+  results_wanted: 25
+
+posts:
+  # Phase 4. Last 7 days, English and Hebrew.
+  days_back: 7
+  queries_en:
+    - hiring product manager fintech
+    - we're hiring regtech
+    - product manager payments
+    - compliance product manager Israel
+    # extensions
+    - hiring product manager Israel
+    - looking for a product manager fintech
+    - join our product team fintech
+    - hiring regulatory product manager
+    - product manager position payments Israel
+    - we are hiring product manager compliance
+  queries_he:
+    - מגייסים product manager
+    - דרוש מנהל מוצר פינטק
+    - מחפשים product manager רגולציה
+    # extensions
+    - מגייסים מנהל מוצר
+    - דרוש/ה מנהל/ת מוצר
+    - מחפשים מנהל מוצר פינטק
+    - משרה מנהל מוצר פינטק
+    - מגייסים מנהל מוצר תשלומים
+    - דרוש מנהל מוצר רגולציה
+    - מנהל מוצר דרושים פינטק
