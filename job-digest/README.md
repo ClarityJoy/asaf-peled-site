@@ -5,9 +5,9 @@ one machine, writes a markdown file, uploads nothing anywhere.
 
 ## Status
 
-Phases 1-2 complete: job sources working end to end, with a SQLite store that
-remembers what it has already shown you. Phases 3-6 (scoring, post search,
-digest rendering, cron) are not built yet.
+Phases 1-3 complete: job sources working end to end, a SQLite store that
+remembers what it has already shown you, and deterministic fit scoring.
+Phases 4-6 (post search, digest rendering, cron) are not built yet.
 
 ## Install
 
@@ -65,6 +65,59 @@ edited by hand.
 `config/profile.yaml` has one placeholder to fill in:
 `compensation.income_floor_monthly_ils`. Until it is set the floor is not
 applied, and the digest will say so rather than filter silently.
+
+## Scoring
+
+Rule-based and deterministic. No LLM call anywhere, so every number traces
+back to a keyword list or a weight in `profile.yaml` and you can argue with it.
+
+Four components, reported separately so a 60 reads as "great domain, wrong
+commute" rather than a bare number:
+
+| Component | Weight | What it asks |
+| --- | --- | --- |
+| domain fit | 45 | does it touch regulation, payments or compliance at all |
+| seniority fit | 20 | senior IC or small-team lead, not junior and not a VP |
+| role type fit | 20 | is it actually a product role |
+| location fit | 15 | reachable from Rishon LeZion, or remote enough not to matter |
+
+Penalties are subtracted from the total afterwards rather than folded into a
+component, so the digest can name them out loud: `no_domain_surface`,
+`large_team_management`, `compliance_analyst`, `wrong_discipline`,
+`too_junior`, `too_senior`.
+
+Three buckets: **strong** (>=70), **worth a look** (>=45), and
+**stretch - likely resume-screen rejection** below that. The third label is
+deliberately not softened.
+
+Two things worth knowing about how it behaves:
+
+- **Domain dominates by design.** A generic PM role cannot reach `strong`
+  even if it is senior, a product title, and on your doorstep -- the
+  `no_domain_surface` penalty caps it. That shape is the one that has been
+  getting cut at the resume screen, so it must never read as promising.
+- **Keywords are bilingual.** Hebrew terms sit alongside the English ones.
+  Without them a Hebrew regtech posting scored zero domain fit and got
+  penalised as generic, which for this market is a serious miss.
+
+### Commute model
+
+`profile.yaml` holds three tiers of place names relative to Rishon LeZion.
+Note what it encodes: **Tel Aviv is `medium`, not `near`**. Under your
+30-minute rule that means most Tel Aviv roles need WFH days to score well,
+which is a real consequence of the constraint rather than an oversight. A
+`hybrid_markers` hit in the posting text rescues a medium or far commute.
+
+### Income floor
+
+35,000 ILS/month, in `profile.yaml`. A posting is filtered out only when it
+**states** a salary below the floor; most Israeli postings state none at all,
+in which case the floor simply does not apply and nothing is hidden. Foreign
+currencies are converted with static, hand-editable rates -- nothing calls a
+live FX service.
+
+Everything filtered out is listed at the bottom of the output with its
+reason, so the rules can be tuned rather than guessed at.
 
 ## Sources
 

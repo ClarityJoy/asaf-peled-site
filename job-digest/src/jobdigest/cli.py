@@ -10,6 +10,7 @@ from pathlib import Path
 from .config import Config, ConfigError
 from .models import JobPosting, SourceStatus
 from .runner import run_sources
+from .scoring import BUCKET_STRETCH, BUCKET_STRONG, BUCKET_WORTH, Score, Scorer
 from .store import Store
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -50,28 +51,60 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _print_postings(heading: str, postings: list[JobPosting], limit: int) -> None:
-    if not postings:
+def _sort_key(pair: tuple[JobPosting, Score]):
+    posting, score = pair
+    # Highest score first; within a score, newly-seen before already-seen.
+    return (-score.total, not bool(posting.is_new))
+
+
+def _print_group(heading: str, pairs: list[tuple[JobPosting, Score]], limit: int) -> None:
+    if not pairs:
         return
     print("\n" + "=" * 78)
-    print(f"{heading} ({len(postings)})")
+    print(f"{heading} ({len(pairs)})")
     print("=" * 78)
-
-    def sort_key(p: JobPosting):
-        return (p.date_posted is None,
-                -(p.date_posted.toordinal() if p.date_posted else 0))
-
-    for posting in sorted(postings, key=sort_key)[:limit]:
+    for posting, score in sorted(pairs, key=_sort_key)[:limit]:
+        marker = "NEW  " if posting.is_new else "seen "
         when = posting.date_posted.isoformat() if posting.date_posted else "date unknown"
-        print(f"\n  {posting.title}")
-        print(f"    {posting.company or 'unknown company'} - {posting.display_location}")
-        seen = ""
+        print(f"\n  [{score.total:3d}] {marker}{posting.title}")
+        print(f"        {posting.company or 'unknown company'} - {posting.display_location}")
+        print(f"        {score.component_line()}")
+        print(f"        {score.reason}")
+        if score.salary_note:
+            print(f"        {score.salary_note}")
+        age = ""
         if posting.times_seen and posting.times_seen > 1:
-            seen = f" - seen in {posting.times_seen} runs since {(posting.first_seen or '')[:10]}"
-        print(f"    {when} - via {posting.source}{seen}")
-        print(f"    {posting.url}")
-    if len(postings) > limit:
-        print(f"\n  ... and {len(postings) - limit} more")
+            age = f" - seen in {posting.times_seen} runs since {(posting.first_seen or '')[:10]}"
+        print(f"        {when} - via {posting.source}{age}")
+        print(f"        {posting.url}")
+    if len(pairs) > limit:
+        print(f"\n  ... and {len(pairs) - limit} more")
+
+
+def _print_stretch(pairs: list[tuple[JobPosting, Score]], limit: int) -> None:
+    """Collapsed: titles only. These are long shots and should read that way."""
+    if not pairs:
+        return
+    print("\n" + "=" * 78)
+    print(f"STRETCH - LIKELY RESUME-SCREEN REJECTION ({len(pairs)})")
+    print("=" * 78)
+    for posting, score in sorted(pairs, key=_sort_key)[:limit]:
+        print(f"  [{score.total:3d}] {posting.title} - {posting.company or '?'} "
+              f"({posting.source})")
+    if len(pairs) > limit:
+        print(f"  ... and {len(pairs) - limit} more")
+
+
+def _print_filtered(pairs: list[tuple[JobPosting, Score]]) -> None:
+    """What was dropped and why, so the rules can be tuned."""
+    if not pairs:
+        return
+    print("\n" + "=" * 78)
+    print(f"FILTERED OUT ({len(pairs)})")
+    print("=" * 78)
+    for posting, score in pairs:
+        print(f"  {posting.title} - {posting.company or '?'}")
+        print(f"      {score.filter_reason}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -157,8 +190,26 @@ def main(argv: list[str] | None = None) -> int:
         if args.no_store:
             print("  (store disabled - 'new' is meaningless in this mode)")
 
-        _print_postings("NEW SINCE LAST RUN", new_postings, args.limit)
-        _print_postings("SEEN BEFORE", returning, args.limit)
+        scorer = Scorer(config.profile)
+        scored = [(p, scorer.score(p)) for p in unique]
+        kept = [pair for pair in scored if not pair[1].filtered]
+        dropped = [pair for pair in scored if pair[1].filtered]
+
+        by_bucket: dict[str, list[tuple[JobPosting, Score]]] = {
+            BUCKET_STRONG: [], BUCKET_WORTH: [], BUCKET_STRETCH: []
+        }
+        for pair in kept:
+            by_bucket[pair[1].bucket].append(pair)
+
+        floor = (config.profile.get("compensation") or {}).get("income_floor_monthly_ils")
+        print(f"  scored against profile: {len(kept)} kept, {len(dropped)} filtered out"
+              + (f"; income floor {float(floor):,.0f} ILS/month" if floor else
+                 "; no income floor set"))
+
+        _print_group("STRONG MATCHES", by_bucket[BUCKET_STRONG], args.limit)
+        _print_group("WORTH A LOOK", by_bucket[BUCKET_WORTH], args.limit)
+        _print_stretch(by_bucket[BUCKET_STRETCH], args.limit)
+        _print_filtered(dropped)
 
         problems = [r for r in report.results if r.status.is_problem]
         if problems:

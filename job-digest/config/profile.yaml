@@ -73,18 +73,107 @@ location:
   # More remote is better, but substance outweighs format.
   remote_preference_weight: modest
 
+  # Commute tiers from Rishon LeZion, in peak traffic. These are judgement
+  # calls, not measured drive times -- edit them freely.
+  #
+  # Note what this encodes: Tel Aviv is 'medium', not 'near'. Under the
+  # 30-minute rule that means most Tel Aviv roles need WFH days to clear,
+  # which is a real consequence of the constraint rather than an oversight.
+  commute_tiers:
+    near:            # roughly within 30 minutes
+      - rishon lezion
+      - rishon le zion
+      - ראשון לציון
+      - ness ziona
+      - nes tziona
+      - נס ציונה
+      - rehovot
+      - רחובות
+      - holon
+      - חולון
+      - bat yam
+      - בת ים
+      - yavne
+      - יבנה
+      - beer yaakov
+      - ramla
+      - lod
+      - לוד
+      - gedera
+    medium:          # roughly 30-50 minutes
+      - tel aviv
+      - tel aviv-yafo
+      - tel-aviv
+      - תל אביב
+      - ramat gan
+      - רמת גן
+      - givatayim
+      - גבעתיים
+      - petah tikva
+      - petach tikva
+      - פתח תקווה
+      - bnei brak
+      - בני ברק
+      - or yehuda
+      - azor
+      - airport city
+      - modiin
+      - מודיעין
+    far:             # roughly 50 minutes or more
+      - herzliya
+      - הרצליה
+      - raanana
+      - ra'anana
+      - רעננה
+      - kfar saba
+      - כפר סבא
+      - hod hasharon
+      - netanya
+      - נתניה
+      - jerusalem
+      - ירושלים
+      - haifa
+      - חיפה
+      - beer sheva
+      - be'er sheva
+      - באר שבע
+      - caesarea
+      - yokneam
+      - ramat hasharon
+
+  # Signals in the posting text that a role has WFH days, which is what
+  # rescues a medium or far commute.
+  hybrid_markers:
+    - hybrid
+    - work from home
+    - wfh
+    - remote days
+    - days a week from home
+    - flexible work
+    - היברידי
+    - עבודה מהבית
+    - מהבית
+
 # ---------------------------------------------------------------------------
 # Compensation
 # ---------------------------------------------------------------------------
 compensation:
-  # PLACEHOLDER — fill this in. Until it is set, the income floor is not
-  # applied and the digest will say so explicitly rather than filter silently.
-  income_floor_monthly_ils: null
+  income_floor_monthly_ils: 35000
   currency: ILS
   period: monthly
   # Open to a step down in level or pay for a better track, provided it
   # clears the floor above.
   open_to_step_down: true
+
+  # Most Israeli postings carry no salary at all. When a posting does list
+  # one, it is converted to monthly ILS using these static rates and compared
+  # against the floor. They are approximate and hand-editable on purpose --
+  # nothing here calls a live FX service.
+  fx_to_ils:
+    ILS: 1.0
+    USD: 3.7
+    EUR: 4.0
+    GBP: 4.7
 
 # ---------------------------------------------------------------------------
 # Scoring
@@ -120,6 +209,24 @@ scoring:
       - psd2
       - open banking
       - risk
+      # Hebrew. A large share of Israeli postings are written in Hebrew, and
+      # without these a Hebrew regtech role scores zero domain fit and gets
+      # penalised as a generic PM role.
+      - רגולציה
+      - רגולטורי
+      - רגולטורית
+      - ציות
+      - הלבנת הון
+      - איסור הלבנת הון
+      - רישוי
+      - רישיון
+      - תשלומים
+      - פינטק
+      - סליקה
+      - זיהוי לקוח
+      - הכר את הלקוח
+      - סיכונים
+      - הונאות
     moderate:
       - banking
       - financial services
@@ -132,6 +239,17 @@ scoring:
       - insurtech
       - identity verification
       - fraud
+      # Hebrew
+      - בנקאות
+      - פיננסים
+      - פיננסי
+      - אשראי
+      - כרטיסי אשראי
+      - ארנק דיגיטלי
+      - קריפטו
+      - ביטוח
+      - מסחר
+      - הלוואות
 
   # Score down. Each entry subtracts from the relevant component.
   negative_keywords:
@@ -159,6 +277,9 @@ scoring:
       - compliance associate
       - transaction monitoring analyst
       - mlro
+      - אנליסט ציות
+      - בקר ציות
+      - אנליסט הלבנת הון
     wrong_discipline:
       - software engineer
       - data scientist
@@ -169,6 +290,12 @@ scoring:
       - marketing manager
       - designer
       - qa engineer
+      - מהנדס תוכנה
+      - מפתח תוכנה
+      - איש מכירות
+      - מעצב
+      - מגייס
+      - מגייסת
 
   penalties:
     no_domain_surface: 30       # generic PM, nothing regulatory/payments/compliance
