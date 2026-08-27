@@ -5,9 +5,11 @@ from __future__ import annotations
 import argparse
 import logging
 import sys
+from datetime import datetime
 from pathlib import Path
 
 from .config import Config, ConfigError
+from .digest import DigestRenderer, write_digest
 from .models import HiringPost, JobPosting, SourceStatus
 from .runner import run_sources
 from .scoring import BUCKET_STRETCH, BUCKET_STRONG, BUCKET_WORTH, Score, Scorer
@@ -15,6 +17,7 @@ from .store import Store
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DB = PROJECT_ROOT / "state" / "jobs.db"
+DEFAULT_DIGEST_DIR = PROJECT_ROOT / "digests"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -45,6 +48,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-pacing", action="store_true",
         help="skip inter-request delays. Local testing only - never in cron.",
+    )
+    parser.add_argument(
+        "--digest-dir", type=Path, default=DEFAULT_DIGEST_DIR,
+        help=f"where to write the markdown digest (default: {DEFAULT_DIGEST_DIR})",
+    )
+    parser.add_argument(
+        "--no-digest", action="store_true",
+        help="do not write the markdown digest, just print to stdout",
     )
     parser.add_argument(
         "--no-posts", action="store_true",
@@ -247,6 +258,33 @@ def main(argv: list[str] | None = None) -> int:
         _print_stretch(by_bucket[BUCKET_STRETCH], args.limit)
         _print_filtered(dropped)
         _print_posts(report.posts, new_posts, args.limit)
+
+        if not args.no_digest:
+            streaks: dict[str, int] = {}
+            if store:
+                for result in report.results:
+                    if not result.status.is_problem:
+                        continue
+                    streak = 0
+                    for row in store.source_history(result.source, limit=10):
+                        if row["status"] in ("failed", "blocked"):
+                            streak += 1
+                        else:
+                            break
+                    streaks[result.source] = streak
+            markdown = DigestRenderer(
+                run_id=run_id,
+                generated_at=datetime.now(),
+                report=report,
+                scored=scored,
+                posts=report.posts,
+                new_post_keys={p.fingerprint() for p in new_posts},
+                profile=config.profile,
+                source_streaks=streaks,
+                store_enabled=not args.no_store,
+            ).render()
+            path = write_digest(markdown, args.digest_dir, datetime.now())
+            print(f"\n  digest written: {path}")
 
         problems = [r for r in report.results if r.status.is_problem]
         if problems:

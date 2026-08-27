@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import time
 from typing import Any
 
@@ -99,6 +100,26 @@ def looks_like_block(text: str) -> bool:
     return any(marker in lowered for marker in BLOCK_MARKERS)
 
 
+_HEBREW = re.compile(r"[\u0590-\u05FF]")
+
+
+def detect_language(text: str, fallback: str) -> str:
+    """Language of the post itself, not of the query that surfaced it.
+
+    An English query routinely returns Hebrew posts, so tagging a post with
+    the query's language mislabels exactly the ones worth noticing.
+    """
+    if not text:
+        return fallback
+    hebrew = len(_HEBREW.findall(text))
+    letters = sum(1 for ch in text if ch.isalpha())
+    if letters and hebrew / letters > 0.3:
+        return "he"
+    if hebrew:
+        return "mixed"
+    return "en"
+
+
 def payload_understood(payload: Any) -> bool:
     """Did the reply have a shape we recognise, even if it held no posts?
 
@@ -144,7 +165,7 @@ def parse_posts(payload: Any, query: str, language: str) -> list[HiringPost]:
                 company=_first(record, _COMPANY_KEYS),
                 posted_at=str(_first(record, _DATE_KEYS) or "") or None,
                 query=query,
-                language=language,
+                language=detect_language(str(text or ""), language),
                 raw=record,
             )
         )

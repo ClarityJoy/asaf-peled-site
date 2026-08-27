@@ -5,9 +5,9 @@ one machine, writes a markdown file, uploads nothing anywhere.
 
 ## Status
 
-Phases 1-4 complete: job sources, a SQLite store that remembers what it has
-already shown you, deterministic fit scoring, and authenticated LinkedIn post
-search. Phases 5-6 (digest rendering, cron) are not built yet.
+Phases 1-5 complete: job sources, a SQLite store that remembers what it has
+already shown you, deterministic fit scoring, authenticated LinkedIn post
+search, and the markdown digest. Phase 6 (cron, dry-run mode) is not built yet.
 
 ## Install
 
@@ -26,7 +26,11 @@ python3 -m venv .venv
 .venv/bin/jobdigest --source indeed          # one source
 .venv/bin/jobdigest --max-queries 2 --no-pacing   # quick local look
 .venv/bin/jobdigest --no-store               # ignore history, everything is new
+.venv/bin/jobdigest --no-digest              # stdout only, write no file
 ```
+
+Each run writes `digests/YYYY-MM-DD.md` and prints the path. That directory is
+gitignored -- it is your job search, not repository content.
 
 `--no-pacing` removes the delays between requests. Use it while editing config,
 never from cron.
@@ -65,6 +69,23 @@ edited by hand.
 `config/profile.yaml` has one placeholder to fill in:
 `compensation.income_floor_monthly_ils`. Until it is set the floor is not
 applied, and the digest will say so rather than filter silently.
+
+## The digest
+
+`digests/YYYY-MM-DD.md`, in this order:
+
+1. **Run summary** - per-source status table, then a callout for anything that
+   failed, was blocked, or was skipped, with the reason. A source that has
+   been failing for several days says so.
+2. **Strong matches, new since last run** - full detail, uncollapsed.
+3. **Strong matches, already seen** - collapsed table.
+4. **Worth a look** - new ones in full, seen ones collapsed.
+5. **Hiring-signal posts** - poster, company, text, direct link.
+6. **Stretch** - collapsed, and labelled *likely resume-screen rejection*.
+7. **Filtered out** - what was dropped and why, so the rules can be tuned.
+
+The ordering is deliberate. What broke comes before what was found, because a
+digest that quietly omits a dead source is worse than no digest at all.
 
 ## Scoring
 
