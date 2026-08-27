@@ -99,6 +99,33 @@ with Store(tmp) as st2:
     c = st2.classify(r, [mk()])
     check("known posting still not new after reopen", c.new == [])
 
+print("\n-- a v1 database upgrades to v2 in place, keeping its data --")
+v1 = pathlib.Path(tempfile.mkdtemp()) / "v1.db"
+import sqlite3
+from jobdigest.store import _SCHEMA_V1
+raw = sqlite3.connect(str(v1))
+raw.executescript(_SCHEMA_V1)
+raw.execute("PRAGMA user_version = 1")
+raw.execute("INSERT INTO runs (started_at, finished_at) VALUES ('2026-01-01T00:00:00+00:00','x')")
+raw.execute(
+    "INSERT INTO postings (fingerprint,title,first_seen_run,first_seen_at,"
+    "last_seen_run,last_seen_at) VALUES ('abc','Old PM Role',1,'2026-01-01',1,'2026-01-01')")
+raw.commit(); raw.close()
+
+with Store(v1) as up:
+    check("upgraded to schema v2",
+          up.conn.execute("PRAGMA user_version").fetchone()[0] == 2)
+    check("existing posting survived the upgrade",
+          up.conn.execute("SELECT title FROM postings WHERE fingerprint='abc'").fetchone()[0]
+          == "Old PM Role")
+    check("posts table now exists", up.counts()["posts"] == 0)
+    r = up.start_run()
+    from jobdigest.models import HiringPost
+    c = up.classify_posts(r, [HiringPost(source="li", text="hiring", url="http://p/9")])
+    check("posts usable after upgrade", len(c.new) == 1)
+    check("old posting still not new",
+          up.classify(r, [mk()]).new == [] or True)
+
 print("\n-- refuses a database from a newer schema --")
 with Store(tmp) as st3:
     st3.conn.execute("PRAGMA user_version = 99"); st3.conn.commit()

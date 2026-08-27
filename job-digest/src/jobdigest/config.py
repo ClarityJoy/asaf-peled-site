@@ -11,6 +11,7 @@ import yaml
 from .pacing import Pacer
 from .sources.base import Source
 from .sources.jobspy_source import JobSpySource
+from .sources.linkedin_posts import LinkedInPostsSource
 
 DEFAULT_CONFIG_DIR = Path(__file__).resolve().parents[2] / "config"
 
@@ -63,6 +64,39 @@ class Config:
         if sleeper is not None:
             kwargs["sleeper"] = sleeper
         return Pacer(**kwargs)
+
+    def build_post_sources(self) -> list[Source]:
+        """The authenticated layer. Absent or disabled is a normal state."""
+        settings = self.sources.get("post_search") or {}
+        if not settings.get("enabled", False):
+            return []
+
+        posts = (self.queries.get("posts") or {})
+        # Interleave English and Hebrew rather than taking the first N of a
+        # concatenated list, so a low max_queries does not silently drop
+        # Hebrew entirely -- which is where a large share of Israeli hiring
+        # posts actually live.
+        english = [(q, "en") for q in posts.get("queries_en", [])]
+        hebrew = [(q, "he") for q in posts.get("queries_he", [])]
+        interleaved: list[tuple[str, str]] = []
+        for pair in zip(english, hebrew):
+            interleaved.extend(pair)
+        longer = english[len(hebrew):] or hebrew[len(english):]
+        interleaved.extend(longer)
+
+        limit = int(settings.get("max_queries", len(interleaved)))
+        return [
+            LinkedInPostsSource(
+                queries=interleaved[:limit],
+                date_posted=str(settings.get("date_posted", "past-week")),
+                max_pages=int(settings.get("max_pages", 2)),
+                command=str(settings.get("command", "uvx")),
+                server_args=settings.get("server_args"),
+                per_call_timeout=float(settings.get("per_call_timeout_seconds", 180)),
+                env_extra=settings.get("env") or None,
+                enabled=True,
+            )
+        ]
 
     def build_job_sources(self, only: list[str] | None = None) -> list[Source]:
         jobs = self.queries.get("jobs") or {}

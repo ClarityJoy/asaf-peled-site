@@ -6,7 +6,7 @@ import logging
 import time
 from dataclasses import dataclass, field
 
-from .models import JobPosting, SourceResult, SourceStatus
+from .models import HiringPost, JobPosting, SourceResult, SourceStatus
 from .pacing import Pacer, RunAborted
 from .sources.base import Source
 
@@ -21,10 +21,14 @@ class RunReport:
 
     @property
     def postings(self) -> list[JobPosting]:
-        out: list[JobPosting] = []
-        for result in self.results:
-            out.extend(result.items)
-        return out
+        """Job listings only. Post sources put HiringPosts in the same field."""
+        return [item for result in self.results for item in result.items
+                if isinstance(item, JobPosting)]
+
+    @property
+    def posts(self) -> list[HiringPost]:
+        return [item for result in self.results for item in result.items
+                if isinstance(item, HiringPost)]
 
     @property
     def unique_postings(self) -> list[JobPosting]:

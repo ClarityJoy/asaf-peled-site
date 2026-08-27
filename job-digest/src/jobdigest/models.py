@@ -109,12 +109,55 @@ class JobPosting:
 
 
 @dataclass
+class HiringPost:
+    """An informal hiring signal -- someone posting "we're hiring", not a listing.
+
+    These often appear days before a formal job listing exists, which is the
+    whole reason for paying the cost of an authenticated source at all.
+    """
+
+    source: str
+    text: str
+    url: str
+    poster_name: str | None = None
+    poster_headline: str | None = None
+    company: str | None = None
+    posted_at: str | None = None
+    query: str | None = None
+    language: str | None = None          # "en" | "he"
+    raw: dict[str, Any] = field(default_factory=dict, repr=False)
+
+    # Populated by the store, as with JobPosting.
+    is_new: bool | None = None
+    first_seen: str | None = None
+    times_seen: int | None = None
+
+    def fingerprint(self) -> str:
+        """Identity for a post.
+
+        The post URL is stable and unique when we get one, so it wins. When a
+        post has no usable link we fall back to poster plus the opening of the
+        text, which is enough to stop the same post reappearing as new every
+        night without collapsing two different posts by the same recruiter.
+        """
+        if self.url:
+            return hashlib.sha256(self.url.encode()).hexdigest()[:16]
+        key = f"{_norm(self.poster_name)}|{_norm(self.text)[:160]}"
+        return hashlib.sha256(key.encode()).hexdigest()[:16]
+
+    @property
+    def summary(self) -> str:
+        flat = _WS.sub(" ", self.text or "").strip()
+        return flat[:180] + ("..." if len(flat) > 180 else "")
+
+
+@dataclass
 class SourceResult:
     """What an adapter reports back, success or failure."""
 
     source: str
     status: SourceStatus
-    items: list[JobPosting] = field(default_factory=list)
+    items: list[Any] = field(default_factory=list)   # JobPosting or HiringPost
     detail: str | None = None          # human-readable, goes into the digest
     scrape_calls: int = 0
     duration_seconds: float = 0.0

@@ -5,9 +5,9 @@ one machine, writes a markdown file, uploads nothing anywhere.
 
 ## Status
 
-Phases 1-3 complete: job sources working end to end, a SQLite store that
-remembers what it has already shown you, and deterministic fit scoring.
-Phases 4-6 (post search, digest rendering, cron) are not built yet.
+Phases 1-4 complete: job sources, a SQLite store that remembers what it has
+already shown you, deterministic fit scoring, and authenticated LinkedIn post
+search. Phases 5-6 (digest rendering, cron) are not built yet.
 
 ## Install
 
@@ -132,6 +132,56 @@ needs no authentication of any kind.
 | Glassdoor | excluded | raises "Glassdoor is not available for ISRAEL" before any network call |
 | Google Jobs | excluded | JobSpy issue #302: returns 0 results / 403, open since 2026 |
 | ZipRecruiter | excluded | same issue, and US/Canada only in practice |
+
+## The authenticated layer
+
+Post search is the only thing in the tool that touches an account, and it is
+built to be the least important part. It is backed by
+[stickerdaniel/linkedin-mcp-server](https://github.com/stickerdaniel/linkedin-mcp-server),
+run as a one-shot stdio subprocess rather than a long-lived agent connection.
+
+Why this and not a cookie in `.env`: every lightweight cookie-based Voyager
+client is dead or cannot search posts. `linkedin-api` (tomquirk) is a 404,
+`linkedin_scraper` has no global content search, and `linkedincli` states
+outright that post search is unavailable. This server is the only maintained
+implementation of the thing, and it authenticates with a browser session
+rather than a pasted cookie.
+
+### Setting it up
+
+```
+uvx mcp-server-linkedin --import-from-browser chrome   # reuse a signed-in browser
+uvx mcp-server-linkedin --login                        # or sign in once, in a window
+uvx mcp-server-linkedin --status                       # is the session still good?
+```
+
+The session lives in `~/.linkedin-mcp/profile/`. On first run patchright
+downloads its own Chromium (~150MB); `--chrome-path` points it at an existing
+Chrome instead.
+
+### How it degrades
+
+A dead session **skips** the source rather than failing it: the digest carries
+one line saying the session expired and how to renew it, and the
+unauthenticated job sources carry the run. Expiry is detected by reading what
+came back, not by trusting a status code -- LinkedIn answers an expired
+session with HTTP 200 and a login page, so a transport-level check would
+report everything as fine.
+
+A 429 or challenge is different, and does abort the run.
+
+### Read-only, enforced
+
+`mcp_client.py` holds an allowlist. `send_message` and `connect_with_person`
+exist on that server, and this client refuses to call them before the server
+even starts -- so no amount of config editing can make the pipeline write to
+anyone's LinkedIn. `.mcp.json` registers the same server for interactive use
+in a Claude Code session, with both write tools denied in
+`.claude/settings.json`.
+
+That interactive registration is deliberately separate from the cron
+pipeline: MCP is the wrong shape for a headless nightly run, but the right
+shape for asking ad-hoc questions about a company or a role.
 
 ## Ground rules encoded in the code
 

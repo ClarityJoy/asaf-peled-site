@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "linkedin": {
+      "command": "uvx",
+      "args": ["mcp-server-linkedin", "--transport", "stdio"],
+      "env": {}
+    }
+  }
+}

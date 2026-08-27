@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "deny": [
+      "mcp__linkedin__send_message",
+      "mcp__linkedin__connect_with_person"
+    ]
+  }
+}

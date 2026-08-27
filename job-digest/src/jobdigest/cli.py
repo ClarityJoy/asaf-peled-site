@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from .config import Config, ConfigError
-from .models import JobPosting, SourceStatus
+from .models import HiringPost, JobPosting, SourceStatus
 from .runner import run_sources
 from .scoring import BUCKET_STRETCH, BUCKET_STRONG, BUCKET_WORTH, Score, Scorer
 from .store import Store
@@ -45,6 +45,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-pacing", action="store_true",
         help="skip inter-request delays. Local testing only - never in cron.",
+    )
+    parser.add_argument(
+        "--no-posts", action="store_true",
+        help="skip the authenticated LinkedIn post search",
     )
     parser.add_argument("--limit", type=int, default=40, help="rows to print")
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -95,6 +99,33 @@ def _print_stretch(pairs: list[tuple[JobPosting, Score]], limit: int) -> None:
         print(f"  ... and {len(pairs) - limit} more")
 
 
+def _print_posts(all_posts: list[HiringPost], new_posts: list[HiringPost],
+                 limit: int) -> None:
+    """Hiring-signal posts. Informal, unscored, and often ahead of a listing."""
+    if not all_posts:
+        return
+    print("\n" + "=" * 78)
+    print(f"HIRING-SIGNAL POSTS ({len(all_posts)}, {len(new_posts)} new)")
+    print("=" * 78)
+    new_keys = {p.fingerprint() for p in new_posts}
+    ordered = sorted(all_posts, key=lambda p: p.fingerprint() not in new_keys)
+    for post in ordered[:limit]:
+        marker = "NEW  " if post.fingerprint() in new_keys else "seen "
+        who = post.poster_name or "unknown poster"
+        if post.company:
+            who += f" ({post.company})"
+        print(f"\n  {marker}{who}")
+        if post.poster_headline:
+            print(f"        {post.poster_headline[:90]}")
+        print(f"        {post.summary}")
+        when = f" - {post.posted_at}" if post.posted_at else ""
+        print(f"        [{post.language or '??'}] query: {post.query!r}{when}")
+        if post.url:
+            print(f"        {post.url}")
+    if len(ordered) > limit:
+        print(f"\n  ... and {len(ordered) - limit} more")
+
+
 def _print_filtered(pairs: list[tuple[JobPosting, Score]]) -> None:
     """What was dropped and why, so the rules can be tuned."""
     if not pairs:
@@ -117,6 +148,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         config = Config.load(args.config_dir)
         sources = config.build_job_sources(only=args.sources)
+        post_sources = [] if (args.no_posts or args.sources) else config.build_post_sources()
     except ConfigError as exc:
         print(f"config error: {exc}", file=sys.stderr)
         return 2
@@ -132,6 +164,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"planned scrape calls: {planned} (budget {pacer.max_scrape_calls})")
     if args.no_pacing:
         print("pacing DISABLED - local testing only")
+    print(f"posts: {'skipped' if not post_sources else 'linkedin post search enabled'}")
     print(f"store: {'disabled' if args.no_store else args.db}")
     print()
 
@@ -139,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
     run_id = store.start_run() if store else None
 
     try:
-        report = run_sources(sources, pacer)
+        report = run_sources(sources + post_sources, pacer)
 
         unique = report.unique_postings
         if store and run_id is not None:
@@ -154,8 +187,11 @@ def main(argv: list[str] | None = None) -> int:
                 aborted_reason=report.aborted_reason,
             )
             new_postings, returning = classified.new, classified.returning
+            post_split = store.classify_posts(run_id, report.posts)
+            new_posts = post_split.new
         else:
             new_postings, returning = unique, []
+            new_posts = report.posts
 
         print("=" * 78)
         print("RUN SUMMARY" + (f"  (run #{run_id})" if run_id else ""))
@@ -210,6 +246,7 @@ def main(argv: list[str] | None = None) -> int:
         _print_group("WORTH A LOOK", by_bucket[BUCKET_WORTH], args.limit)
         _print_stretch(by_bucket[BUCKET_STRETCH], args.limit)
         _print_filtered(dropped)
+        _print_posts(report.posts, new_posts, args.limit)
 
         problems = [r for r in report.results if r.status.is_problem]
         if problems:

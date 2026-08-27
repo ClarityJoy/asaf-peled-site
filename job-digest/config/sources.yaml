@@ -51,3 +51,35 @@ pacing:
   # Hard ceiling on scrape calls for the whole run, across every source.
   # Exceeding it ends the run cleanly and says so in the digest.
   max_scrape_calls: 40
+
+# ---------------------------------------------------------------------------
+# Authenticated layer. Deliberately the smallest, least important part.
+# ---------------------------------------------------------------------------
+# Post search is the only thing here, because it is the only thing with no
+# unauthenticated equivalent. If this fails the digest says so in one line and
+# the job sources carry the run.
+#
+# Backed by stickerdaniel/linkedin-mcp-server, run as a one-shot stdio
+# subprocess rather than a long-lived agent connection. Authenticate once with:
+#
+#     uvx mcp-server-linkedin --import-from-browser chrome
+#     uvx mcp-server-linkedin --login            # if the import does not work
+#     uvx mcp-server-linkedin --status           # check whether it is still good
+#
+# On first run it downloads its own Chromium (~150MB). Point --chrome-path at
+# an existing Chrome to avoid that.
+post_search:
+  enabled: true
+  # "past-24h" | "past-week" | "past-month". past-week is the 7-day window.
+  date_posted: past-week
+  # Scroll depth per query. Content search is an infinite scroll, so this caps
+  # how far the page is scrolled. Kept low on purpose: this is the account-bearing
+  # source and depth is what makes it look like a crawler.
+  max_pages: 2
+  # Cap on how many post queries run per day, English and Hebrew combined.
+  # There are 20 configured; running all of them nightly is more LinkedIn
+  # traffic than this is worth.
+  max_queries: 6
+  command: uvx
+  server_args: ["mcp-server-linkedin", "--transport", "stdio"]
+  per_call_timeout_seconds: 180

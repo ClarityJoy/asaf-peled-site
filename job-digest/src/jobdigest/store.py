@@ -23,9 +23,9 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .models import JobPosting, SourceResult
+from .models import HiringPost, JobPosting, SourceResult
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 _SCHEMA_V1 = """
 CREATE TABLE IF NOT EXISTS runs (
@@ -88,6 +88,28 @@ CREATE TABLE IF NOT EXISTS sightings (
 """
 
 
+_SCHEMA_V2 = """
+CREATE TABLE IF NOT EXISTS posts (
+    fingerprint     TEXT PRIMARY KEY,
+    text            TEXT NOT NULL,
+    url             TEXT,
+    poster_name     TEXT,
+    poster_headline TEXT,
+    company         TEXT,
+    posted_at       TEXT,
+    language        TEXT,
+    source          TEXT,
+    first_seen_run  INTEGER NOT NULL,
+    first_seen_at   TEXT NOT NULL,
+    last_seen_run   INTEGER NOT NULL,
+    last_seen_at    TEXT NOT NULL,
+    times_seen      INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE INDEX IF NOT EXISTS idx_posts_first_seen ON posts(first_seen_run);
+"""
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -98,6 +120,16 @@ class Classified:
 
     new: list[JobPosting] = field(default_factory=list)
     returning: list[JobPosting] = field(default_factory=list)
+
+    @property
+    def total(self) -> int:
+        return len(self.new) + len(self.returning)
+
+
+@dataclass
+class ClassifiedPosts:
+    new: list[HiringPost] = field(default_factory=list)
+    returning: list[HiringPost] = field(default_factory=list)
 
     @property
     def total(self) -> int:
@@ -130,6 +162,9 @@ class Store:
             version = cur.execute("PRAGMA user_version").fetchone()[0]
             if version < 1:
                 cur.executescript(_SCHEMA_V1)
+            if version < 2:
+                cur.executescript(_SCHEMA_V2)
+            if version < SCHEMA_VERSION:
                 cur.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
             elif version > SCHEMA_VERSION:
                 raise RuntimeError(
@@ -324,6 +359,52 @@ class Store:
         self.conn.commit()
         return result
 
+    # -- posts -------------------------------------------------------------
+
+    def classify_posts(self, run_id: int, posts: list[HiringPost]) -> "ClassifiedPosts":
+        result = ClassifiedPosts()
+        for post in posts:
+            fingerprint = post.fingerprint()
+            now = _now()
+            known = self.conn.execute(
+                "SELECT 1 FROM posts WHERE fingerprint = ?", (fingerprint,)
+            ).fetchone() is not None
+
+            if known:
+                self.conn.execute(
+                    "UPDATE posts SET text = COALESCE(?, text), "
+                    "url = COALESCE(?, url), poster_name = COALESCE(?, poster_name), "
+                    "poster_headline = COALESCE(?, poster_headline), "
+                    "company = COALESCE(?, company), posted_at = COALESCE(?, posted_at), "
+                    "language = COALESCE(?, language), last_seen_run = ?, "
+                    "last_seen_at = ?, times_seen = times_seen + 1 "
+                    "WHERE fingerprint = ?",
+                    (post.text or None, post.url or None, post.poster_name,
+                     post.poster_headline, post.company, post.posted_at,
+                     post.language, run_id, now, fingerprint),
+                )
+            else:
+                self.conn.execute(
+                    "INSERT INTO posts (fingerprint, text, url, poster_name, "
+                    "poster_headline, company, posted_at, language, source, "
+                    "first_seen_run, first_seen_at, last_seen_run, last_seen_at, "
+                    "times_seen) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1)",
+                    (fingerprint, post.text, post.url, post.poster_name,
+                     post.poster_headline, post.company, post.posted_at,
+                     post.language, post.source, run_id, now, run_id, now),
+                )
+
+            row = self.conn.execute(
+                "SELECT first_seen_at, times_seen FROM posts WHERE fingerprint = ?",
+                (fingerprint,),
+            ).fetchone()
+            post.is_new = not known
+            post.first_seen = row["first_seen_at"] if row else None
+            post.times_seen = int(row["times_seen"]) if row else 1
+            (result.new if not known else result.returning).append(post)
+        self.conn.commit()
+        return result
+
     # -- reporting ---------------------------------------------------------
 
     def counts(self) -> dict[str, int]:
@@ -332,4 +413,5 @@ class Store:
             "runs": get("SELECT COUNT(*) FROM runs"),
             "postings": get("SELECT COUNT(*) FROM postings"),
             "sightings": get("SELECT COUNT(*) FROM sightings"),
+            "posts": get("SELECT COUNT(*) FROM posts"),
         }
